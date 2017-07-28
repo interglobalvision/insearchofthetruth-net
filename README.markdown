@@ -1,6 +1,6 @@
 insearchofthetruth-net
 ---
-v 1.7.6
+v 0.0.1
 
 Starting point for our wordpress themes
 
