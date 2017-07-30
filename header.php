@@ -31,7 +31,7 @@
     <div class="container">
       <div class="grid-row align-items-center">
         <div class="grid-item">
-          <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+          <h1><a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a></h1>
         </div>
         <nav class="grid-item flex-grow text-align-right">
           <ul class="u-inline-list">
