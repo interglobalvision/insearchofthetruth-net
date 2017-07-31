@@ -26,7 +26,7 @@ if( have_posts() ) {
           </div>
 
           <div class="grid-item item-s-12 item-m-4">
-            <time datetime="<?php the_time('Y-m-d'); ?>"><?php echo get_the_date(); ?></time><br>
+            <time class="u-block" datetime="<?php the_time('Y-m-d'); ?>"><?php echo get_the_date(); ?></time>
 
             <?php if (has_category() && $cat_name !== 'Uncategorized') { ?>
             <a href="<?php echo esc_url($cat_link); ?>"><?php echo $cat_name; ?></a>
