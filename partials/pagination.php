@@ -1,22 +1,31 @@
 <?php
 if( get_next_posts_link() || get_previous_posts_link() ) {
+  $previous = get_previous_posts_link('Newer');
+  $next = get_next_posts_link('Older');
 ?>
-  <!-- post pagination -->
-  <nav id="pagination">
+<section id="pagination">
+  <div class="container">
+    <nav class="grid-row">
 <?php
-$previous = get_previous_posts_link('Newer');
-$next = get_next_posts_link('Older');
-if ($previous) {
-  echo $previous;
-}
-if ($previous && $next) {
-  echo ' &mdash; ';
-}
-if ($next) {
-  echo $next;
-}
+  if ($previous) {
 ?>
-  </nav>
+      <div class="grid-item flex-grow">
+        <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> <a class="link-underline" href="<?php echo get_previous_posts_page_link(); ?>">Newer</a>
+      </div>
+<?php
+  }
+
+  if ($next) {
+?>
+      <div class="grid-item flex-grow text-align-right">
+        <a class="link-underline" href="<?php echo get_next_posts_page_link(); ?>">Older</a> <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?>
+      </div>
+<?php
+  }
+?>
+    </nav>
+  </div>
+</section>
 <?php
 }
 ?>
