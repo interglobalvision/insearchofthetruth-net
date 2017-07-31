@@ -1,1 +1,12 @@
-<svg id="icon-arrow" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.05 36.18"><defs><style>.a{font-size:36px;font-family:Ionicons, Ionicons;}</style></defs><title>arrow-right</title><text class="a" transform="translate(0 31.68)"></text></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 23.6 24" style="enable-background:new 0 0 23.6 24;" xml:space="preserve">
+<style type="text/css">
+	.st0{enable-background:new    ;}
+</style>
+<title>arrow-right</title>
+<g class="st0">
+	<path d="M0,13.5v-3h18.3L9.9,2.1L12,0l12,12L12,24l-2.2-2.1l8.4-8.4H0z"/>
+</g>
+</svg>
