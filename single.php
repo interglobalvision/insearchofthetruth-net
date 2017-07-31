@@ -34,7 +34,7 @@ if( have_posts() ) {
           </div>
 
           <div class="grid-item item-s-12">
-            <?php the_post_thumbnail('item-l-12'); ?>
+            <?php the_post_thumbnail('single-big'); ?>
           </div>
 
           <div class="grid-item item-s-12">
