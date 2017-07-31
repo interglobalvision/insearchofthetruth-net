@@ -22,7 +22,7 @@ if( have_posts() ) {
         <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="grid-item item-s-12 item-m-4">
-            <h1><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a><h1>
+            <h1><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
           </div>
 
           <div class="grid-item item-s-12 item-m-4">
