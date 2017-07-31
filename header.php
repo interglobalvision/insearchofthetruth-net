@@ -28,5 +28,19 @@
 <section id="main-container">
 
   <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+    <div class="container">
+      <div class="grid-row align-items-center">
+        <div class="grid-item">
+          <h1><a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a></h1>
+        </div>
+        <nav class="grid-item flex-grow text-align-right">
+          <ul class="u-inline-list">
+            <li><a href="<?php echo home_url(); ?>">Portraits</a></li>
+            <li><a href="<?php echo home_url('support'); ?>">Support</a></li>
+            <li><a href="<?php echo home_url('about'); ?>">About</a></li>
+            <li><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
