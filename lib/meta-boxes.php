@@ -61,15 +61,15 @@ function igv_cmb_metaboxes() {
   ));
 
   $cmb_product->add_field( array(
-		'name' => esc_html__( 'Price USD', 'cmb2' ),
-		'desc' => esc_html__( '$', 'cmb2' ),
-		'id'   => $prefix . 'product_price',
-		'type' => 'text_small',
-	) );
+    'name' => esc_html__( 'Price USD', 'cmb2' ),
+  'desc' => esc_html__( '$', 'cmb2' ),
+  'id'   => $prefix . 'product_price',
+  'type' => 'text_small',
+) );
 
   $cmb_product->add_field( array(
-		'name' => esc_html__( 'PayPal Embed Code', 'cmb2' ),
-		'desc' => esc_html__( '
+    'name' => esc_html__( 'PayPal Embed Code', 'cmb2' ),
+    'desc' => esc_html__( '
     [1] https://www.paypal.com/webapps/mpp/merchant-services-hub
     [2] Click on "Create payment buttons for your website"
     [3] Choose a button type: Buy Now
@@ -77,10 +77,10 @@ function igv_cmb_metaboxes() {
     [5] If your item has options (eg. Size): Add a drop-down menu
     [6] Click "Create Button"
     [7] Copy form code and paste here
-    ', 'cmb2' ),
-		'id'   => $prefix . 'paypal_embed',
-		'type' => 'textarea_code',
-	) );
+', 'cmb2' ),
+    'id'   => $prefix . 'paypal_embed',
+    'type' => 'textarea_code',
+  ) );
 
   // SUPPORT
   $support_page = get_page_by_path('support');
