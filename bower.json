@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "lazysizes": "^2.0.4"
+    "lazysizes": "^2.0.4",
+    "swiper": "^3.4.2"
   }
 }

@@ -12,6 +12,18 @@ Site = {
 
     $(document).ready(function () {
 
+      var mySwiper = new Swiper ('.swiper-container', {
+        // Optional parameters
+        pagination: '.swiper-pagination',
+        loop: true,
+        slidesPerView: 'auto',
+        loopedSlides: 5,
+        spaceBetween: 0,
+        paginationClickable: true,
+        centeredSlides: true,
+        slideToClickedSlide: true,
+      });
+
     });
 
   },
