@@ -15,7 +15,7 @@ if( have_posts() ) {
         <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="grid-item item-s-12">
-            <h1><?php the_title(); ?><h1>
+            <h1><?php the_title(); ?></h1>
           </div>
 
           <div class="grid-item item-s-12">
