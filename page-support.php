@@ -32,7 +32,7 @@ if( have_posts() ) {
 
           <section class="grid-row margin-top-mid margin-bottom-mid">
             <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3 text-align-center">
-              <?php echo $headline; ?>
+              <?php echo apply_filters('the_content', $headline); ?>
             </div>
           </section>
 
