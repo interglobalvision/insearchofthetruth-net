@@ -25,6 +25,17 @@ normalize()
 
 // ******************************************************
 
+// FONTS
+
+// declare font families here
+
+@import 'fonts/fonts'
+
+$font-sans = 'Helvetica Neue', font-stack('Helvetica');
+$font-serif = font-stack('Georgia');
+
+// ******************************************************
+
 // TYPOGRAPHY
 
 @import '../../globie-library/type'
@@ -59,6 +70,9 @@ body
 
 .line-larger
   line-height: $font-leading-larger
+
+.font-heavy
+  font-weight: 700
 
 // ******************************************************
 
