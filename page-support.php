@@ -30,8 +30,8 @@ if( have_posts() ) {
     if (!empty($headline)) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
-            <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3 text-align-center">
+          <section class="grid-row margin-top-large margin-bottom-large">
+            <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3 text-align-center font-size-large font-medium">
               <?php echo apply_filters('the_content', $headline); ?>
             </div>
           </section>
@@ -42,7 +42,7 @@ if( have_posts() ) {
     if (has_post_thumbnail()) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
+          <section class="grid-row margin-top-large margin-bottom-large">
             <div class="item-s-12">
               <?php the_post_thumbnail('full-width'); ?>
             </div>
@@ -52,8 +52,8 @@ if( have_posts() ) {
     }
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
-            <div class="grid-item item-s-12 item-m-10 offset-m-1">
+          <section class="grid-row margin-top-large margin-bottom-large">
+            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-large font-medium">
               <?php the_content(); ?>
             </div>
           </section>
@@ -61,9 +61,9 @@ if( have_posts() ) {
 <?php
     if (!empty($form_options)) {
 ?>
-          <section class="margin-top-mid margin-bottom-mid">
+          <section class="margin-top-large margin-bottom-large font-size-large font-medium">
             <div class="grid-row">
-              <div class="grid-item item-s-11 offset-s-1 class="margin-bottom-basic" ">
+              <div class="grid-item item-s-11 offset-s-1 margin-bottom-basic">
                 How can you support the truth booth?
               </div>
             </div>
@@ -72,9 +72,9 @@ if( have_posts() ) {
                 I want to
               </div>
               <div class="grid-item flex-grow">
-                <input id="support-form-email" class="form-element" type="email" placeholder="my email" class="margin-bottom-basic u-block" />
+                <input id="support-form-email" class="form-element margin-bottom-basic u-block" type="email" placeholder="my email" />
 
-                <select id="support-form-select" class="form-element" class="u-block">
+                <select id="support-form-select" class="form-element u-block">
                   <?php
                     foreach ($form_options as $option) {
                       echo '<option>' . $option . '</option>';
@@ -93,8 +93,8 @@ if( have_posts() ) {
     if (!empty($products)) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid justify-center">
-            <h2 class="grid-item item-s-12 text-align-center margin-bottom-basic">Get Truth gear!</h2>
+          <section class="grid-row margin-top-large margin-bottom-large justify-center">
+            <h2 class="grid-item item-s-12 text-align-center margin-bottom-basic font-size-large font-medium">Get Truth gear!</h2>
 <?php
       foreach ($products as $product) {
         $paypal = get_post_meta($product->ID, '_igv_paypal_embed', true);
@@ -107,8 +107,8 @@ if( have_posts() ) {
                 <?php echo get_the_post_thumbnail($product->ID, 'product-thumb'); ?>
               </div>
 
-              <div class="grid-item item-s-12">
-                <h3 class="margin-bottom-small"><?php echo get_the_title($product->ID) . '&emsp;$' . $price; ?><span class="font-size-small">USD</span></h3>
+              <div class="grid-item item-s-12 font-size-mid font-medium">
+                <h3 class="margin-bottom-small"><?php echo get_the_title($product->ID) . '&mdash;$' . $price; ?><span class="font-size-basic">USD</span></h3>
                 <?php echo $paypal ?>
               </div>
             </div>
@@ -125,8 +125,8 @@ if( have_posts() ) {
 
 ?>
 
-        <section class="margin-top-mid margin-bottom-mid">
-          <div class="grid-row margin-bottom-basic">
+        <section class="margin-top-large margin-bottom-large">
+          <div class="grid-row margin-bottom-basic font-medium font-size-large">
             <div class="grid-item item-s-12 item-m-8 offset-m-1 item-l-6">
               In Search of the Truth has been graciously sponsored by these organizations:
             </div>

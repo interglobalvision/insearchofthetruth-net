@@ -21,11 +21,11 @@ if( have_posts() ) {
 
         <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
 
-          <div class="grid-item item-s-12 item-m-4">
-            <h1><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+          <div class="grid-item item-s-12 item-m-4 margin-bottom-small">
+            <h1 class="font-medium font-size-large"><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
           </div>
 
-          <div class="grid-item item-s-12 item-m-4">
+          <div class="grid-item item-s-12 item-m-4 font-size-mid padding-top-tiny margin-bottom-small">
             <time class="u-block" datetime="<?php the_time('Y-m-d'); ?>"><?php echo get_the_date(); ?></time>
 
             <?php if (has_category() && $cat_name !== 'Uncategorized') { ?>

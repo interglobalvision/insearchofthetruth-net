@@ -15,6 +15,7 @@ if( have_posts() ) {
     $gallery = get_post_meta($post->ID, '_igv_about_gallery', true);
     $longtext = get_post_meta($post->ID, '_igv_about_long', true);
     $press = get_post_meta($post->ID, '_igv_about_press', true);
+    $press_pdf = get_post_meta($post->ID, '_igv_press_pdf', true);
     $bios = get_post_meta($post->ID, '_igv_about_bios', true);
 ?>
 
@@ -26,8 +27,8 @@ if( have_posts() ) {
     if (!empty($headline)) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
-            <div class="grid-item item-s-12 item-m-6">
+          <section class="grid-row margin-top-large margin-bottom-large">
+            <div class="grid-item item-s-12 item-m-8 item-l-6 font-size-large font-medium">
               <?php echo apply_filters('the_content', $headline); ?>
             </div>
           </section>
@@ -38,7 +39,7 @@ if( have_posts() ) {
     if (has_post_thumbnail()) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
+          <section class="grid-row margin-top-large margin-bottom-large">
             <div class="item-s-12 item-m-8 offset-m-4">
               <?php the_post_thumbnail('full-width'); ?>
             </div>
@@ -48,8 +49,8 @@ if( have_posts() ) {
     }
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
-            <div class="grid-item item-s-12 item-m-10 offset-m-1">
+          <section class="grid-row margin-top-large margin-bottom-large">
+            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-large font-medium">
               <?php the_content(); ?>
             </div>
           </section>
@@ -63,7 +64,7 @@ if( have_posts() ) {
 ?>
 
           <section class="grid-row margin-top-mid margin-bottom-mid">
-            <div class="grid-item item-s-12 item-m-10 offset-m-1">
+            <div class="grid-item item-s-12 item-m-10 offset-m-1 item-l-8 offset-l-2 font-size-mid">
               <?php echo apply_filters('the_content', $longtext); ?>
             </div>
           </section>
@@ -74,7 +75,7 @@ if( have_posts() ) {
     if (!empty($press)) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid justify-center">
+          <section class="grid-row margin-top-large margin-bottom-large justify-center">
 
 <?php
       $i = 0;
@@ -85,7 +86,7 @@ if( have_posts() ) {
             $quote['author'] = '<a class="link-underline" href="' . esc_url($quote['link']) . '">' . $quote['author'] . '</a>';
           }
 ?>
-            <div class="grid-item item-s-12 item-m-4">
+            <div class="grid-item item-s-12 item-m-4 font-size-large font-medium margin-bottom-mid">
               <div class="margin-bottom-small"><?php echo $quote['quote']; ?></div>
               <span>&mdash;&nbsp;<?php echo $quote['author']; ?></span>
             </div>
@@ -97,7 +98,7 @@ if( have_posts() ) {
       if (!empty($press_pdf)) {
 ?>
 
-            <div class="grid-item item-s-12 text-align-center margin-top-basic">
+            <div class="grid-item item-s-12 text-align-center font-size-mid margin-bottom-large">
               <a class="link-underline" href="<?php echo esc_url($press_pdf); ?>">Download our press archive</a>
             </div>
 
@@ -111,23 +112,28 @@ if( have_posts() ) {
     if (!empty($bios)) {
 ?>
 
-          <section class="margin-top-mid margin-bottom-mid">
+          <section class="margin-top-large margin-bottom-large">
+            <div class="grid-row margin-bottom-small">
+              <div class="grid-item item-s-12 item-m-3 offset-m-1">
+                <h2 class="font-size-mid font-medium">Meet the artists:</h2>
+              </div>
+            </div>
 
 <?php
       foreach ($bios as $bio) {
 
         if (!empty($bio['name'])) {
 ?>
-            <div class="grid-row">
+            <div class="grid-row margin-bottom-small">
               <div class="grid-item item-s-12 item-m-6 offset-m-4">
-                <h3><?php echo $bio['name']; ?></h3>
+                <h3 class="font-size-large font-medium"><?php echo $bio['name']; ?></h3>
               </div>
             </div>
 
 <?php
         }
 ?>
-            <div class="grid-row">
+            <div class="grid-row margin-bottom-basic">
               <div class="grid-item item-s-12 item-m-3 offset-m-1">
                 <?php echo !empty($bio['image']) ? wp_get_attachment_image($bio['image_id'], 'item-l-3') : '&nbsp;'; ?>
               </div>
