@@ -9,7 +9,7 @@ if( get_next_posts_link() || get_previous_posts_link() ) {
 <?php
   if ($previous) {
 ?>
-      <div class="grid-item flex-grow">
+      <div class="grid-item flex-grow font-size-mid font-bold">
         <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> <a class="link-underline" href="<?php echo get_previous_posts_page_link(); ?>">Newer</a>
       </div>
 <?php
@@ -17,7 +17,7 @@ if( get_next_posts_link() || get_previous_posts_link() ) {
 
   if ($next) {
 ?>
-      <div class="grid-item flex-grow text-align-right">
+      <div class="grid-item flex-grow text-align-right font-size-mid font-bold">
         <a class="link-underline" href="<?php echo get_next_posts_page_link(); ?>">Older</a> <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?>
       </div>
 <?php

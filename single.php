@@ -21,11 +21,11 @@ if( have_posts() ) {
 
         <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
 
-          <div class="grid-item item-s-12">
-            <h1><?php the_title(); ?></h1>
+          <div class="grid-item item-s-12 margin-bottom-basic">
+            <h1 class="font-size-large font-medium"><?php the_title(); ?></h1>
           </div>
 
-          <div class="grid-item item-s-12">
+          <div class="grid-item item-s-12 font-size-mid margin-bottom-basic">
             <time datetime="<?php the_time('Y-m-d'); ?>"><?php echo get_the_date(); ?></time><br>
 
             <?php if (has_category() && $cat_name !== 'Uncategorized') { ?>
@@ -33,11 +33,11 @@ if( have_posts() ) {
             <?php } ?>
           </div>
 
-          <div class="item-s-12">
+          <div class="item-s-12 margin-bottom-basic">
             <?php the_post_thumbnail('full-width'); ?>
           </div>
 
-          <div class="grid-item item-s-12">
+          <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3">
             <div class="single-content-container">
               <?php the_content(); ?>
             </div>

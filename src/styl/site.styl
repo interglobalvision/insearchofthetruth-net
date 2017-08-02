@@ -71,8 +71,8 @@ body
 .line-larger
   line-height: $font-leading-larger
 
-.font-heavy
-  font-weight: 700
+.font-medium
+  font-weight: 500
 
 // ******************************************************
 
@@ -115,16 +115,16 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 12px
-$font-size-h1 = 28px
-$font-size-h2 = 21px
-$font-size-h3 = 16px
+$font-size-basic = 13px
+$font-size-large = $font-size-basic * 2
+$font-size-mid = $font-size-basic * 1.5
+$font-size-small = $font-size-basic * .666
 
-grid(96%, $gutter, s)
+grid(100%, $gutter, s)
 
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-font-sizes($font-size-basic, $font-size-h1, $font-size-h2, $font-size-h3)
+font-sizes($font-size-basic, false, $font-size-large, $font-size-mid, $font-size-small)
 
 @import 'responsive/mobile'
 
@@ -139,13 +139,16 @@ font-sizes($font-size-basic, $font-size-h1, $font-size-h2, $font-size-h3)
   $margin-mid = ($gutter * 3.5)
   $margin-large = ($gutter * 5)
 
-  $font-size-basic = 14px
+  $font-size-basic = 17px
+  $font-size-large = $font-size-basic * 2
+  $font-size-mid = $font-size-basic * 1.5
+  $font-size-small = $font-size-basic * .666
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  grid(680px, $gutter, m)
+  grid(100%, $gutter, m)
 
-  font-sizes($font-size-basic)
+  font-sizes($font-size-basic, false, $font-size-large, $font-size-mid, $font-size-small)
 
   .mobile-only
     display: none !important
@@ -163,13 +166,16 @@ font-sizes($font-size-basic, $font-size-h1, $font-size-h2, $font-size-h3)
   $margin-mid = ($gutter * 3.5)
   $margin-large = ($gutter * 5)
 
-  $font-size-basic = 16px
+  $font-size-basic = 21px
+  $font-size-large = $font-size-basic * 2
+  $font-size-mid = $font-size-basic * 1.5
+  $font-size-small = $font-size-basic * .666
 
-  grid(1000px, $gutter, l)
+  grid(100%, $gutter, l)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  font-sizes($font-size-basic)
+  font-sizes($font-size-basic, false, $font-size-large, $font-size-mid, $font-size-small)
 
   .desktop-only
     display: initial !important
@@ -178,13 +184,11 @@ font-sizes($font-size-basic, $font-size-h1, $font-size-h2, $font-size-h3)
 
 @media screen and (min-width: 1280px)
 
-  grid(1200px)
-
   @import 'responsive/laptop'
 
 @media screen and (min-width: 1366px)
 
-  grid(1300px, false, xl)
+  grid(100%, false, xl)
 
   @import 'responsive/desktop'
 
