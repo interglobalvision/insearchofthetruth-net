@@ -63,18 +63,18 @@ if( have_posts() ) {
 ?>
           <section class="margin-top-large margin-bottom-large font-size-large font-medium">
             <div class="grid-row">
-              <div class="grid-item item-s-11 offset-s-1 margin-bottom-basic">
+              <div class="grid-item item-s-11 offset-s-1">
                 How can you support the truth booth?
               </div>
             </div>
             <form id="support-form" class="grid-row align-items-end">
-              <div class="grid-item">
+              <div id="i-want-to" class="grid-item">
                 I want to
               </div>
-              <div class="grid-item flex-grow">
-                <input id="support-form-email" class="form-element margin-bottom-basic u-block" type="email" placeholder="my email" />
+              <div class="grid-item grid-column flex-grow">
+                <input id="support-form-email" class="form-element margin-top-basic" type="email" placeholder="my email" />
 
-                <select id="support-form-select" class="form-element u-block">
+                <select id="support-form-select" class="form-element margin-top-basic u-pointer">
                   <?php
                     foreach ($form_options as $option) {
                       echo '<option>' . $option . '</option>';
@@ -83,7 +83,7 @@ if( have_posts() ) {
                 </select>
               </div>
               <div class="grid-item">
-                <button class="js-submit-form"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
+                <button id="submit" class="form-arrow u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
               </div>
             </form>
           </section>
@@ -107,9 +107,12 @@ if( have_posts() ) {
                 <?php echo get_the_post_thumbnail($product->ID, 'product-thumb'); ?>
               </div>
 
-              <div class="grid-item item-s-12 font-size-mid font-medium">
-                <h3 class="margin-bottom-small"><?php echo get_the_title($product->ID) . '&mdash;$' . $price; ?><span class="font-size-basic">USD</span></h3>
-                <?php echo $paypal ?>
+              <div class="grid-item item-s-12 font-size-mid font-medium no-gutter grid-row">
+                <h3 class="grid-item item-s-12 margin-bottom-small"><?php echo get_the_title($product->ID) . '&mdash;$' . $price; ?><span class="font-size-basic">USD</span></h3>
+
+                <div class="paypal-form-holder grid-item item-s-12 no-gutter">
+                  <?php echo $paypal ?>
+                </div>
               </div>
             </div>
 <?php
@@ -127,7 +130,7 @@ if( have_posts() ) {
 
         <section class="margin-top-large margin-bottom-large">
           <div class="grid-row margin-bottom-basic font-medium font-size-large">
-            <div class="grid-item item-s-12 item-m-8 offset-m-1 item-l-6">
+            <div class="grid-item item-s-12 item-m-6 offset-m-1 item-l-5 item-xl-4">
               In Search of the Truth has been graciously sponsored by these organizations:
             </div>
           </div>
