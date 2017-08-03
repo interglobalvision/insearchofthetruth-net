@@ -35,7 +35,7 @@
           <a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a>
         </div>
         <nav id="main-nav" class="grid-item flex-grow no-gutter">
-          <ul class="u-inline-list font-bold grid-row">
+          <ul class="grid-row font-bold">
             <li class="grid-item"><a href="<?php echo home_url(); ?>">Portraits</a></li>
             <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
             <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
