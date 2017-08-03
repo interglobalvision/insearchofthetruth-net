@@ -13,3 +13,64 @@
     justify-content: center
 
 // ******************************************************
+
+// FORM
+
+#support-form
+  flex-wrap: nowrap
+
+::-webkit-input-placeholder // Chrome/Opera/Safari
+  transition: opacity 100ms linear
+  color: $color-black
+
+::-moz-placeholder // Firefox 19+
+  transition: opacity 100ms linear
+  color: $color-black
+
+:-ms-input-placeholder // IE 10+
+  transition: opacity 100ms linear
+  color: $color-black
+
+:-moz-placeholder // Firefox 18-
+  transition: opacity 100ms linear
+  color: $color-black
+
+input, select
+  width: 100%
+  border: 0
+  background: transparent
+  appearance: none
+  border-bottom: 3px solid $color-black
+  padding-bottom: 3px
+  border-radius: 0
+  margin-bottom: -4px
+  font-weight: 500
+  font-family: font-stack('Helvetica');
+  &:focus
+    outline: none
+  &:focus::-webkit-input-placeholder
+    opacity: 0
+  &:focus::-moz-placeholder
+    opacity: 0
+  &:focus:-ms-input-placeholder
+    opacity: 0
+  &:focus:-moz-placeholder
+    opacity: 0
+
+input[type="submit"]
+  cursor: pointer
+
+.form-arrow
+  background: transparent
+  border: 0
+  svg
+    height: 20px
+
+.paypal-form-holder
+  form
+    display: flex
+    justify-content: flex-end
+
+@media screen and (max-width: 440px)
+  #i-want-to
+    display: none

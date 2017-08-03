@@ -24,6 +24,10 @@ Site = {
         slideToClickedSlide: true,
       });
 
+      if ($('.paypal-form-holder').length) {
+        Site.Paypal.init();
+      }
+
     });
 
   },
@@ -41,6 +45,43 @@ Site = {
       $(this).html(string);
     });
   },
+};
+
+Site.Paypal = {
+  init: function() {
+    var _this = this;
+
+    var $form = $('.paypal-form-holder form')
+
+    $form.each(function() {
+      _this.styleForm($(this));
+    });
+
+    $('.paypal-form-holder').removeClass('u-hidden');
+
+  },
+
+  styleBuy: function($buy) {
+
+  },
+
+  styleForm: function($form) {
+    var $buy = $form.find('input[name="submit"]');
+    var $select = $form.find('select');
+
+    // Style Buy button
+    $buy.attr('type', 'submit');
+    $buy.attr('value', 'Buy');
+    $buy.wrap('<div class="grid-item item-s-6"></div>');
+
+    // Style select
+    if ($select.length) {
+      $form.prepend($select);
+      $form.find('table').remove();
+      $select.wrap('<div class="grid-item item-s-6"></div>');
+    }
+  },
+
 };
 
 Site.init();
