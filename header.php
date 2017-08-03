@@ -27,18 +27,19 @@
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="margin-bottom-large">
     <div class="container">
       <div class="grid-row align-items-center">
-        <div class="grid-item">
-          <h1><a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a></h1>
+        <div id="logo-holder" class="grid-item text-align-center">
+          <h1 class="u-visuallyhidden">In Search of the Truth</h1>
+          <a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a>
         </div>
-        <nav class="grid-item flex-grow text-align-right">
-          <ul class="u-inline-list font-bold">
-            <li><a href="<?php echo home_url(); ?>">Portraits</a></li>
-            <li><a href="<?php echo home_url('support'); ?>">Support</a></li>
-            <li><a href="<?php echo home_url('about'); ?>">About</a></li>
-            <li><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
+        <nav id="main-nav" class="grid-item flex-grow no-gutter">
+          <ul class="u-inline-list font-bold grid-row">
+            <li class="grid-item"><a href="<?php echo home_url(); ?>">Portraits</a></li>
+            <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
+            <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
+            <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
           </ul>
         </nav>
       </div>
