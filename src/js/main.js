@@ -75,9 +75,11 @@ Site.Paypal = {
     $buy.wrap('<div class="grid-item item-s-6"></div>');
 
     // Style select
-    $form.prepend($select);
-    $form.find('table').remove();
-    $select.wrap('<div class="grid-item item-s-6"></div>');
+    if ($select.length) {
+      $form.prepend($select);
+      $form.find('table').remove();
+      $select.wrap('<div class="grid-item item-s-6"></div>');
+    }
   },
 
 };
