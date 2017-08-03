@@ -57,6 +57,8 @@ Site.Paypal = {
       _this.styleForm($(this));
     });
 
+    $('.paypal-form-holder').removeClass('u-hidden');
+
   },
 
   styleBuy: function($buy) {

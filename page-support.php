@@ -93,7 +93,7 @@ if( have_posts() ) {
     if (!empty($products)) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large justify-center">
+          <section class="grid-row margin-top-large margin-bottom-large justify-center align-items-end">
             <h2 class="grid-item item-s-12 text-align-center margin-bottom-basic font-size-large font-medium">Get Truth gear!</h2>
 <?php
       foreach ($products as $product) {
@@ -110,7 +110,7 @@ if( have_posts() ) {
               <div class="grid-item item-s-12 font-size-mid font-medium no-gutter grid-row">
                 <h3 class="grid-item item-s-12 margin-bottom-small"><?php echo get_the_title($product->ID) . '&mdash;$' . $price; ?><span class="font-size-basic">USD</span></h3>
 
-                <div class="paypal-form-holder grid-item item-s-12 no-gutter">
+                <div class="paypal-form-holder grid-item item-s-12 no-gutter u-hidden">
                   <?php echo $paypal ?>
                 </div>
               </div>
