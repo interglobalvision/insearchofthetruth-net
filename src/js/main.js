@@ -51,7 +51,7 @@ Site.Paypal = {
   init: function() {
     var _this = this;
 
-    $form = $('.paypal-form-holder form')
+    var $form = $('.paypal-form-holder form')
 
     $form.each(function() {
       _this.styleForm($(this));
@@ -66,8 +66,8 @@ Site.Paypal = {
   },
 
   styleForm: function($form) {
-    $buy = $form.find('input[name="submit"]');
-    $select = $form.find('select');
+    var $buy = $form.find('input[name="submit"]');
+    var $select = $form.find('select');
 
     // Style Buy button
     $buy.attr('type', 'submit');
