@@ -130,6 +130,16 @@ function create_portrait_taxonomies() {
       'portrait',
       array(
         'label' => __($taxonomy_name),
+        'labels' => array(
+          'name' => __($taxonomy_name),
+          'singular_name' => __($taxonomy_name),
+          'all_items' => __('All ' . $taxonomy_name),
+          'edit_item' => __('Edit ' . $taxonomy_name),
+          'view_item' => __('View ' . $taxonomy_name),
+          'update_item' => __('Update ' . $taxonomy_name),
+          'add_new_item' => __('Add New ' . $taxonomy_name),
+          'new_item_name' => __('New ' . $taxonomy_name . ' Name'),
+        ),
         'rewrite' => array( 'slug' => $taxonomy_slug ),
         'hierarchical' => true,
       )
