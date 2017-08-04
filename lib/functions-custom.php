@@ -27,3 +27,23 @@ function render_gallery_slider($images) {
 <?php
 
 }
+
+function render_filter_select($options, $name, $classes) {
+  if (empty($options) || empty($name)) {
+   return;
+  }
+    ?>
+      <div class="<?php echo $classes; ?>">
+        <select id="filter-<?php echo $name; ?>" name="filter-<?php echo $name; ?>">
+  <option><?php echo $name; ?></option>
+<?php
+  foreach($options as $option) {
+?>
+    <option value="<?php echo $option->slug; ?>"><?php echo $option->name; ?></option>
+<?php
+  }
+?>
+  </select>
+</div>
+<?php
+}
