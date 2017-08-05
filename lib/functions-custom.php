@@ -34,8 +34,8 @@ function render_filter_select($options, $name, $classes) {
   }
     ?>
       <div class="<?php echo $classes; ?>">
-        <select id="filter-<?php echo $name; ?>" name="filter-<?php echo $name; ?>">
-  <option><?php echo $name; ?></option>
+      <select id="filter-<?php echo $name; ?>" name="filter-<?php echo $name; ?>" class="filter-select" data-filter="<?php echo $name; ?>">
+  <option value=""><?php echo $name; ?></option>
 <?php
   foreach($options as $option) {
 ?>
@@ -46,4 +46,16 @@ function render_filter_select($options, $name, $classes) {
   </select>
 </div>
 <?php
+}
+
+function get_taxonomy_value($post,$taxonomy) {
+  $value = get_the_terms($post,$taxonomy);
+
+  if(empty($value)) {
+    return null;
+  }
+
+  $value = $value[0]->slug;
+
+  return $value;
 }
