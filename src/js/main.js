@@ -93,9 +93,13 @@ Site.Portraits = {
   init: function() {
     var _this = this;
 
+    // Get filters form element
     _this.$form = $('#portraits-filters');
+
+    // Get filters select elements
     _this.$filters = _this.$form.find('select');
 
+    // Init grid
     _this.initGrid();
 
     // Bind select filters
@@ -112,7 +116,6 @@ Site.Portraits = {
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
     });
-
 
     // Workaround to make it compatible with lazysizes
     _this.$grid[0].addEventListener('load', (function(){
@@ -134,28 +137,33 @@ Site.Portraits = {
   handleFilterChange: function(event) {
     var _this = this;
 
+    // Get the selector text to be used for filtering
     var filterSelector = _this.getFilterSelector();
 
-    console.log('filter',filterSelector);
-
+    // Filter using the selector on Isotope
     _this.$grid.isotope({
       filter: filterSelector,
     });
   },
 
+  // Return a string selector based on the filter values
+  // Eg. '[data-age=23]
+  //     '[data-age=25][data-gender=female]"
   getFilterSelector: function() {
     var _this = this;
 
     var selector = '';
 
+    // Iterate thru the filters to get it's values
     _this.$filters.each( function(index) {
       if(this.value) {
+
+        // Build up selector string
         selector += '[data-' + this.dataset.filter + '=' + this.value + ']';
       }
     });
 
     return selector
-
   },
 
 };
