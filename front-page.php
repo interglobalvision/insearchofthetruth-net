@@ -6,8 +6,6 @@ get_header();
 
   <?php get_template_part('partials/portraits'); ?>
 
-  <?php get_template_part('partials/pagination'); ?>
-
 </main>
 
 <?php
