@@ -48,14 +48,43 @@ function render_filter_select($options, $name, $classes) {
 <?php
 }
 
-function get_taxonomy_value($post,$taxonomy) {
-  $value = get_the_terms($post,$taxonomy);
+// Return taxonomy values in a single array
+function get_taxonomy_values($post,$taxonomy) {
+  $terms = get_the_terms($post,$taxonomy);
 
-  if(empty($value)) {
+  if(empty($terms)) {
     return null;
   }
 
-  $value = $value[0]->slug;
+  $values = array();
 
-  return $value;
+  foreach($terms as $term) {
+    array_push($values, $term->slug);
+  }
+
+  return $values;
+}
+
+// Return a string constructed from the filters values
+// eg. 'age-20 gender-male'
+//     'age-16 subject-racism subject-free-speach gender-female'
+function get_post_filters_data($post) {
+  $filters = array(
+    'age' => get_taxonomy_values($post,'age'),
+    'subject' => get_taxonomy_values($post,'subject'),
+    'location' => get_taxonomy_values($post,'location'),
+    'gender' => get_taxonomy_values($post,'gender'),
+  );
+
+  $filters_data = '';
+
+  foreach($filters as $filter_slug => $filter_data) {
+    if(!empty($filter_data)) {
+      foreach($filter_data as $filter_value) {
+        $filters_data .= $filter_slug . "-" . $filter_value . " ";
+      }
+    }
+  }
+
+  return $filters_data;
 }

@@ -68,20 +68,10 @@ if ( $portraits->have_posts() ) {
   while ( $portraits->have_posts() ) {
     $portraits->the_post();
 
-    $age = get_taxonomy_value($post,'age');
-    $subject = get_taxonomy_value($post,'subject');
-    $location = get_taxonomy_value($post,'location');
-    $gender = get_taxonomy_value($post,'gender');
+    $filters_data = get_post_filters_data($post);
 
 ?>
-  <article
-    <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?>
-    id="post-<?php the_ID(); ?>"
-    data-age="<?php echo $age; ?>"
-    data-subject="<?php echo $subject; ?>"
-    data-location="<?php echo $location; ?>"
-    data-gender="<?php echo $gender; ?>"
-    >
+      <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>">
         <?php the_post_thumbnail('item-l-4'); ?>
       </article>
 <?php

@@ -147,8 +147,8 @@ Site.Portraits = {
   },
 
   // Return a string selector based on the filter values
-  // Eg. '[data-age=23]
-  //     '[data-age=25][data-gender=female]"
+  // Eg. '[data-filters*=age-20]'
+  //     '[data-filters*=age-20][data-filters*=subject-subject-1]'
   getFilterSelector: function() {
     var _this = this;
 
@@ -159,7 +159,7 @@ Site.Portraits = {
       if(this.value) {
 
         // Build up selector string
-        selector += '[data-' + this.dataset.filter + '=' + this.value + ']';
+        selector += '[data-filters*=' + this.dataset.filter + '-' + this.value + ']';
       }
     });
 
