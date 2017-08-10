@@ -24,8 +24,11 @@ Site = {
         slideToClickedSlide: true,
       });
 
-      // Init grid
+
       if ($('#portraits').length) {
+        // Init player
+        Site.Player.init();
+        // Init grid
         Site.Portraits.init();
       }
 
@@ -89,6 +92,55 @@ Site.Paypal = {
 
 };
 
+Site.Player = {
+  init: function() {
+    var _this = this;
+
+    // Get the player container element
+    _this.$playeContainer = $('#player-container');
+
+    // Bind stuff
+    _this.bind();
+
+  },
+
+  bind: function() {
+    var _this = this;
+
+    // Init youtube whuen youtube api is ready
+    // TODO: subscribe to this event with jQuery
+    window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
+
+    // Listen for updatedyoutubelist
+    $(window).on('updatedyoutubelist', function(event, data) {
+
+      // Update list cache
+      _this.list = data.youtubeIds;
+    });
+  },
+
+  initYoutube: function() {
+    var _this = this;
+
+    // Init youtube player inside #player-container
+    _this.$player = new YT.Player('player-container');
+
+  },
+
+  playVideo: function(videoId, list) {
+    var _this = this;
+
+    // Play video
+    _this.$player.loadVideoById(videoId);
+
+    // Update list cache
+    if(list) {
+      _this.list = list;
+    }
+  },
+
+};
+
 Site.Portraits = {
   init: function() {
     var _this = this;
@@ -99,11 +151,17 @@ Site.Portraits = {
     // Get filters select elements
     _this.$filters = _this.$form.find('select');
 
+    // Get grid element
+    _this.$grid = $('#portraits-grid');
+
+    // Get portraits
+    _this.$portraits = _this.$grid.find('.portrait');
+
     // Init grid
     _this.initGrid();
 
-    // Bind select filters
-    _this.$filters = $('.filter-select').on('change', _this.handleFilterChange.bind(_this));
+    // Bind stuff
+    _this.bind();
 
   },
 
@@ -111,7 +169,7 @@ Site.Portraits = {
     var _this = this;
 
     // Set grid with isotope
-    _this.$grid = $('#portraits-grid').isotope({
+    _this.$grid.isotope({
       // options
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
@@ -134,6 +192,54 @@ Site.Portraits = {
 
   },
 
+  bind: function() {
+    var _this = this;
+
+    // Bind select filters change
+    _this.$filters = $('.filter-select').on('change', _this.handleFilterChange.bind(_this));
+
+    // Bind portrait clicks
+    _this.$portraits.on('click', function() {
+      _this.playVideo(this.dataset.youtubeId);
+    });
+
+    // Bind arrange complete grid event
+    _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
+  },
+
+  playVideo: function(videoId) {
+    var _this = this;
+
+    Site.Player.playVideo(videoId);
+  },
+
+  // Get a list of youtube ids (filtered in the list)
+  getFilteredYoutubeIds: function() {
+    var _this = this;
+
+    // Get the filtered elements
+    var filteredElements = _this.$grid.isotope('getFilteredItemElements');
+
+    // Get youtubeIds
+    var youtubeIds = filteredElements.map( function(val) {
+      return val.dataset.youtubeId;
+    });
+
+    return youtubeIds;
+  },
+
+  handleArrangeComplete: function(event) {
+    var _this = this;
+
+    var youtubeIds = _this.getFilteredYoutubeIds();
+
+    // Trigger an event with the list of youtube Ids
+    $(window).trigger('updatedyoutubelist', {
+      youtubeIds: youtubeIds,
+    });
+
+  },
+
   handleFilterChange: function(event) {
     var _this = this;
 
@@ -144,6 +250,7 @@ Site.Portraits = {
     _this.$grid.isotope({
       filter: filterSelector,
     });
+
   },
 
   // Return a string selector based on the filter values
@@ -163,7 +270,7 @@ Site.Portraits = {
       }
     });
 
-    return selector
+    return selector;
   },
 
 };
