@@ -236,36 +236,35 @@ function igv_cmb_metaboxes() {
 add_action( 'cmb2_admin_init', 'igv_location_taxonomy_metabox' );
 
 function igv_location_taxonomy_metabox() {
-	$prefix = '_igv_';
-	/**
-	 * Metabox to add fields to categories and tags
-	 */
-	$cmb_location = new_cmb2_box( array(
-		'id'               => $prefix . 'edit',
-		'title'            => esc_html__( 'Location Metabox', 'cmb2' ), // Doesn't output for term boxes
-		'object_types'     => array( 'term' ), // Tells CMB2 to use term_meta vs post_meta
-		'taxonomies'       => array( 'location', ), // Tells CMB2 which taxonomies should have these fields
-		// 'new_term_section' => true, // Will display in the "Add New Category" section
-	) );
+  $prefix = '_igv_';
+  /**
+   * Metabox to add fields to categories and tags
+   */
+  $cmb_location = new_cmb2_box(array(
+    'id'               => $prefix . 'edit',
+    'title'            => esc_html__('Location Metabox', 'cmb2'), // Doesn't output for term boxes
+    'object_types'     => array('term'), // Tells CMB2 to use term_meta vs post_meta
+    'taxonomies'       => array('location'), // Tells CMB2 which taxonomies should have these fields
+  ));
 
-	$cmb_location->add_field( array(
-		'name'     => esc_html__( 'Coordinates', 'cmb2' ),
-		'id'       => $prefix . 'location_coordinates',
-		'type'     => 'title',
-		'on_front' => false,
-	) );
+  $cmb_location->add_field(array(
+    'name'     => esc_html__('Coordinates', 'cmb2'),
+    'id'       => $prefix . 'location_coordinates',
+    'type'     => 'title',
+    'on_front' => false,
+  ));
 
-  $cmb_location->add_field( array(
-    'name' => esc_html__( 'Latitude', 'cmb2' ),
+  $cmb_location->add_field(array(
+    'name' => esc_html__('Latitude', 'cmb2'),
     'id'   => $prefix . 'location_lat',
     'type' => 'text',
-  ) );
+  ));
 
-  $cmb_location->add_field( array(
-    'name' => esc_html__( 'Longitude', 'cmb2' ),
+  $cmb_location->add_field(array(
+    'name' => esc_html__('Longitude', 'cmb2'),
     'id'   => $prefix . 'location_lon',
     'type' => 'text',
-  ) );
+  ));
 
 }
 ?>
