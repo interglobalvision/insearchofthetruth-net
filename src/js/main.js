@@ -97,7 +97,7 @@ Site.Player = {
     var _this = this;
 
     // Get the player container element
-    _this.$playeContainer = $('#player-container');
+    _this.$playeContainer = $('#player-iframe');
 
     // Bind stuff
     _this.bind();
@@ -123,7 +123,7 @@ Site.Player = {
     var _this = this;
 
     // Init youtube player inside #player-container
-    _this.$player = new YT.Player('player-container');
+    _this.$player = new YT.Player('player-iframe');
 
   },
 
@@ -211,6 +211,8 @@ Site.Portraits = {
     var _this = this;
 
     Site.Player.playVideo(videoId);
+
+    // TODO: scroll to video
   },
 
   // Get a list of youtube ids (filtered in the list)
