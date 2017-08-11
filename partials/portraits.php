@@ -35,7 +35,9 @@ $genders = get_terms( array(
 if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
-  <div id="portraits-player"></div>
+  <div id="player-container" class="u-video-embed-container">
+    <div id="player-iframe"></div>
+  </div>
   <div class="container">
 
     <div id="portraits-filters-container" class="margin-bottom-basic">
@@ -68,10 +70,12 @@ if ( $portraits->have_posts() ) {
   while ( $portraits->have_posts() ) {
     $portraits->the_post();
 
+    $youtube_id = get_post_meta($post->ID, '_video_id_value', true);
+
     $filters_data = get_post_filters_data($post);
 
 ?>
-      <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>">
+      <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
         <?php the_post_thumbnail('item-l-4'); ?>
       </article>
 <?php

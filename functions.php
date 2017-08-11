@@ -23,6 +23,10 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('javascript-library', $javascriptLibrary, '', '', true);
 
+  wp_enqueue_script('yt-player-api', 'http://www.youtube.com/player_api', array(), false, true);
+
+  add_action( 'wp_enqueue_scripts', 'wp_enqueue_scripts__youtube_api' );
+
   wp_register_script('javascript-main', $javascriptMain);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);
