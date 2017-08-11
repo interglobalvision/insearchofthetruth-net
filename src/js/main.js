@@ -94,6 +94,7 @@ Site.Paypal = {
 
 Site.Player = {
   playerOptions: {
+    // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
     controls: 0,
     modestbranding: 1,
     rel: 0,
@@ -103,7 +104,7 @@ Site.Player = {
     var _this = this;
 
     // Get the player container element
-    _this.$playeContainer = $('#player-iframe');
+    _this.$playerContainer = $('#player-iframe');
 
     // Bind stuff
     _this.bind();
