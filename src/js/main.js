@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Site, Modernizr */
+/* global $, jQuery, document, Site, YT */
 
 Site = {
   mobileThreshold: 601,
@@ -93,6 +93,12 @@ Site.Paypal = {
 };
 
 Site.Player = {
+  playerOptions: {
+    controls: 0,
+    modestbranding: 1,
+    rel: 0,
+  },
+
   init: function() {
     var _this = this;
 
@@ -123,7 +129,7 @@ Site.Player = {
     var _this = this;
 
     // Init youtube player inside #player-container
-    _this.$player = new YT.Player('player-iframe');
+    _this.$player = new YT.Player('player-iframe', {playerVars: _this.playerOptions});
 
   },
 
