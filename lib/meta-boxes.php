@@ -252,6 +252,7 @@ function igv_location_taxonomy_metabox() {
     'id'       => $prefix . 'location_coordinates',
     'type'     => 'title',
     'on_front' => false,
+  	'desc'             => esc_html__( 'Set the geolocation in lat long values for this location. http://www.latlong.net/ can be helpful', 'cmb2' ),
   ));
 
   $cmb_location->add_field(array(
