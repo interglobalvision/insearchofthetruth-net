@@ -45,3 +45,37 @@ function add_lazysize_on_srcset($attr) {
 
 }
 add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
+
+// This adds the height of the original image to the size in the srcset array that
+// matches the original size.
+//
+// This is added to the srcset in order to make lazysizes work with background images
+// via it's plugins bgset and parent-fit to work with background size cover.
+// Ref. https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset
+//
+// Eg.
+// Array (
+//  [1552] => Array (
+//   [url] => http://localhost:8080/insearchofthetruth-net/wp-content/uploads/2017/08/e8b548419ee0ceaf94dbe9f8ce0a6f2f_original.jpg
+//   [descriptor] => h
+//   [value] => 1552w 873
+//   )
+// )
+//
+// NOTE: This is very hacky but works well and doesn't break anything
+function add_height_size_to_srcset($sources, $size_array, $image_src, $image_meta, $attachment_id) {
+
+  // Get original image dimensions
+  $width = $size_array[0];
+  $height = $size_array[1];
+
+  // Add the height value to the `value` in the original size
+  // $sources is an array that uses the width of each size as the array index
+  $sources[$width]['value'] = $width . 'w ' . $height;
+
+  // Replace the descriptor for h
+  $sources[$width]['descriptor'] = 'h ';
+
+  return $sources;
+};
+add_filter( 'wp_calculate_image_srcset', 'add_height_size_to_srcset', 10, 5 );
