@@ -12,19 +12,6 @@ Site = {
 
     $(document).ready(function () {
 
-      var mySwiper = new Swiper ('.swiper-container', {
-        // Optional parameters
-        pagination: '.swiper-pagination',
-        loop: true,
-        slidesPerView: 'auto',
-        loopedSlides: 5,
-        spaceBetween: 0,
-        paginationClickable: true,
-        centeredSlides: true,
-        slideToClickedSlide: true,
-      });
-
-
       if ($('#portraits').length) {
         // Init player
         Site.Player.init();
@@ -34,6 +21,11 @@ Site = {
 
       if ($('.paypal-form-holder').length) {
         Site.Paypal.init();
+      }
+
+      if ($('.swiper-container').length) {
+        // Init any galleries
+        Site.Gallery.init();
       }
 
     });
@@ -52,6 +44,33 @@ Site = {
       string = string.replace(/ ([^ ]*)$/,'&nbsp;$1');
       $(this).html(string);
     });
+  },
+};
+
+Site.Gallery = {
+  instances: [],
+  options: {
+    pagination: '.swiper-pagination',
+    loop: true,
+    slidesPerView: 'auto',
+    loopedSlides: 5,
+    spaceBetween: 0,
+    paginationClickable: true,
+    centeredSlides: true,
+    onTap: function(swiper) {
+      swiper.slideNext();
+    },
+  },
+
+  init: function() {
+    var _this = this;
+
+    // Find and loop all swiper containers
+    $('.swiper-container').each(function(index, element) {
+      // Create and save instance on instances array
+      _this.instances[index] = new Swiper (element, _this.options);
+    });
+
   },
 };
 
