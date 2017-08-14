@@ -20,6 +20,14 @@
     "isotope": "^3.0.4"
   },
   "overrides": {
+    "lazysizes": {
+      "main": [
+        "plugins/bgset/ls.bgset.min.js",
+        "plugins/parent-fit/ls.parent-fit.min.js",
+        "lazysizes.js"
+      ],
+      "dependencies": {}
+    },
     "isotope": {
       "main": "dist/isotope.pkgd.min.js",
       "dependencies": {}

@@ -82,6 +82,26 @@ function igv_cmb_metaboxes() {
     'type' => 'textarea_code',
   ) );
 
+  // HOME PAGE METABOXES
+  $home_page = get_page_by_path('home');
+
+  if (!empty($home_page) ) {
+
+    $cmb_home = new_cmb2_box( array(
+      'id'            => $prefix . 'home_metabox',
+      'title'         => esc_html__( 'Splash Images', 'cmb2' ),
+      'object_types'  => array( 'page', ), // Post type
+      'show_on'      => array( 'key' => 'id', 'value' => array($home_page->ID) ),
+    ));
+
+    $cmb_home->add_field( array(
+    	'name'       => esc_html__( 'Splash Images', 'cmb2' ),
+      'desc'       => esc_html__( 'Images slection fror home page splash', 'cmb2' ),
+    	'id'         => $prefix . 'home_splash_images',
+    	'type'       => 'file_list',
+    ) );
+  }
+
   // SUPPORT
   $support_page = get_page_by_path('support');
 
