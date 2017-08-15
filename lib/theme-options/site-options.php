@@ -62,6 +62,12 @@ $metabox = array(
       'id'   => $prefix . 'og_fb_app_id',
       'type' => 'text',
     ),
+    array(
+      'name' => __( 'Google API Key', 'IGV' ),
+      'desc' => __( '(requiered for the map)', 'IGV' ),
+      'id'   => $prefix . 'og_google_api_key',
+      'type' => 'text',
+    ),
 
     // BOILER
 
