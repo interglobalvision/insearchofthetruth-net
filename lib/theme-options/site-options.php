@@ -65,7 +65,7 @@ $metabox = array(
     array(
       'name' => __( 'Google API Key', 'IGV' ),
       'desc' => __( '(requiered for the map)', 'IGV' ),
-      'id'   => $prefix . 'og_google_api_key',
+      'id'   => $prefix . 'google_api_key',
       'type' => 'text',
     ),
 
