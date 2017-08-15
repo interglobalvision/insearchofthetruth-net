@@ -13,10 +13,12 @@ Site = {
     $(document).ready(function () {
 
       if ($('#portraits').length) {
-        // Init player
-        Site.Player.init();
         // Init grid
         Site.Portraits.init();
+        // Init player
+        Site.Player.init();
+        // Init Map
+        Site.Map.init();
       }
 
       if ($('.paypal-form-holder').length) {
@@ -353,6 +355,89 @@ Site.Portraits = {
     return selector;
   },
 
+};
+
+Site.Map = {
+  options: {
+    // TODO: Set coordinates
+    center: {
+      lat: -34.397,
+      lng: 150.644
+    },
+    zoom: 2,
+  },
+  markers: [],
+
+  init: function() {
+    var _this = this;
+
+    // Get grid element
+    // TODO: find a way of not repeating this data here and in Site.Portraits
+    _this.$grid = $('#portraits-grid');
+
+    // Get portraits
+    // TODO: find a way of not repeating this data here and in Site.Portraits
+    _this.$portraits = _this.$grid.find('.portrait');
+
+    // Get map container
+    _this.$container = $('#portraits-map');
+
+    // Init google maps
+    _this.map = new google.maps.Map(_this.$container[0], _this.options);
+
+    // Add a marker for each location
+    if (WP.locations.length) {
+      for(var i = 0; i < WP.locations.length; i++) {
+        var location = WP.locations[i];
+        // Add marker
+        _this.markers[i] = new google.maps.Marker({
+          map: _this.map,
+          title: location.name,
+          position: {
+            lat: parseInt(location.lat),
+            lng: parseInt(location.lng),
+          }
+        });
+
+        // Add slug to the marker
+        _this.markers[i].slug = location.slug;
+
+        // Add click listener
+        _this.markers[i].addListener('click', function() {
+          _this.playPortraitsByLocation(this.slug);
+        });
+      }
+    }
+
+  },
+
+  // Play portraits by location
+  playPortraitsByLocation: function(location) {
+    var _this = this;
+
+    // Empty list for youtube IDs
+    var list = [];
+
+    // Filter selector string
+    var filter = '[data-filters*=location-' + location + ']';
+
+    // Filter portraits
+    var $filteredPortraits = _this.$portraits.filter(filter);
+
+    // Save youtube IDs
+    $filteredPortraits.each(function(index) {
+      list[index] = this.dataset.youtubeId;
+    });
+
+    // Load list
+    Site.Player.setVideosList(list);
+
+    // Play first video
+    Site.Player.playVideo(list[0]);
+
+    // TODO: Scroll to player
+
+  },
 };
 
 Site.init();
