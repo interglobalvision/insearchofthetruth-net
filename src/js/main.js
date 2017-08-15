@@ -122,11 +122,25 @@ Site.Player = {
   init: function() {
     var _this = this;
 
+    // If WP_DEBUg turn on controls cuz happy Dev :)
+    if(WP.wp_debug) {
+      _this.playerOptions.controls = 1;
+    }
+
     // Get the player container element
     _this.$playerContainer = $('#player-iframe');
 
     // Bind stuff
     _this.bind();
+
+  },
+
+  setVideosList: function(list) {
+    var _this = this;
+
+    if(list) {
+      _this.list = list;
+    }
 
   },
 
@@ -141,27 +155,61 @@ Site.Player = {
     $(window).on('updatedyoutubelist', function(event, data) {
 
       // Update list cache
-      _this.list = data.youtubeIds;
+      _this.setVideosList(data.youtubeIds);
     });
+
   },
 
   initYoutube: function() {
     var _this = this;
 
     // Init youtube player inside #player-container
-    _this.$player = new YT.Player('player-iframe', {playerVars: _this.playerOptions});
+    _this.player = new YT.Player('player-iframe', {
+      playerVars: _this.playerOptions,
+    });
+
+    _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
 
   },
 
-  playVideo: function(videoId, list) {
+  handleVideoStateChange: function(event) {
+    var _this = this;
+
+    // 0 = Video ended
+    if(event.data === 0) {
+      // Check if there's list
+      if(_this.list) {
+        _this.nextVideo();
+      }
+    }
+  },
+
+  playVideo: function(videoId) {
     var _this = this;
 
     // Play video
-    _this.$player.loadVideoById(videoId);
+    _this.player.loadVideoById(videoId);
 
-    // Update list cache
-    if(list) {
-      _this.list = list;
+  },
+
+  nextVideo: function() {
+    var _this = this;
+
+    // Get current video ID
+    var currentVideo =  _this.player.getVideoData();
+    currentVideo = _this.list.indexOf(currentVideo.video_id);
+
+    // Check if theres more videos to play
+    if (_this.list.length > currentVideo + 1) {
+
+      // Get next video ID
+      var nextVideo = _this.list[currentVideo + 1];
+
+      // Play next video
+      _this.playVideo(nextVideo);
+    } else {
+      // TODO Close video
+      console.log('No more videos');
     }
   },
 
@@ -216,6 +264,10 @@ Site.Portraits = {
       };
     }()), true);
 
+    // Set initial video list on Player
+    var list = _this.getFilteredYoutubeIds();
+    Site.Player.setVideosList(list);
+
   },
 
   bind: function() {
@@ -225,20 +277,20 @@ Site.Portraits = {
     _this.$filters = $('.filter-select').on('change', _this.handleFilterChange.bind(_this));
 
     // Bind portrait clicks
-    _this.$portraits.on('click', function() {
-      _this.playVideo(this.dataset.youtubeId);
-    });
+    _this.$portraits.on('click', _this.handlePortraitClick.bind(this));
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
   },
 
-  playVideo: function(videoId) {
+  handlePortraitClick: function(event) {
     var _this = this;
 
-    Site.Player.playVideo(videoId);
+    var videoId = event.currentTarget.dataset.youtubeId;
 
     // TODO: scroll to video
+    Site.Player.playVideo(videoId);
+
   },
 
   // Get a list of youtube ids (filtered in the list)
