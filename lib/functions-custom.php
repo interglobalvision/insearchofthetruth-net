@@ -88,3 +88,32 @@ function get_post_filters_data($post) {
 
   return $filters_data;
 }
+
+function get_locations_data() {
+  // Get Locations taxonomy
+  $locations = get_terms( array(
+    'taxonomy' => 'location',
+  ), true);
+
+  if (!empty($locations)) {
+
+    $data = array();
+
+    foreach($locations as $location) {
+      // Get coordinates
+      $lat = get_term_meta($location->term_id, '_igv_location_lat', true);
+      $lon = get_term_meta($location->term_id, '_igv_location_lon', true);
+
+      if (!empty($lat) && !empty($lat)) {
+        array_push($data, array(
+          'name' => $location->name,
+          'slug' => $location->slug,
+          'lat' => $lat,
+          'lng' => $lon,
+        ));
+      }
+    }
+
+    return $data;
+  }
+}
