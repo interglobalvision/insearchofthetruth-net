@@ -39,7 +39,6 @@ if ( $portraits->have_posts() ) {
     <div id="player-iframe"></div>
   </div>
   <div class="container">
-
     <div id="portraits-filters-container" class="margin-bottom-basic">
       <form id="portraits-filters" class="grid-row">
 
@@ -83,7 +82,11 @@ if ( $portraits->have_posts() ) {
 ?>
 
     </div>
+
+    <div id="portraits-map">
+    </div>
   </div>
+
 </div>
 <?php
 }
