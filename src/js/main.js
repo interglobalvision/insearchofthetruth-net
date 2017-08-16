@@ -70,7 +70,7 @@ Site.Gallery = {
     // Find and loop all swiper containers
     $('.swiper-container').each(function(index, element) {
       // Create and save instance on instances array
-      _this.instances[index] = new Swiper (element, _this.options);
+      _this.instances[index] = new Swiper(element, _this.options);
     });
 
   },
@@ -389,23 +389,22 @@ Site.Map = {
 
     // Add a marker for each location
     if (WP.locations.length) {
-      $(WP.locations).each(function(i) {
-        var location = WP.locations[i];
+      $(WP.locations).each(function(index, item) {
         // Add marker
-        _this.markers[i] = new google.maps.Marker({
+        _this.markers[index] = new google.maps.Marker({
           map: _this.map,
-          title: location.name,
+          title: item.name,
           position: {
-            lat: parseInt(location.lat),
-            lng: parseInt(location.lng),
+            lat: parseInt(item.lat),
+            lng: parseInt(item.lng),
           }
         });
 
         // Add slug to the marker
-        _this.markers[i].slug = location.slug;
+        _this.markers[index].slug = item.slug;
 
         // Add click listener
-        _this.markers[i].addListener('click', function() {
+        _this.markers[index].addListener('click', function() {
           _this.playPortraitsByLocation(this.slug);
         });
       });
@@ -427,8 +426,8 @@ Site.Map = {
     var $filteredPortraits = _this.$portraits.filter(filter);
 
     // Save youtube IDs
-    $filteredPortraits.each(function(i) {
-      list[i] = this.dataset.youtubeId;
+    $filteredPortraits.each(function(index, element) {
+      list[index] = element.dataset.youtubeId;
     });
 
     // Play first video, update the list
