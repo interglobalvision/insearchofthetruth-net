@@ -155,7 +155,6 @@ Site.Player = {
 
     // Listen for updatedyoutubelist
     $(window).on('updatedyoutubelist', function(event, data) {
-
       // Update list cache
       _this.setVideosList(data.youtubeIds);
     });
@@ -186,11 +185,16 @@ Site.Player = {
     }
   },
 
-  playVideo: function(videoId) {
+  playVideo: function(videoId, list) {
     var _this = this;
 
     // Play video
     _this.player.loadVideoById(videoId);
+
+    // If passed, update list
+    if(typeof list !== 'undefined') {
+      _this.setVideosList(list);
+    }
 
   },
 
@@ -266,10 +270,6 @@ Site.Portraits = {
       };
     }()), true);
 
-    // Set initial video list on Player
-    var list = _this.getFilteredYoutubeIds();
-    Site.Player.setVideosList(list);
-
   },
 
   bind: function() {
@@ -290,8 +290,10 @@ Site.Portraits = {
 
     var videoId = event.currentTarget.dataset.youtubeId;
 
+    var list = _this.getFilteredYoutubeIds();
+
     // TODO: scroll to video
-    Site.Player.playVideo(videoId);
+    Site.Player.playVideo(videoId, list);
 
   },
 
@@ -429,11 +431,8 @@ Site.Map = {
       list[index] = this.dataset.youtubeId;
     });
 
-    // Load list
-    Site.Player.setVideosList(list);
-
-    // Play first video
-    Site.Player.playVideo(list[0]);
+    // Play first video, update the list
+    Site.Player.playVideo(list[0], list);
 
     // TODO: Scroll to player
 
