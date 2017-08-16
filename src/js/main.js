@@ -389,7 +389,7 @@ Site.Map = {
 
     // Add a marker for each location
     if (WP.locations.length) {
-      for(var i = 0; i < WP.locations.length; i++) {
+      $(WP.locations).each(function(i) {
         var location = WP.locations[i];
         // Add marker
         _this.markers[i] = new google.maps.Marker({
@@ -408,7 +408,7 @@ Site.Map = {
         _this.markers[i].addListener('click', function() {
           _this.playPortraitsByLocation(this.slug);
         });
-      }
+      });
     }
 
   },
@@ -427,8 +427,8 @@ Site.Map = {
     var $filteredPortraits = _this.$portraits.filter(filter);
 
     // Save youtube IDs
-    $filteredPortraits.each(function(index) {
-      list[index] = this.dataset.youtubeId;
+    $filteredPortraits.each(function(i) {
+      list[i] = this.dataset.youtubeId;
     });
 
     // Play first video, update the list
