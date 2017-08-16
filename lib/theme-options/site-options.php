@@ -36,6 +36,19 @@ $metabox = array(
       'type' => 'text',
     ),
 
+    array(
+      'name' => __( 'API Keys', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'apikeys_title',
+      'type' => 'title',
+    ),
+    array(
+      'name' => __( 'Google API Key', 'IGV' ),
+      'desc' => __( '(requiered for the map)', 'IGV' ),
+      'id'   => $prefix . 'google_api_key',
+      'type' => 'text',
+    ),
+
     // METADATA OPTIONS
 
     array(

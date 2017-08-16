@@ -13,10 +13,12 @@ Site = {
     $(document).ready(function () {
 
       if ($('#portraits').length) {
-        // Init player
-        Site.Player.init();
         // Init grid
         Site.Portraits.init();
+        // Init player
+        Site.Player.init();
+        // Init Map
+        Site.Map.init();
       }
 
       if ($('.paypal-form-holder').length) {
@@ -68,7 +70,7 @@ Site.Gallery = {
     // Find and loop all swiper containers
     $('.swiper-container').each(function(index, element) {
       // Create and save instance on instances array
-      _this.instances[index] = new Swiper (element, _this.options);
+      _this.instances[index] = new Swiper(element, _this.options);
     });
 
   },
@@ -153,7 +155,6 @@ Site.Player = {
 
     // Listen for updatedyoutubelist
     $(window).on('updatedyoutubelist', function(event, data) {
-
       // Update list cache
       _this.setVideosList(data.youtubeIds);
     });
@@ -184,11 +185,16 @@ Site.Player = {
     }
   },
 
-  playVideo: function(videoId) {
+  playVideo: function(videoId, list) {
     var _this = this;
 
     // Play video
     _this.player.loadVideoById(videoId);
+
+    // If passed, update list
+    if(typeof list !== 'undefined') {
+      _this.setVideosList(list);
+    }
 
   },
 
@@ -264,10 +270,6 @@ Site.Portraits = {
       };
     }()), true);
 
-    // Set initial video list on Player
-    var list = _this.getFilteredYoutubeIds();
-    Site.Player.setVideosList(list);
-
   },
 
   bind: function() {
@@ -288,8 +290,10 @@ Site.Portraits = {
 
     var videoId = event.currentTarget.dataset.youtubeId;
 
+    var list = _this.getFilteredYoutubeIds();
+
     // TODO: scroll to video
-    Site.Player.playVideo(videoId);
+    Site.Player.playVideo(videoId, list);
 
   },
 
@@ -353,6 +357,85 @@ Site.Portraits = {
     return selector;
   },
 
+};
+
+Site.Map = {
+  options: {
+    // TODO: Set coordinates
+    center: {
+      lat: -34.397,
+      lng: 150.644
+    },
+    zoom: 2,
+  },
+  markers: [],
+
+  init: function() {
+    var _this = this;
+
+    // Get grid element
+    // TODO: find a way of not repeating this data here and in Site.Portraits
+    _this.$grid = $('#portraits-grid');
+
+    // Get portraits
+    // TODO: find a way of not repeating this data here and in Site.Portraits
+    _this.$portraits = _this.$grid.find('.portrait');
+
+    // Get map container
+    _this.$container = $('#portraits-map');
+
+    // Init google maps
+    _this.map = new google.maps.Map(_this.$container[0], _this.options);
+
+    // Add a marker for each location
+    if (WP.locations.length) {
+      $(WP.locations).each(function(index, item) {
+        // Add marker
+        _this.markers[index] = new google.maps.Marker({
+          map: _this.map,
+          title: item.name,
+          position: {
+            lat: parseInt(item.lat),
+            lng: parseInt(item.lng),
+          }
+        });
+
+        // Add slug to the marker
+        _this.markers[index].slug = item.slug;
+
+        // Add click listener
+        _this.markers[index].addListener('click', function() {
+          _this.playPortraitsByLocation(this.slug);
+        });
+      });
+    }
+
+  },
+
+  // Play portraits by location
+  playPortraitsByLocation: function(location) {
+    var _this = this;
+
+    // Empty list for youtube IDs
+    var list = [];
+
+    // Filter selector string
+    var filter = '[data-filters*=location-' + location + ']';
+
+    // Filter portraits
+    var $filteredPortraits = _this.$portraits.filter(filter);
+
+    // Save youtube IDs
+    $filteredPortraits.each(function(index, element) {
+      list[index] = element.dataset.youtubeId;
+    });
+
+    // Play first video, update the list
+    Site.Player.playVideo(list[0], list);
+
+    // TODO: Scroll to player
+
+  },
 };
 
 Site.init();
