@@ -102,14 +102,14 @@ function get_locations_data() {
     foreach($locations as $location) {
       // Get coordinates
       $lat = get_term_meta($location->term_id, '_igv_location_lat', true);
-      $lon = get_term_meta($location->term_id, '_igv_location_lon', true);
+      $lng = get_term_meta($location->term_id, '_igv_location_lng', true);
 
-      if (!empty($lat) && !empty($lat)) {
+      if (!empty($lat) && !empty($lng)) {
         array_push($data, array(
           'name' => $location->name,
           'slug' => $location->slug,
           'lat' => $lat,
-          'lng' => $lon,
+          'lng' => $lng,
         ));
       }
     }

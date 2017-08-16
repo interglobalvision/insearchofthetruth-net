@@ -283,7 +283,7 @@ function igv_location_taxonomy_metabox() {
 
   $cmb_location->add_field(array(
     'name' => esc_html__('Longitude', 'cmb2'),
-    'id'   => $prefix . 'location_lon',
+    'id'   => $prefix . 'location_lng',
     'type' => 'text',
   ));
 
