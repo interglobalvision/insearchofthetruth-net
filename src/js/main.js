@@ -130,7 +130,7 @@ Site.Player = {
     }
 
     // Get the player container element
-    _this.$playerContainer = $('#player-iframe');
+    _this.$container = $('#portraits');
 
     // Bind stuff
     _this.bind();
@@ -185,8 +185,24 @@ Site.Player = {
     }
   },
 
+  openVideo: function() {
+    var _this = this;
+
+    _this.$container.addClass('video');
+
+  },
+
+  closeVideo: function() {
+    var _this = this;
+
+    _this.$container.removeClass('video');
+
+  },
+
   playVideo: function(videoId, list) {
     var _this = this;
+
+    _this.openVideo();
 
     // Play video
     _this.player.loadVideoById(videoId);
@@ -214,8 +230,7 @@ Site.Player = {
       // Play next video
       _this.playVideo(nextVideo);
     } else {
-      // TODO Close video
-      console.log('No more videos');
+      _this.closeVideo();
     }
   },
 
@@ -292,7 +307,6 @@ Site.Portraits = {
 
     var list = _this.getFilteredYoutubeIds();
 
-    // TODO: scroll to video
     Site.Player.playVideo(videoId, list);
 
   },
