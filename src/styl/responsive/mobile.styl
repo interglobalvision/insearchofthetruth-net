@@ -23,6 +23,21 @@
 
 // ******************************************************
 
+// PORTRAITS
+#portraits
+  #player-container
+    overflow: hidden
+
+  #player-wrapper
+    overflow: hidden
+    height: 0
+    transition: height 300ms
+
+  &.video
+    #player-wrapper
+      height: 100vh
+// ******************************************************
+
 // MAP
 // TODO: Do this right
 #portraits-map

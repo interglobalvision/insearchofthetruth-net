@@ -35,8 +35,10 @@ $genders = get_terms( array(
 if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
-  <div id="player-container" class="u-video-embed-container">
-    <div id="player-iframe"></div>
+  <div id="player-wrapper">
+    <div id="player-container" class="u-video-embed-container">
+      <div id="player-iframe"></div>
+    </div>
   </div>
   <div class="container">
     <div id="portraits-filters-container" class="margin-bottom-basic">
