@@ -22,12 +22,16 @@
   <?php } ?>
   <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+
+<?php
+    $loading_class = is_front_page() ? 'loading' : '';
+?>
+<body <?php body_class($loading_class); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
 <section id="main-container">
 
-  <header id="header" class="margin-bottom-large">
+  <header id="header">
     <div class="container">
       <div class="grid-row align-items-center">
         <div id="logo-holder" class="grid-item text-align-center">

@@ -13,7 +13,7 @@ function scripts_and_styles_method() {
     $javascriptMain = $templateuri . '/dist/js/main.min.js';
   }
 
-  $is_admin = current_user_can('administrator') ? 1 : 0;
+  $is_admin = current_user_can('administrator') ? true : false;
 
   $javascriptVars = array(
     'siteUrl' => home_url(),

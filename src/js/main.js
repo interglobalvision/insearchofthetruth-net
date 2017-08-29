@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Site, YT */
+/* global $, document, Site, YT, Swiper, WP, google */
 
 Site = {
   mobileThreshold: 601,
@@ -119,15 +119,21 @@ Site.Player = {
     controls: 0,
     modestbranding: 1,
     rel: 0,
+    title: 0,
+    showinfo: 0,
+    fs: 0, // Fullscreen
   },
 
   init: function() {
     var _this = this;
 
-    // If WP_DEBUg turn on controls cuz happy Dev :)
-    if(WP.wp_debug) {
+    // If WP_DEBUG turn on controls cuz happy Dev :)
+    if(WP.wp_debug == true && WP.isAdmin == true) {
       _this.playerOptions.controls = 1;
     }
+
+    // Get the player container element
+    _this.$wrapper = $('#player-container');
 
     // Get the player container element
     _this.$container = $('#portraits');
@@ -135,6 +141,29 @@ Site.Player = {
     // Bind stuff
     _this.bind();
 
+    // Remove loading
+    // TODO: This shouldn't go here, we must dev a feat to check Google Maps and
+    // Yotube loading, and then remove this class
+    $( window ).on( "load", function() {
+      $('body').removeClass('loading');
+    });
+
+  },
+
+  calcHeight: function() {
+    var _this = this;
+
+    var windowHeight = $(window).height();
+    var headerHeight = $('#header').height();
+
+    var videoHeight = windowHeight - headerHeight;
+
+    _this.$wrapper.css({
+      'height': videoHeight,
+      'margin-top': headerHeight,
+    });
+
+    _this.$wrapper.find('iframe').css('height', _this.$wrapper.width() * .5625);
   },
 
   setVideosList: function(list) {
@@ -169,20 +198,56 @@ Site.Player = {
       playerVars: _this.playerOptions,
     });
 
+    // Calc player height
+    _this.calcHeight();
+
+    $(window).resize(_this.onResize.bind(_this));
+
     _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
+
+  },
+
+  onResize: function() {
+    var _this = this;
+
+    _this.calcHeight();
 
   },
 
   handleVideoStateChange: function(event) {
     var _this = this;
 
-    // 0 = Video ended
-    if(event.data === 0) {
+    switch(event.data) {
+      case -1: // Unstarted
+        _this.fadeOut();
+        break;
+      case 0: // Ended
+        _this.fadeOut();
+
+        if(_this.list) {
+          _this.nextVideo();
+        }
+        break;
+      case 1: // Playing
+        _this.fadeIn();
+        break;
+      case 3: // Video ended
+        _this.fadeOut();
+        break;
       // Check if there's list
-      if(_this.list) {
-        _this.nextVideo();
-      }
     }
+  },
+
+  fadeOut: function() {
+    var _this = this;
+
+    _this.$container.removeClass('show');
+  },
+
+  fadeIn: function() {
+    var _this = this;
+
+    _this.$container.addClass('show');
   },
 
   openVideo: function() {
@@ -199,6 +264,12 @@ Site.Player = {
 
   },
 
+  scrollIn: function() {
+    var _this = this;
+
+    $('body').scrollTo(_this.$container, 150);
+  },
+
   playVideo: function(videoId, list) {
     var _this = this;
 
@@ -206,6 +277,7 @@ Site.Player = {
 
     // Play video
     _this.player.loadVideoById(videoId);
+
 
     // If passed, update list
     if(typeof list !== 'undefined') {
@@ -308,6 +380,7 @@ Site.Portraits = {
     var list = _this.getFilteredYoutubeIds();
 
     Site.Player.playVideo(videoId, list);
+    Site.Player.scrollIn();
 
   },
 
