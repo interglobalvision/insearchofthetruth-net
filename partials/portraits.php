@@ -31,25 +31,12 @@ $genders = get_terms( array(
   'taxonomy' => 'gender',
 ) );
 
-// Get splash image
-$splash_images = get_post_meta($post->ID, '_igv_home_splash_images', true);
-
 if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
 
 <?php
-  if (!empty($splash_images)) {
-    $splash_image_id = array_rand($splash_images);
-    $splash_image_srcset = wp_get_attachment_image_srcset($splash_image_id, 'full-width');
-?>
-
-  <section id="portraits-cover" class="grid-row">
-    <div class="item-s-12 full-splash-image lazyload" data-bgset="<?php echo $splash_image_srcset; ?>" data-sizes="auto"></div>
-  </section>
-
-<?php
-  }
+  render_front_splash($post->ID);
 ?>
 
   <div class="">
@@ -112,4 +99,3 @@ if ( $portraits->have_posts() ) {
 <?php
 }
 ?>
-
