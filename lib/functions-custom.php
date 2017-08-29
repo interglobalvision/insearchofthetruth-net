@@ -118,6 +118,7 @@ function get_locations_data() {
   }
 }
 
+// Render front page splash image
 function render_front_splash($front_id) {
   $splash_images = get_post_meta($front_id, '_igv_home_splash_images', true);
 
