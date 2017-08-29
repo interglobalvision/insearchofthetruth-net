@@ -8,8 +8,9 @@ function create_custom_pages() {
 	$custom_pages = array(
 		'about' => 'About',
     'support' => 'Support',
+    'home' => 'Home',
   );
-  
+
   foreach($custom_pages as $page_name => $page_title) {
     $page = get_page_by_path($page_name);
     if( empty($page) ) {
