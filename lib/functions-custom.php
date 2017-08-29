@@ -117,3 +117,20 @@ function get_locations_data() {
     return $data;
   }
 }
+
+// Render front page splash image
+function render_front_splash($front_id) {
+  $splash_images = get_post_meta($front_id, '_igv_home_splash_images', true);
+
+  if (!empty($splash_images)) {
+    $splash_image_id = array_rand($splash_images);
+    $splash_image_srcset = wp_get_attachment_image_srcset($splash_image_id, 'full-width');
+?>
+
+<section id="portraits-cover" class="grid-row">
+  <div class="item-s-12 full-splash-image lazyload" data-bgset="<?php echo $splash_image_srcset; ?>" data-sizes="auto"></div>
+</section>
+
+<?php
+  }
+}
