@@ -69,12 +69,15 @@ function add_height_size_to_srcset($sources, $size_array, $image_src, $image_met
   $width = $size_array[0];
   $height = $size_array[1];
 
-  // Add the height value to the `value` in the original size
-  // $sources is an array that uses the width of each size as the array index
-  $sources[$width]['value'] = $width . 'w ' . $height;
+  if (!empty($sources[$width])) {
+    // Add the height value to the `value` in the original size
+    // $sources is an array that uses the width of each size as the array index
+    $sources[$width]['value'] = $width . 'w ' . $height;
 
-  // Replace the descriptor for h
-  $sources[$width]['descriptor'] = 'h ';
+    // Replace the descriptor for h
+    $sources[$width]['descriptor'] = 'h ';
+  }
+
 
   return $sources;
 };
