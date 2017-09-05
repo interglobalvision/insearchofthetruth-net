@@ -37,6 +37,34 @@ Site = {
   onResize: function() {
     var _this = this;
 
+    _this.fitHeight();
+
+    _this.Player.calcHeight();
+
+  },
+
+  // Give elements with .js-fit-height a min height of
+  // windows height - header height
+  // or
+  fitHeight: function() {
+    var _this = this;
+
+    var $fitElements = $('.js-fit-height');
+
+    // Get window height
+    var windowHeight = $(window).height();
+
+    // Get header height
+    var headerHeight = $('#header .container').height();
+
+    // Calc min height
+    var minHeight = windowHeight - headerHeight;
+
+    // Add min height to each element
+    $fitElements.css({
+      'min-height': minHeight,
+    });
+
   },
 
   fixWidows: function() {
@@ -154,14 +182,9 @@ Site.Player = {
     var _this = this;
 
     var windowHeight = $(window).height();
-    var headerHeight = $('#header').height();
+    var headerHeight = $('#header .container').height();
 
     var videoHeight = windowHeight - headerHeight;
-
-    _this.$wrapper.css({
-      'height': videoHeight,
-      'margin-top': headerHeight,
-    });
 
     _this.$wrapper.find('iframe').css('height', _this.$wrapper.width() * .5625);
   },
@@ -267,7 +290,8 @@ Site.Player = {
   scrollIn: function() {
     var _this = this;
 
-    $('body').scrollTo(_this.$container, 150);
+    // Scroll to top
+    $('body').scrollTo(0, 150);
   },
 
   playVideo: function(videoId, list) {
@@ -375,6 +399,8 @@ Site.Portraits = {
   handlePortraitClick: function(event) {
     var _this = this;
 
+    event.preventDefault();
+
     var videoId = event.currentTarget.dataset.youtubeId;
 
     var list = _this.getFilteredYoutubeIds();
@@ -454,6 +480,88 @@ Site.Map = {
       lng: 150.644
     },
     zoom: 2,
+    styles: [
+      {
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#212121"
+          }
+        ]
+      },
+      {
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#bbbbbb"
+          },
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
+      {
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "simplified"
+          }
+        ]
+      },
+      {
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#757575"
+          },
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      }
+    ],
   },
   markers: [],
 
@@ -468,8 +576,11 @@ Site.Map = {
     // TODO: find a way of not repeating this data here and in Site.Portraits
     _this.$portraits = _this.$grid.find('.portrait');
 
+    // Get shared wrapper
+    _this.$wrapper = $('#map-portraits-wrapper');
+
     // Get map container
-    _this.$container = $('#portraits-map');
+    _this.$container = $('#map-container');
 
     // Init google maps
     _this.map = new google.maps.Map(_this.$container[0], _this.options);
@@ -497,6 +608,17 @@ Site.Map = {
       });
     }
 
+    _this.bind();
+
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.js-toggle-map').on('click', function(event) {
+      event.preventDefault();
+      _this.$wrapper.toggleClass('show-map');
+    });
   },
 
   // Play portraits by location
@@ -520,7 +642,8 @@ Site.Map = {
     // Play first video, update the list
     Site.Player.playVideo(list[0], list);
 
-    // TODO: Scroll to player
+    // Scroll to top
+    $('body').scrollTo(0, 150);
 
   },
 };

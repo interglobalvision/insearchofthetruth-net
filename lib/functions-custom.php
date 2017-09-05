@@ -28,7 +28,7 @@ function render_gallery_slider($images) {
 
 }
 
-function render_filter_select($options, $name, $classes) {
+function render_filter_select($options, $name, $classes = '') {
   if (empty($options) || empty($name)) {
    return;
   }

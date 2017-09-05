@@ -34,20 +34,16 @@ $genders = get_terms( array(
 if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
-
-<?php
-  render_front_splash($post->ID);
-?>
-
-  <div class="">
-    <div id="player-wrapper" class="container">
-      <div id="player-container" class="">
-        <div id="player-iframe"></div>
-      </div>
+  <div id="player-wrapper" class="container">
+    <div id="player-container" class="">
+      <div id="player-iframe" class="js-fit-height"></div>
     </div>
-    <div class="container">
-      <div id="portraits-filters-container" class="margin-bottom-basic">
-        <form id="portraits-filters" class="grid-row">
+  </div>
+  <div id="map-portraits-wrapper">
+    <div id="map-portraits-container" class="js-fit-height">
+      <div class="container">
+        <div id="portraits-filters-container" class="margin-bottom-basic grid-row">
+          <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
 
   <?php
     if (!empty($ages)) {
@@ -68,9 +64,10 @@ if ( $portraits->have_posts() ) {
 
   ?>
         </form>
-      </div>
+          <a href="#" class="js-toggle-map grid-item">Map</a>
+        </div>
 
-      <div id="portraits-grid" class="grid-row">
+        <div id="portraits-grid" class="grid-row">
 
   <?php
     while ( $portraits->have_posts() ) {
@@ -81,16 +78,25 @@ if ( $portraits->have_posts() ) {
       $filters_data = get_post_filters_data($post);
 
   ?>
-        <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
+          <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
           <?php the_post_thumbnail('item-l-4'); ?>
-        </article>
+          </article>
   <?php
     }
   ?>
 
+        </div>
       </div>
 
       <div id="portraits-map">
+        <div class="container">
+          <div class="grid-row">
+            <div class="gird-item item-s-3">
+              <a href="#" class="js-toggle-map">Portraits</a>
+            </div>
+          </div>
+          <div id="map-container"></div>
+        </div>
       </div>
     </div>
   </div>
