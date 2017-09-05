@@ -3,6 +3,7 @@
 
 Site = {
   mobileThreshold: 601,
+  scrollToSpeed: 300,
   init: function() {
     var _this = this;
 
@@ -293,7 +294,7 @@ Site.Player = {
     var _this = this;
 
     // Scroll to top
-    $('body').scrollTo(0, 300);
+    $('body').scrollTo(0, Site.scrollToSpeed);
   },
 
   playVideo: function(videoId, list) {
@@ -504,7 +505,7 @@ Site.Map = {
             "visibility": "on"
           },
           {
-            "weight": 0.5 
+            "weight": 0.5
           }
         ]
       },
@@ -606,7 +607,7 @@ Site.Map = {
     Site.Player.playVideo(list[0], list);
 
     // Scroll to top
-    $('body').scrollTo(0, 150);
+    $('body').scrollTo(0, Site.scrollToSpeed);
 
   },
 };
