@@ -1,7 +1,8 @@
-$transitionSpeed = 300ms
+$transition-speed = 300ms
 
-#main-conteiner
+#main-container
   position: relative
+
 // HEADER
 #logo-holder
   flex-grow: 1
@@ -23,14 +24,14 @@ $transitionSpeed = 300ms
   height: 100vh
   background-size: cover
   background-position: center
-  transition: height $transitionSpeed ease-out
+  transition: height $transition-speed ease-out
 
 // ******************************************************
 
 // PORTRAITS
 #portraits
   opacity: 1
-  transition: opacity $transitionSpeed
+  transition: opacity $transition-speed
 
   // This class toggles to open/close the video
   &.video
@@ -41,7 +42,7 @@ $transitionSpeed = 300ms
   &.show
     #player-container
       opacity: 1
-      transition: opacity $transitionSpeed
+      transition: opacity $transition-speed
 
 #player-container
   overflow: hidden
@@ -53,19 +54,19 @@ $transitionSpeed = 300ms
 #player-wrapper
   overflow: hidden
   height: 0
-  transition: height $transitionSpeed ease-out, min-height $transitionSpeed ease-out
+  transition: height $transition-speed ease-out, min-height $transition-speed ease-out
 
 
 #portraits-cover
   height: 0
   overflow: hidden
-  transition: height $transitionSpeed ease-out
+  transition: height $transition-speed ease-out
   position: absolute
   top: 0
   right: 0
   left: 0
   bottom: 0
-  z-index: -1
+  z-index: -100
 
 .loading
   overflow: hidden
@@ -75,7 +76,7 @@ $transitionSpeed = 300ms
   #portraits
     opacity: 0
     position: relative
-    z-index: -2
+    z-index: -200
 
   #portraits-cover
     height: 100vh
@@ -101,7 +102,7 @@ $transitionSpeed = 300ms
 
 #map-portraits-container
   position: relative
-  transition: transform $transitionSpeed
+  transition: transform $transition-speed
 
 
 
