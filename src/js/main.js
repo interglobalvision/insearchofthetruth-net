@@ -484,21 +484,13 @@ Site.Map = {
     zoom: 2,
     styles: [
       {
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#212121"
-          }
-        ]
-      },
-      {
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#bbbbbb"
+            "color": "#ffffff"
           },
           {
-            "visibility": "simplified"
+            "visibility": "on"
           }
         ]
       },
@@ -506,60 +498,29 @@ Site.Map = {
         "elementType": "geometry.stroke",
         "stylers": [
           {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#757575"
+            "color": "#000000"
           },
           {
-            "visibility": "off"
+            "visibility": "on"
+          },
+          {
+            "weight": 0.5 
           }
         ]
       },
       {
-        "featureType": "poi",
+        "elementType": "labels.text.fill",
         "stylers": [
           {
-            "visibility": "off"
+            "color": "#000000"
           }
         ]
       },
       {
-        "featureType": "road",
+        "elementType": "labels.text.stroke",
         "stylers": [
           {
             "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "transit",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#ffffff"
           }
         ]
       }
