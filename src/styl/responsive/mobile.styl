@@ -1,3 +1,5 @@
+$transitionSpeed = 300ms
+
 #main-conteiner
   position: relative
 // HEADER
@@ -21,14 +23,14 @@
   height: 100vh
   background-size: cover
   background-position: center
-  transition: height 150ms ease-out
+  transition: height $transitionSpeed ease-out
 
 // ******************************************************
 
 // PORTRAITS
 #portraits
   opacity: 1
-  transition: opacity 300ms
+  transition: opacity $transitionSpeed
 
   // This class toggles to open/close the video
   &.video
@@ -39,7 +41,7 @@
   &.show
     #player-container
       opacity: 1
-      transition: opacity 500ms
+      transition: opacity $transitionSpeed
 
 #player-container
   overflow: hidden
@@ -51,13 +53,13 @@
 #player-wrapper
   overflow: hidden
   height: 0
-  transition: height 300ms ease-out, min-height 300ms ease-out
+  transition: height $transitionSpeed ease-out, min-height $transitionSpeed ease-out
 
 
 #portraits-cover
   height: 0
   overflow: hidden
-  transition: height 300ms ease-out
+  transition: height $transitionSpeed ease-out
   position: absolute
   top: 0
   right: 0
@@ -99,7 +101,7 @@
 
 #map-portraits-container
   position: relative
-  transition: transform 300ms
+  transition: transform $transitionSpeed
 
 
 
