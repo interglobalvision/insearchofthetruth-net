@@ -33,7 +33,7 @@
   // This class toggles to open/close the video
   &.video
     #player-wrapper
-      min-height: 100vh
+      height: 100vh
 
   // This class toggles to show/hide the video (eg, when buffering)
   &.show
@@ -51,7 +51,8 @@
 #player-wrapper
   overflow: hidden
   height: 0
-  transition: height 300ms ease-out
+  transition: height 300ms ease-out, min-height 300ms ease-out
+
 
 #portraits-cover
   height: 0

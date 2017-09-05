@@ -30,6 +30,8 @@ Site = {
         Site.Gallery.init();
       }
 
+      _this.fitHeight();
+
     });
 
   },
@@ -62,7 +64,7 @@ Site = {
 
     // Add min height to each element
     $fitElements.css({
-      'min-height': minHeight,
+      'height': minHeight,
     });
 
   },
@@ -291,7 +293,7 @@ Site.Player = {
     var _this = this;
 
     // Scroll to top
-    $('body').scrollTo(0, 150);
+    $('body').scrollTo(0, 300);
   },
 
   playVideo: function(videoId, list) {
