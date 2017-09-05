@@ -48,4 +48,10 @@
         </nav>
       </div>
     </div>
+<?php
+    // Render loading cover in frontpage
+    if (is_front_page()) {
+      render_front_splash($post->ID);
+    }
+?>
   </header>
