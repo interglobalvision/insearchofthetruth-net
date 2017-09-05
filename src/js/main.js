@@ -65,7 +65,7 @@ Site = {
 
     // Add min height to each element
     $fitElements.css({
-      'height': minHeight,
+      'min-height': minHeight,
     });
 
   },
@@ -363,10 +363,16 @@ Site.Portraits = {
     var _this = this;
 
     // Set grid with isotope
-    _this.$grid.isotope({
+    _this.isotopeGrid = _this.$grid.isotope({
       // options
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
+    });
+
+    // Load visibale images on layout complete aka after filtering
+    _this.isotopeGrid.isotope('on', 'layoutComplete', function () {
+      var $imgs = _this.isotopeGrid.find('img');
+      _this.loadVisible($imgs, 'lazylazy');
     });
 
     // Workaround to make it compatible with lazysizes
@@ -383,6 +389,17 @@ Site.Portraits = {
         }
       };
     }()), true);
+
+  },
+
+  loadVisible: function($elements, trigger) {
+    var _this = this;
+
+    // Filter images that inside the viewport and lazyload them
+    $elements.filter(function() {
+      var rect = this.getBoundingClientRect();
+      return rect.top >= 0 && rect.top <= window.innerHeight;
+    }).trigger(trigger);
 
   },
 

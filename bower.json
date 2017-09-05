@@ -18,7 +18,8 @@
     "lazysizes": "^2.0.4",
     "swiper": "^3.4.2",
     "isotope": "^3.0.4",
-    "jquery.scrollTo": "^2.1.2"
+    "jquery.scrollTo": "^2.1.2",
+    "lazyload": "^3.2.2"
   },
   "overrides": {
     "lazysizes": {
