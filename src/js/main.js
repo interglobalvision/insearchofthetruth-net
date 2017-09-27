@@ -502,7 +502,7 @@ Site.Map = {
             "color": "#000000"
           },
           {
-            "visibility": "on"
+            "visibility": "off"
           },
           {
             "weight": 0.5
@@ -528,6 +528,7 @@ Site.Map = {
     ],
   },
   markers: [],
+  geoJSONURL: WP.themeUrl + '/dist/static/countries.geo.json',
 
   init: function() {
     var _this = this;
@@ -549,9 +550,22 @@ Site.Map = {
     // Init google maps
     _this.map = new google.maps.Map(_this.$container[0], _this.options);
 
+    // Load GeoJSON with countries' borders
+    _this.map.data.loadGeoJson(_this.geoJSONURL);
+
+    // Set the stroke width, and fill color for each polygon
+    _this.map.data.setStyle({
+      fillColor: 'white',
+      strokeWeight: 1
+    });
+
+    // Init a bounds object
+    var bounds = new google.maps.LatLngBounds();
+
     // Add a marker for each location
     if (WP.locations.length) {
       $(WP.locations).each(function(index, item) {
+
         // Add marker
         _this.markers[index] = new google.maps.Marker({
           map: _this.map,
@@ -569,7 +583,15 @@ Site.Map = {
         _this.markers[index].addListener('click', function() {
           _this.playPortraitsByLocation(this.slug);
         });
+
+        // Add item location to the bounds list
+        bounds.extend(new google.maps.LatLng(item.lat, item.lng));
+
       });
+
+      // Make map fit all locations
+      _this.map.fitBounds(bounds);
+
     }
 
     _this.bind();
