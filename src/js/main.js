@@ -527,6 +527,10 @@ Site.Map = {
       }
     ],
   },
+  dataStyle: {
+    fillColor: 'white',
+    strokeWeight: 1
+  },
   markers: [],
   geoJSONURL: WP.themeUrl + '/dist/static/countries.geo.json',
 
@@ -554,10 +558,7 @@ Site.Map = {
     _this.map.data.loadGeoJson(_this.geoJSONURL);
 
     // Set the stroke width, and fill color for each polygon
-    _this.map.data.setStyle({
-      fillColor: 'white',
-      strokeWeight: 1
-    });
+    _this.map.data.setStyle(_this.dataStyle);
 
     // Init a bounds object
     var bounds = new google.maps.LatLngBounds();
