@@ -39,20 +39,6 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
 	 */
 
-  // PORTRAIT
-  $cmb_portrait = new_cmb2_box( array(
-    'id'            => $prefix . 'portrait_metabox',
-    'title'         => esc_html__( 'Options', 'cmb2' ),
-    'object_types'  => array( 'portrait', ), // Post type
-  ));
-
-  $cmb_portrait->add_field( array(
-  	'name'       => esc_html__( 'Youtube ID', 'cmb2' ),
-  	'desc'       => esc_html__( 'From the video URL. 11 character string after watch?v=', 'cmb2' ),
-  	'id'         => $prefix . 'youtube_id',
-  	'type'       => 'text',
-  ) );
-
   //PRODUCT
   $cmb_product = new_cmb2_box( array(
     'id'            => $prefix . 'product_metabox',
