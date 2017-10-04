@@ -33,7 +33,7 @@ if( have_posts() ) {
             <?php } ?>
           </div>
 
-          <div class="item-s-12 margin-bottom-basic">
+          <div class="item-s-12 margin-bottom-basic text-align-center">
             <?php the_post_thumbnail('full-width'); ?>
           </div>
 
