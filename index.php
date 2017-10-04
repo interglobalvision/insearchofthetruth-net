@@ -2,8 +2,8 @@
 get_header();
 ?>
 
-<main id="main-content">
-  <section id="posts">
+<main id="main-content" class="margin-bottom-large">
+  <section id="posts" class="margin-top-large">
     <div class="container">
 
 <?php
@@ -19,7 +19,7 @@ if( have_posts() ) {
     }
 ?>
 
-        <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('grid-row margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="grid-item item-s-12 item-m-4 margin-bottom-small">
             <h1 class="font-medium font-size-large"><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>

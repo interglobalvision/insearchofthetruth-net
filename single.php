@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main id="main-content" class="margin-bottom-large">
   <section id="post">
     <div class="container">
 
@@ -19,7 +19,7 @@ if( have_posts() ) {
     }
 ?>
 
-        <article <?php post_class('grid-row'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('grid-row margin-top-large'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="grid-item item-s-12 margin-bottom-basic">
             <h1 class="font-size-large font-medium"><?php the_title(); ?></h1>
