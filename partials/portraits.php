@@ -35,6 +35,10 @@ if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
   <div id="player-wrapper" class="container">
+    <div id="player-loader" class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
     <div id="player-container" class="">
       <div id="player-iframe" class="js-fit-height"></div>
     </div>
