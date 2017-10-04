@@ -483,6 +483,11 @@ Site.Map = {
       lng: 150.644
     },
     zoom: 2,
+    icon: {
+      url: WP.themeUrl + '/dist/img/truth-bubble.png',
+      scaledSize: new google.maps.Size(75.5,55),
+      anchor: new google.maps.Point(0,55)
+    },
     styles: [
       {
         "elementType": "geometry.fill",
@@ -571,6 +576,7 @@ Site.Map = {
         _this.markers[index] = new google.maps.Marker({
           map: _this.map,
           title: item.name,
+          icon: _this.options.icon,
           position: {
             lat: parseInt(item.lat),
             lng: parseInt(item.lng),
