@@ -34,9 +34,9 @@
   <header id="header">
     <div class="container">
       <div class="grid-row align-items-center">
-        <div id="logo-holder" class="grid-item text-align-center">
+        <div id="logo-holder" class="grid-item text-align-center margin-top-tiny margin-bottom-tiny">
           <h1 class="u-visuallyhidden">In Search of the Truth</h1>
-          <a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a>
+          <a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/truth-logo.svg'); ?></a>
         </div>
         <nav id="main-nav" class="grid-item flex-grow no-gutter">
           <ul class="grid-row font-bold">
