@@ -21,7 +21,7 @@ if( have_posts() ) {
 
         <article <?php post_class('grid-row margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
 
-          <div class="grid-item item-s-12 item-m-4 margin-bottom-small">
+          <div class="grid-item item-s-12 item-m-5 margin-bottom-small">
             <h1 class="font-medium font-size-large"><a class="link-underline" href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
           </div>
 
@@ -33,7 +33,7 @@ if( have_posts() ) {
             <?php } ?>
           </div>
 
-          <div class="grid-item item-s-12 item-m-4">
+          <div class="grid-item item-s-12 item-m-3">
             <?php the_post_thumbnail('item-l-4'); ?>
           </div>
 
