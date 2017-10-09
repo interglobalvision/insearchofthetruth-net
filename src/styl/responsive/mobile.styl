@@ -36,26 +36,58 @@ $transition-speed = 300ms
   // This class toggles to open/close the video
   &.video
     #player-wrapper
-      height: 100vh
+      width: 100%
+    #player-container
+      height: 100%
+      overflow: hidden
+      iframe
+        transition: height $transition-speed ease-out
+
+$header-height = 89px
+$filters-height = 29px
+
+@media (orientation: portrait)
+  #portraits
+    // This class toggles to open/close the video
+    &.video
+      #player-wrapper
+        height: unquote('calc((100vw / 16) * 9)')
+        #player-container
+          width: 100%
+
+@media (orientation: landscape)
+  #portraits
+    // This class toggles to open/close the video
+    &.video
+      #player-wrapper
+        height: calc('100vh - ' + ($header-height + $filters-height))
+        #player-container
+          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
 
   // This class toggles to show/hide the video (eg, when buffering)
   &.show
+    #player-wrapper
+      transition: none
     #player-container
       opacity: 1
       transition: opacity $transition-speed
+      height: 100%
+      transition: none
 
 #player-container
   overflow: hidden
   opacity: 0
+  display: inline-block
 
   iframe
+    height: 100%
     width: 100%
 
 #player-wrapper
   overflow: hidden
   height: 0
-  transition: height $transition-speed ease-out, min-height $transition-speed ease-out
-
+  text-align: center
+  transition: height $transition-speed ease-out
 
 #portraits-cover
   height: 0
@@ -80,6 +112,7 @@ $transition-speed = 300ms
 
   #portraits-cover
     height: 100vh
+
 // ******************************************************
 
 // MAP
