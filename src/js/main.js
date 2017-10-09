@@ -31,42 +31,12 @@ Site = {
         Site.Gallery.init();
       }
 
-      //_this.fitHeight();
-
     });
 
   },
 
   onResize: function() {
     var _this = this;
-
-    //_this.fitHeight();
-
-    //_this.Player.calcHeight();
-
-  },
-
-  // Give elements with .js-fit-height a min height of
-  // windows height - header height
-  // or
-  fitHeight: function() {
-    var _this = this;
-
-    var $fitElements = $('.js-fit-height');
-
-    // Get window height
-    var windowHeight = $(window).height();
-
-    // Get header height
-    var headerHeight = $('#header').height();
-
-    // Calc min height
-    var minHeight = windowHeight - (headerHeight * 2);
-
-    // Add min height to each element
-    $fitElements.css({
-      'height': minHeight,
-    });
 
   },
 
@@ -181,17 +151,6 @@ Site.Player = {
 
   },
 
-  calcHeight: function() {
-    var _this = this;
-
-    var windowHeight = $(window).height();
-    var headerHeight = $('#header .container').height();
-
-    var videoHeight = windowHeight - headerHeight;
-
-    _this.$wrapper.find('iframe').css('height', _this.$wrapper.width() * .5625);
-  },
-
   setVideosList: function(list) {
     var _this = this;
 
@@ -224,19 +183,7 @@ Site.Player = {
       playerVars: _this.playerOptions,
     });
 
-    // Calc player height
-    //_this.calcHeight();
-
-    //$(window).resize(_this.onResize.bind(_this));
-
     _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
-
-  },
-
-  onResize: function() {
-    var _this = this;
-
-    //_this.calcHeight();
 
   },
 
