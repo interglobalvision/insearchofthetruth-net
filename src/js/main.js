@@ -31,7 +31,7 @@ Site = {
         Site.Gallery.init();
       }
 
-      _this.fitHeight();
+      //_this.fitHeight();
 
     });
 
@@ -40,9 +40,9 @@ Site = {
   onResize: function() {
     var _this = this;
 
-    _this.fitHeight();
+    //_this.fitHeight();
 
-    _this.Player.calcHeight();
+    //_this.Player.calcHeight();
 
   },
 
@@ -58,10 +58,10 @@ Site = {
     var windowHeight = $(window).height();
 
     // Get header height
-    var headerHeight = $('#header .container').height();
+    var headerHeight = $('#header').height();
 
     // Calc min height
-    var minHeight = windowHeight - headerHeight;
+    var minHeight = windowHeight - (headerHeight * 2);
 
     // Add min height to each element
     $fitElements.css({
@@ -225,9 +225,9 @@ Site.Player = {
     });
 
     // Calc player height
-    _this.calcHeight();
+    //_this.calcHeight();
 
-    $(window).resize(_this.onResize.bind(_this));
+    //$(window).resize(_this.onResize.bind(_this));
 
     _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
 
@@ -236,7 +236,7 @@ Site.Player = {
   onResize: function() {
     var _this = this;
 
-    _this.calcHeight();
+    //_this.calcHeight();
 
   },
 
