@@ -1,9 +1,10 @@
 <?php
+$older_link = false;
+$newer_link = false;
+
 if (is_single()) {
   $prev_post = get_previous_post();
   $next_post = get_next_post();
-  $older_link = false;
-  $newer_link = false;
 
   if (!empty($prev_post)) {
     $older_link = get_permalink($prev_post);
@@ -12,8 +13,13 @@ if (is_single()) {
     $newer_link = get_permalink($next_post);
   }
 } else {
-  $newer_link = get_previous_posts_page_link();
-  $older_link = get_next_posts_page_link();
+  if (get_previous_posts_link()) {
+    $newer_link = get_previous_posts_page_link();
+  }
+
+  if (get_next_posts_link()) {
+    $older_link = get_next_posts_page_link();
+  }
 }
 
 if ($newer_link || $older_link) {
