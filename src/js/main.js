@@ -33,6 +33,10 @@ Site = {
 
       _this.fitHeight();
 
+      $('.js-menu-toggle').on('click', function() {
+        $('#mobile-menu').toggleClass('open');
+      });
+
     });
 
   },
