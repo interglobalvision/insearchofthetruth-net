@@ -3,18 +3,32 @@ $transition-speed = 300ms
 #main-container
   position: relative
 
-// HEADER
-#logo-holder
-  flex-grow: 1
+// HEADER 
 
 #logo
-  height: auto
-  width: 80%
+  height: 72px
   max-width: 280px
 
 #main-nav
+  display: none
   ul
     justify-content: center
+
+#mobile-menu
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: $color-white
+  z-index: 900
+  transform: translateX(100%)
+  transition: transform $transition-speed ease-in-out
+  &.open
+    transform: translateX(0%)
+
+.menu-icon
+  height: 16px
 
 // ******************************************************
 
