@@ -13,20 +13,6 @@
 
 // ******************************************************
 
-$header-height = 101px
-$filters-height = 42px
-
-@media (orientation: landscape)
-  #portraits
-    // This class toggles to open/close the video
-    &.video
-      #player-wrapper
-        height: calc('100vh - ' + ($header-height + $filters-height))
-        #player-container
-          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
-
-// ******************************************************
-
 .form-element
   border-bottom: 4px solid $color-black
   padding-bottom: 4px
