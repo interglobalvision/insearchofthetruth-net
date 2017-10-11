@@ -47,19 +47,19 @@ if ( $portraits->have_posts() ) {
 
   <?php
     if (!empty($ages)) {
-      render_filter_select($ages, 'age', 'grid-item item-s-2');
+      render_filter_select($ages, 'age', 'grid-item item-m-2');
     }
 
     if (!empty($subjects)) {
-      render_filter_select($subjects, 'subject', 'grid-item item-s-2');
+      render_filter_select($subjects, 'subject', 'grid-item item-m-2');
     }
 
     if (!empty($locations)) {
-      render_filter_select($locations, 'location', 'grid-item item-s-2');
+      render_filter_select($locations, 'location', 'grid-item item-m-2');
     }
 
     if (!empty($genders)) {
-      render_filter_select($genders, 'gender', 'grid-item item-s-2');
+      render_filter_select($genders, 'gender', 'grid-item item-m-2');
     }
 
   ?>
