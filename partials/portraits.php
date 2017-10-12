@@ -42,7 +42,7 @@ if ( $portraits->have_posts() ) {
   <div id="map-portraits-wrapper">
     <div id="map-portraits-container" class="js-fit-height">
       <div class="container">
-        <div id="portraits-filters-container" class="margin-bottom-basic grid-row">
+        <div id="portraits-filters-container" class="padding-bottom-small grid-row">
           <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
 
   <?php
@@ -64,7 +64,7 @@ if ( $portraits->have_posts() ) {
 
   ?>
         </form>
-          <a href="#" class="js-toggle-map grid-item">Map</a>
+          <a href="#" class="js-toggle-map grid-item font-bold">Map ></a>
         </div>
 
         <div id="portraits-grid" class="grid-row">
@@ -90,9 +90,9 @@ if ( $portraits->have_posts() ) {
 
       <div id="portraits-map">
         <div class="container">
-          <div class="grid-row">
-            <div class="gird-item item-s-3">
-              <a href="#" class="js-toggle-map">Portraits</a>
+          <div class="grid-row padding-bottom-small">
+            <div class="grid-item item-s-3">
+              <a href="#" class="js-toggle-map font-bold">< Grid</a>
             </div>
           </div>
           <div id="map-container"></div>
