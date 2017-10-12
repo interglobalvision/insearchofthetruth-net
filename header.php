@@ -59,7 +59,6 @@
             <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-close.svg'); ?>
           </div>
           <nav id="mobile-nav" class="grid-item flex-grow">
-
             <ul class="grid-column font-bold font-size-mid justify-center align-items-center">
               <li class="grid-item"><a href="<?php echo home_url(); ?>">Portraits</a></li>
               <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
@@ -67,7 +66,6 @@
               <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
             </ul>
           </nav>
-
         </div>
       </div>
     </div>
