@@ -31,6 +31,10 @@ Site = {
         Site.Gallery.init();
       }
 
+      $('.js-menu-toggle').on('click', function() {
+        $('#mobile-menu').toggleClass('open');
+      });
+
     });
 
   },
