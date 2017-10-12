@@ -36,7 +36,7 @@
       <div class="grid-row align-items-center justify-between">
         <div id="logo-holder" class="grid-item">
           <h1 class="u-visuallyhidden">In Search of the Truth</h1>
-          <a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a>
+          <a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/truth-logo.svg'); ?></a>
         </div>
         <div id="nav-toggle-holder" class="grid-item">
           <div><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-open.svg'); ?></div>

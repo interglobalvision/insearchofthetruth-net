@@ -3,7 +3,7 @@ $transition-speed = 300ms
 #main-container
   position: relative
 
-// HEADER 
+// HEADER
 
 #logo
   height: 72px
@@ -47,29 +47,59 @@ $transition-speed = 300ms
   opacity: 1
   transition: opacity $transition-speed
 
-  // This class toggles to open/close the video
-  &.video
-    #player-wrapper
-      height: 100vh
-
   // This class toggles to show/hide the video (eg, when buffering)
   &.show
+    #player-wrapper
+      transition: none
     #player-container
       opacity: 1
       transition: opacity $transition-speed
+      height: 100%
+      transition: none
+
+  // This class toggles to open/close the video
+  &.video
+    #player-wrapper
+      width: 100%
+    #player-container
+      width: 100%
+
+/*
+#portraits
+  // This class toggles to open/close the video
+  &.video
+    #player-wrapper
+      height: unquote('calc((100vw / 16) * 9)')
+      #player-container
+        width: 100%
+
+$header-height = 89px
+$filters-height = 29px
+
+@media (orientation: landscape)
+  #portraits
+    // This class toggles to open/close the video
+    &.video
+      #player-wrapper
+        height: calc('100vh - ' + ($header-height + $filters-height))
+        #player-container
+          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
+*/
+
+#player-wrapper
+  display: block
+  overflow: hidden
+  height: 0
+  text-align: center
+  transition: height $transition-speed ease-out
 
 #player-container
   overflow: hidden
   opacity: 0
+  display: inline-block
 
   iframe
-    width: 100%
-
-#player-wrapper
-  overflow: hidden
-  height: 0
-  transition: height $transition-speed ease-out, min-height $transition-speed ease-out
-
+    height: 100%
 
 #portraits-cover
   height: 0
@@ -94,6 +124,7 @@ $transition-speed = 300ms
 
   #portraits-cover
     height: 100vh
+
 // ******************************************************
 
 // MAP
@@ -182,3 +213,21 @@ input[type='submit']
 @media screen and (max-width: 440px)
   #i-want-to
     display: none
+
+// ******************************************************
+
+// SINGLE
+
+.single-content-container
+  .wp-caption, img
+    padding: $margin-basic 0
+  .wp-caption
+    width: 100% !important
+    font-size: $font-size-small
+    text-align: center !important
+    img
+      margin-bottom: 1em
+      padding: 0
+
+.icon-arrow
+  height: 14px
