@@ -7,10 +7,11 @@ $transition-speed = 300ms
 #logo-holder
   flex-grow: 1
 
-#logo
-  height: auto
-  width: 80%
-  max-width: 280px
+#header
+  .truth-logo
+    height: auto
+    width: 80%
+    max-width: 280px
 
 #main-nav
   ul
@@ -199,3 +200,21 @@ input[type='submit']
 @media screen and (max-width: 440px)
   #i-want-to
     display: none
+
+// ******************************************************
+
+// SINGLE
+
+.single-content-container
+  .wp-caption, img
+    padding: $margin-basic 0
+  .wp-caption
+    width: 100% !important
+    font-size: $font-size-small
+    text-align: center !important
+    img
+      margin-bottom: 1em
+      padding: 0
+
+.icon-arrow
+  height: 14px
