@@ -479,7 +479,7 @@ Site.Map = {
       lat: -34.397,
       lng: 150.644
     },
-    zoom: 2,
+    minZoom: 2,
     icon: {
       url: WP.themeUrl + '/dist/img/truth-bubble.png',
       scaledSize: new google.maps.Size(75.5,55),
