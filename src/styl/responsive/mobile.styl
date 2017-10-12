@@ -5,9 +5,10 @@ $transition-speed = 300ms
 
 // HEADER
 
-#logo
-  height: 72px
-  max-width: 280px
+#header
+  .truth-logo
+    height: 44px
+    width: auto
 
 #main-nav
   display: none
@@ -26,6 +27,8 @@ $transition-speed = 300ms
   transition: transform $transition-speed ease-in-out
   &.open
     transform: translateX(0%)
+  .grid-column
+    min-height: calc('100vh - ' + ($margin-basic * 4))
 
 .menu-icon
   height: 16px

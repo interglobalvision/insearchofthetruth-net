@@ -31,7 +31,7 @@
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="padding-top-small">
     <div class="container">
       <div class="grid-row align-items-center justify-between">
         <div id="logo-holder" class="grid-item">
@@ -55,17 +55,17 @@
     <div id="mobile-menu">
       <div class="container margin-top-basic padding-bottom-basic">
         <div class="grid-row justify-between">
+          <div class="grid-item item-s-12 text-align-right">
+            <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-close.svg'); ?>
+          </div>
           <nav id="mobile-nav" class="grid-item flex-grow">
-            <ul class="grid-column font-bold text-align-center font-size-mid">
+            <ul class="grid-column font-bold font-size-mid justify-center align-items-center">
               <li class="grid-item"><a href="<?php echo home_url(); ?>">Portraits</a></li>
               <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
               <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
               <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
             </ul>
           </nav>
-          <div class="grid-item">
-            <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-close.svg'); ?>
-          </div>
         </div>
       </div>
     </div>
