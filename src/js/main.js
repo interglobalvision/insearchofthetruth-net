@@ -403,13 +403,18 @@ Site.Portraits = {
     // Get hash
     var hash = location.hash.split('/');
 
-    // Get youtube ID
-    var videoId = hash[hash.length - 1];
+    // Check that its a portrait
+    if(hash[1] === 'portrait') {
 
-    var list = _this.getFilteredYoutubeIds();
+      // Get youtube ID
+      var videoId = hash[hash.length - 1];
 
-    Site.Player.playVideo(videoId, list);
-    Site.Player.scrollIn();
+      var list = _this.getFilteredYoutubeIds();
+
+      Site.Player.playVideo(videoId, list);
+
+      Site.Player.scrollIn();
+    }
   },
 
   handleHashChange: function(event) {
