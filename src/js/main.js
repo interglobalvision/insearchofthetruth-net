@@ -151,6 +151,7 @@ Site.Player = {
     // Yotube loading, and then remove this class
     $( window ).on( "load", function() {
       $('body').removeClass('loading');
+      Site.Portraits.checkHash();
     });
 
   },
@@ -389,24 +390,32 @@ Site.Portraits = {
     // Bind select filters change
     _this.$filters = $('.filter-select').on('change', _this.handleFilterChange.bind(_this));
 
-    // Bind portrait clicks
-    _this.$portraits.on('click', _this.handlePortraitClick.bind(this));
+    // Bind hash change aka clicking on a portrait
+    $(window).on('hashchange', _this.handleHashChange.bind(_this));
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
   },
 
-  handlePortraitClick: function(event) {
+  checkHash: function() {
     var _this = this;
 
-    event.preventDefault();
+    // Get hash
+    var hash = location.hash.split('/');
 
-    var videoId = event.currentTarget.dataset.youtubeId;
+    // Get youtube ID
+    var videoId = hash[hash.length - 1];
 
     var list = _this.getFilteredYoutubeIds();
 
     Site.Player.playVideo(videoId, list);
     Site.Player.scrollIn();
+  },
+
+  handleHashChange: function(event) {
+    var _this = this;
+
+    _this.checkHash();
 
   },
 
