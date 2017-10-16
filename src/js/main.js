@@ -589,11 +589,28 @@ Site.Map = {
         });
 
         // Add item location to the bounds list
-        bounds.extend(new google.maps.LatLng(item.lat, item.lng));
+        bounds.extend(_this.markers[index].getPosition());
 
       });
 
       // Make map fit all locations
+
+      //center the map to the geometric center of all markers
+      _this.map.setCenter(bounds.getCenter());
+
+      // Listen for bounds change (only once)
+      google.maps.event.addListenerOnce(_this.map, 'bounds_changed', function(event) {
+        //remove one zoom level to ensure no marker is on the edge.
+        _this.map.setZoom(_this.map.getZoom()-1);
+
+        // set a minimum zoom
+        // if you got only 1 marker or all markers are too close to each other map will be zoomed too much.
+        if (_this.map.getZoom() > 13) {
+          _this.map.setZoom(4);
+        }
+
+      }.bind(this));
+
       _this.map.fitBounds(bounds);
 
     }
