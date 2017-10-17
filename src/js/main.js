@@ -495,9 +495,7 @@ Site.Map = {
     },
     minZoom: 2,
     icon: {
-      url: WP.themeUrl + '/dist/img/truth-bubble.png',
-      scaledSize: new google.maps.Size(75.5,55),
-      anchor: new google.maps.Point(0,55)
+      // requires Maps API and set on init()
     },
     styles: [
       {
@@ -552,6 +550,13 @@ Site.Map = {
 
   init: function() {
     var _this = this;
+
+    // Setup options that depend on Maps API library
+    _this.options.icon = {
+      url: WP.themeUrl + '/dist/img/truth-bubble.png',
+      scaledSize: new google.maps.Size(75.5,55),
+      anchor: new google.maps.Point(0,55)
+    };
 
     // Get grid element
     // TODO: find a way of not repeating this data here and in Site.Portraits
