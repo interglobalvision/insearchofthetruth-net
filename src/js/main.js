@@ -31,7 +31,9 @@ Site = {
         Site.Gallery.init();
       }
 
-      _this.fitHeight();
+      $('.js-menu-toggle').on('click', function() {
+        $('#mobile-menu').toggleClass('open');
+      });
 
     });
 
@@ -39,34 +41,6 @@ Site = {
 
   onResize: function() {
     var _this = this;
-
-    _this.fitHeight();
-
-    _this.Player.calcHeight();
-
-  },
-
-  // Give elements with .js-fit-height a min height of
-  // windows height - header height
-  // or
-  fitHeight: function() {
-    var _this = this;
-
-    var $fitElements = $('.js-fit-height');
-
-    // Get window height
-    var windowHeight = $(window).height();
-
-    // Get header height
-    var headerHeight = $('#header .container').height();
-
-    // Calc min height
-    var minHeight = windowHeight - headerHeight;
-
-    // Add min height to each element
-    $fitElements.css({
-      'height': minHeight,
-    });
 
   },
 
@@ -177,19 +151,9 @@ Site.Player = {
     // Yotube loading, and then remove this class
     $( window ).on( "load", function() {
       $('body').removeClass('loading');
+      Site.Portraits.checkHash();
     });
 
-  },
-
-  calcHeight: function() {
-    var _this = this;
-
-    var windowHeight = $(window).height();
-    var headerHeight = $('#header .container').height();
-
-    var videoHeight = windowHeight - headerHeight;
-
-    _this.$wrapper.find('iframe').css('height', _this.$wrapper.width() * .5625);
   },
 
   setVideosList: function(list) {
@@ -224,19 +188,9 @@ Site.Player = {
       playerVars: _this.playerOptions,
     });
 
-    // Calc player height
-    _this.calcHeight();
-
     $(window).resize(_this.onResize.bind(_this));
 
     _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
-
-  },
-
-  onResize: function() {
-    var _this = this;
-
-    _this.calcHeight();
 
   },
 
@@ -281,6 +235,7 @@ Site.Player = {
 
     _this.$container.addClass('video');
 
+    _this.sizeIframe();
   },
 
   closeVideo: function() {
@@ -331,6 +286,49 @@ Site.Player = {
     } else {
       _this.closeVideo();
     }
+  },
+
+  sizeIframe: function() {
+    var _this = this;
+
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+    var headerHeight = $('#header').outerHeight();
+    var filterHeight = $('#portraits-filters-container').outerHeight();
+
+    var landscapeIframeHeight = windowHeight - (headerHeight + filterHeight);
+    var portraitIframeHeight = (windowWidth / 16) * 9;
+
+    if (_this.$container.hasClass('video')) {
+      if (windowWidth <= (windowHeight / 9 * 16) && portraitIframeHeight <= landscapeIframeHeight) {
+        // Portrait
+
+        $('#player-wrapper').css({
+          'height': portraitIframeHeight
+        });
+
+        $('#player-iframe').css({
+          'width': '100%'
+        });
+
+      } else {
+        // Landscape
+
+        $('#player-wrapper').css({
+          'height': landscapeIframeHeight
+        });
+
+        $('#player-iframe').css({
+          'width': (landscapeIframeHeight / 9) * 16
+        });
+      }
+    }
+  },
+
+  onResize: function() {
+    var _this = this;
+
+    _this.sizeIframe();
   },
 
 };
@@ -392,24 +390,37 @@ Site.Portraits = {
     // Bind select filters change
     _this.$filters = $('.filter-select').on('change', _this.handleFilterChange.bind(_this));
 
-    // Bind portrait clicks
-    _this.$portraits.on('click', _this.handlePortraitClick.bind(this));
+    // Bind hash change aka clicking on a portrait
+    $(window).on('hashchange', _this.handleHashChange.bind(_this));
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
   },
 
-  handlePortraitClick: function(event) {
+  checkHash: function() {
     var _this = this;
 
-    event.preventDefault();
+    // Get hash
+    var hash = location.hash.split('/');
 
-    var videoId = event.currentTarget.dataset.youtubeId;
+    // Check that its a portrait
+    if(hash[1] === 'portrait') {
 
-    var list = _this.getFilteredYoutubeIds();
+      // Get youtube ID
+      var videoId = hash[hash.length - 1];
 
-    Site.Player.playVideo(videoId, list);
-    Site.Player.scrollIn();
+      var list = _this.getFilteredYoutubeIds();
+
+      Site.Player.playVideo(videoId, list);
+
+      Site.Player.scrollIn();
+    }
+  },
+
+  handleHashChange: function(event) {
+    var _this = this;
+
+    _this.checkHash();
 
   },
 
@@ -482,11 +493,9 @@ Site.Map = {
       lat: -34.397,
       lng: 150.644
     },
-    zoom: 2,
+    minZoom: 2,
     icon: {
-      url: WP.themeUrl + '/dist/img/truth-bubble.png',
-      scaledSize: new google.maps.Size(75.5,55),
-      anchor: new google.maps.Point(0,55)
+      // requires Maps API and set on init()
     },
     styles: [
       {
@@ -542,6 +551,13 @@ Site.Map = {
   init: function() {
     var _this = this;
 
+    // Setup options that depend on Maps API library
+    _this.options.icon = {
+      url: WP.themeUrl + '/dist/img/truth-bubble.png',
+      scaledSize: new google.maps.Size(75.5,55),
+      anchor: new google.maps.Point(0,55)
+    };
+
     // Get grid element
     // TODO: find a way of not repeating this data here and in Site.Portraits
     _this.$grid = $('#portraits-grid');
@@ -592,11 +608,28 @@ Site.Map = {
         });
 
         // Add item location to the bounds list
-        bounds.extend(new google.maps.LatLng(item.lat, item.lng));
+        bounds.extend(_this.markers[index].getPosition());
 
       });
 
       // Make map fit all locations
+
+      //center the map to the geometric center of all markers
+      _this.map.setCenter(bounds.getCenter());
+
+      // Listen for bounds change (only once)
+      google.maps.event.addListenerOnce(_this.map, 'bounds_changed', function(event) {
+        //remove one zoom level to ensure no marker is on the edge.
+        _this.map.setZoom(_this.map.getZoom()-1);
+
+        // set a minimum zoom
+        // if you got only 1 marker or all markers are too close to each other map will be zoomed too much.
+        if (_this.map.getZoom() > 13) {
+          _this.map.setZoom(4);
+        }
+
+      }.bind(this));
+
       _this.map.fitBounds(bounds);
 
     }

@@ -23,9 +23,6 @@
   flex: 0 1 auto
   max-width: 100%
   max-height: 100%
-  &.no-gutter
-    padding-left: 0
-    padding-right: 0
   &.flex-grow
     flex-grow: 1
 
@@ -114,8 +111,12 @@ grid($width = false, $gutter = false, $size = false, $cols = 12)
       width: $width
 
   if $gutter
-    .grid-item
-      padding: 0 ( $gutter / 2 )
+    .grid-row
+      .grid-item
+        padding: 0 ( $gutter / 2 )
+    .grid-column
+      .grid-item
+        padding: ( $gutter / 2 ) 0
 
   // COLUMN SIZES & OFFSETS
 

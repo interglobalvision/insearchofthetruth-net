@@ -42,29 +42,29 @@ if ( $portraits->have_posts() ) {
   <div id="map-portraits-wrapper">
     <div id="map-portraits-container" class="js-fit-height">
       <div class="container">
-        <div id="portraits-filters-container" class="margin-bottom-basic grid-row">
+        <div id="portraits-filters-container" class="padding-bottom-small grid-row">
           <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
 
   <?php
     if (!empty($ages)) {
-      render_filter_select($ages, 'age', 'grid-item item-s-2');
+      render_filter_select($ages, 'age', 'grid-item item-m-2');
     }
 
     if (!empty($subjects)) {
-      render_filter_select($subjects, 'subject', 'grid-item item-s-2');
+      render_filter_select($subjects, 'subject', 'grid-item item-m-2');
     }
 
     if (!empty($locations)) {
-      render_filter_select($locations, 'location', 'grid-item item-s-2');
+      render_filter_select($locations, 'location', 'grid-item item-m-2');
     }
 
     if (!empty($genders)) {
-      render_filter_select($genders, 'gender', 'grid-item item-s-2');
+      render_filter_select($genders, 'gender', 'grid-item item-m-2');
     }
 
   ?>
         </form>
-          <a href="#" class="js-toggle-map grid-item">Map</a>
+          <a href="#" class="js-toggle-map grid-item font-bold">Map ></a>
         </div>
 
         <div id="portraits-grid" class="grid-row">
@@ -79,7 +79,7 @@ if ( $portraits->have_posts() ) {
 
   ?>
           <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
-          <?php the_post_thumbnail('item-l-4'); ?>
+          <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('item-l-4'); ?></a>
           </article>
   <?php
     }
@@ -90,9 +90,9 @@ if ( $portraits->have_posts() ) {
 
       <div id="portraits-map">
         <div class="container">
-          <div class="grid-row">
-            <div class="gird-item item-s-3">
-              <a href="#" class="js-toggle-map">Portraits</a>
+          <div class="grid-row padding-bottom-small">
+            <div class="grid-item item-s-3">
+              <a href="#" class="js-toggle-map font-bold">< Grid</a>
             </div>
           </div>
           <div id="map-container"></div>

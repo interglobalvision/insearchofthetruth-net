@@ -3,11 +3,20 @@
 #logo-holder
   flex-grow: 0
 
-#logo
-  height: 96px
-  width: auto
+#header
+  .truth-logo
+    height: 60px
+    max-width: none
+
+#mobile-menu
+  &.open
+    transform: translateX(100%)
+
+#nav-toggle-holder
+  display: none
 
 #main-nav
+  display: block
   ul
     justify-content: flex-end
 
@@ -21,3 +30,17 @@
 .form-arrow
   svg
     height: 30px
+
+// ******************************************************
+
+// SINGLE
+
+.single-content-container
+  .wp-caption, img
+    font-size: $font-size-small
+    padding: $margin-basic 0
+    img
+      padding: 0
+
+.icon-arrow
+  height: 18px

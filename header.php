@@ -31,12 +31,15 @@
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="padding-top-small">
     <div class="container">
-      <div class="grid-row align-items-center">
-        <div id="logo-holder" class="grid-item text-align-center">
+      <div class="grid-row align-items-center justify-between">
+        <div id="logo-holder" class="grid-item">
           <h1 class="u-visuallyhidden">In Search of the Truth</h1>
-          <a href="<?php echo home_url(); ?>"><img id="logo" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/truth-logo.png"></a>
+          <a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/truth-logo.svg'); ?></a>
+        </div>
+        <div id="nav-toggle-holder" class="grid-item">
+          <div><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-open.svg'); ?></div>
         </div>
         <nav id="main-nav" class="grid-item flex-grow no-gutter">
           <ul class="grid-row font-bold">
@@ -46,6 +49,24 @@
             <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
           </ul>
         </nav>
+      </div>
+    </div>
+
+    <div id="mobile-menu">
+      <div class="container margin-top-basic padding-bottom-basic">
+        <div class="grid-row justify-between">
+          <div class="grid-item item-s-12 text-align-right">
+            <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-close.svg'); ?>
+          </div>
+          <nav id="mobile-nav" class="grid-item flex-grow">
+            <ul class="grid-column font-bold font-size-mid justify-center align-items-center">
+              <li class="grid-item"><a href="<?php echo home_url(); ?>">Portraits</a></li>
+              <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
+              <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
+              <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
 <?php
