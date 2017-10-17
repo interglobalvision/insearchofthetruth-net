@@ -151,7 +151,6 @@ Site.Player = {
     // Yotube loading, and then remove this class
     $( window ).on( "load", function() {
       $('body').removeClass('loading');
-      Site.Portraits.checkHash();
     });
 
   },
@@ -190,8 +189,16 @@ Site.Player = {
 
     $(window).resize(_this.onResize.bind(_this));
 
+
+    _this.player.addEventListener('onReady', _this.handleVideoReady.bind(this));
     _this.player.addEventListener('onStateChange', _this.handleVideoStateChange.bind(this));
 
+    $(window).resize(_this.onResize.bind(_this));
+
+  },
+
+  handleVideoReady: function(event) {
+    Site.Portraits.checkHash();
   },
 
   handleVideoStateChange: function(event) {

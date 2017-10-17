@@ -36,11 +36,9 @@ function scripts_and_styles_method() {
       wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&async', array(), false, true);
 
       // Get Locations taxonomy
-      $locations = get_locations_data();
+      $locations = array_merge(array(), get_locations_data());
 
-      if (!empty($locations)) {
-        $javascriptVars['locations'] = $locations;
-      }
+      $javascriptVars['locations'] = $locations;
     }
   }
 
