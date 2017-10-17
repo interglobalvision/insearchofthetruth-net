@@ -15,10 +15,12 @@ if ($query->have_posts() && !is_front_page()) {
   while ($query->have_posts()) {
     $query->the_post();
 
-    if (has_post_thumbnail()) {
+    $youtube_id = get_post_meta($post->ID, '_video_id_value', true);
+
+    if (has_post_thumbnail() && !empty($youtube_id)) {
 ?>
       <div class="item-s-3 item-m-2">
-        <a href="<?php echo home_url(); ?>">
+        <a href="<?php echo home_url(); ?>/#!/portrait/<?php echo $youtube_id; ?>">
           <?php the_post_thumbnail('item-l-3', 'class=u-block'); ?>
         </a>
       </div>
