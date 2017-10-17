@@ -79,7 +79,7 @@ if ( $portraits->have_posts() ) {
 
   ?>
           <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
-          <?php the_post_thumbnail('item-l-4'); ?>
+          <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('item-l-4'); ?></a>
           </article>
   <?php
     }
