@@ -111,12 +111,11 @@ grid($width = false, $gutter = false, $size = false, $cols = 12)
       width: $width
 
   if $gutter
-    .grid-row
-      .grid-item
-        padding: 0 ( $gutter / 2 )
-    .grid-column
-      .grid-item
-        padding: ( $gutter / 2 ) 0
+    .grid-item
+      padding: 0 ( $gutter / 2 )
+      &.no-gutter
+        padding-right: 0
+        padding-left: 0
 
   // COLUMN SIZES & OFFSETS
 
