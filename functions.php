@@ -28,6 +28,9 @@ function scripts_and_styles_method() {
     // Enqueue youtube api
     wp_enqueue_script('yt-player-api', 'http://www.youtube.com/player_api', array(), false, true);
 
+    // Enqueue Shuffle.js
+    wp_enqueue_script('shuffle-js', 'https://cdnjs.cloudflare.com/ajax/libs/Shuffle/5.0.2/shuffle.min.js', '', '', true);
+
     // Get google api id from site options
     $google_api_key = IGV_get_option('_igv_site_options', '_igv_google_api_key');
 
