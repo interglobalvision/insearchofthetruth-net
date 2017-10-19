@@ -9,6 +9,8 @@
   flex-wrap: wrap
   &.reverse
     flex-direction: row-reverse
+  &.nowrap
+    flex-wrap: nowrap
 
 .grid-column
   display: flex
@@ -23,12 +25,6 @@
   max-height: 100%
   &.flex-grow
     flex-grow: 1
-
-.grid-row, .grid-column
-  .grid-item
-    &.no-gutter
-      padding-left: 0
-      padding-right: 0
 
 // FLEX POSITIONING
 
