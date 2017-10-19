@@ -65,9 +65,8 @@ function get_taxonomy_values($post,$taxonomy) {
   return $values;
 }
 
-// Return a string constructed from the filters values
-// eg. 'age-20 gender-male'
-//     'age-16 subject-racism subject-free-speach gender-female'
+// Return an array constructed from the filters values
+// eg. ["age-20", "gender-male"]
 function get_post_filters_data($post) {
   $filters = array(
     'age' => get_taxonomy_values($post,'age'),
@@ -76,12 +75,12 @@ function get_post_filters_data($post) {
     'gender' => get_taxonomy_values($post,'gender'),
   );
 
-  $filters_data = '';
+  $filters_data = array();
 
   foreach($filters as $filter_slug => $filter_data) {
     if(!empty($filter_data)) {
       foreach($filter_data as $filter_value) {
-        $filters_data .= $filter_slug . "-" . $filter_value . " ";
+        array_push($filters_data, $filter_slug . "-" . $filter_value);
       }
     }
   }
