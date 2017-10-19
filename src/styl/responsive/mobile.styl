@@ -31,7 +31,7 @@ $transition-speed = 300ms
     min-height: calc('100vh - ' + ($margin-basic * 4))
 
 .menu-icon
-  height: 16px 
+  height: 16px
 
 // ******************************************************
 
@@ -127,6 +127,21 @@ $filters-height = 29px
 
   #portraits-cover
     height: 100vh
+
+#portrait-sizer, .portrait
+  padding: 0 $margin-tiny
+  a
+    display: block
+    position: relative
+    font-size: 0
+
+@media screen and (orientation: portrait)
+  #portrait-sizer, .portrait
+    width: 50%
+
+@media screen and (orientation: landscape)
+  #portrait-sizer, .portrait
+    width: unquote('calc(100% / 3)') 
 
 // ******************************************************
 
