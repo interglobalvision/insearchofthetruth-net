@@ -39,5 +39,6 @@
     "main-bower-files": "^2.13.1",
     "node-notifier": "^5.1.2",
     "run-sequence": "^1.2.2"
-  }
+  },
+  "dependencies": {}
 }
