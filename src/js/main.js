@@ -655,7 +655,7 @@ Site.Map = {
     var list = [];
 
     // Filter selector string
-    var filter = '[data-filters*=location-' + location + ']';
+    var filter = '[data-groups*="location-' + location + '"]';
 
     // Filter portraits
     var $filteredPortraits = _this.$portraits.filter(filter);
