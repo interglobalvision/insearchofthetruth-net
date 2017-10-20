@@ -433,7 +433,7 @@ Site.Portraits = {
     var _this = this;
 
     // Get the filtered elements
-    var filteredElements = $('.shuffle-item--visible');
+    var filteredElements = $('.shuffle-item--visible').toArray();
 
     // Get youtubeIds
     var youtubeIds = filteredElements.map( function(val) {
