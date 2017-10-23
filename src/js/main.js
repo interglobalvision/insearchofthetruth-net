@@ -370,6 +370,7 @@ Site.Portraits = {
     _this.$grid.shuffle = new window.Shuffle(_this.$grid, {
       itemSelector: '.portrait',
       sizer: '#portrait-sizer',
+      filterMode: window.Shuffle.FilterMode.ALL,
     });
 
     // Workaround to make it compatible with lazysizes
