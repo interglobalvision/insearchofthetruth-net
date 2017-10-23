@@ -67,7 +67,7 @@ if ( $portraits->have_posts() ) {
           <a href="#" class="js-toggle-map grid-item font-bold">Map ></a>
         </div>
 
-        <div id="portraits-grid" class="grid-row">
+        <div id="portraits-grid">
 
   <?php
     while ( $portraits->have_posts() ) {
@@ -79,15 +79,16 @@ if ( $portraits->have_posts() ) {
 
         $filters_data = get_post_filters_data($post);
   ?>
-          <article <?php post_class('portrait grid-item item-s-6 item-m-4 item-l-2 margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-filters="<?php echo $filters_data; ?>" data-youtube-id="<?php echo $youtube_id; ?>">
+          <article <?php post_class('portrait margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-groups='<?php echo json_encode($filters_data); ?>' data-youtube-id="<?php echo $youtube_id; ?>">
           <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('item-l-4'); ?></a>
           </article>
   <?php
       }
     }
   ?>
-
+          <div id="portrait-sizer"></div>
         </div>
+
       </div>
 
       <div id="portraits-map">

@@ -17,8 +17,8 @@
   "dependencies": {
     "lazysizes": "^2.0.4",
     "swiper": "^3.4.2",
-    "isotope": "^3.0.4",
-    "jquery.scrollTo": "^2.1.2"
+    "jquery.scrollTo": "^2.1.2",
+    "shufflejs": "^5.0.2"
   },
   "overrides": {
     "lazysizes": {
@@ -29,8 +29,8 @@
       ],
       "dependencies": {}
     },
-    "isotope": {
-      "main": "dist/isotope.pkgd.min.js",
+    "shufflejs": {
+      "main": "dist/shuffle.min.js",
       "dependencies": {}
     }
   }

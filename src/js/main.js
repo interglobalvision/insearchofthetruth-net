@@ -367,18 +367,17 @@ Site.Portraits = {
   initGrid: function() {
     var _this = this;
 
-    // Set grid with isotope
-    _this.$grid.isotope({
-      // options
-      itemSelector: '.grid-item',
-      layoutMode: 'fitRows'
+    _this.$grid.shuffle = new window.Shuffle(_this.$grid, {
+      itemSelector: '.portrait',
+      sizer: '#portrait-sizer',
+      filterMode: window.Shuffle.FilterMode.ALL,
     });
 
     // Workaround to make it compatible with lazysizes
     _this.$grid[0].addEventListener('load', (function(){
       var runs;
       var update = function(){
-        _this.$grid.isotope('layout');
+        _this.$grid.shuffle.layout();
         runs = false;
       };
       return function(){
@@ -388,7 +387,6 @@ Site.Portraits = {
         }
       };
     }()), true);
-
   },
 
   bind: function() {
@@ -436,7 +434,7 @@ Site.Portraits = {
     var _this = this;
 
     // Get the filtered elements
-    var filteredElements = _this.$grid.isotope('getFilteredItemElements');
+    var filteredElements = $('.shuffle-item--visible').toArray();
 
     // Get youtubeIds
     var youtubeIds = filteredElements.map( function(val) {
@@ -462,33 +460,29 @@ Site.Portraits = {
     var _this = this;
 
     // Get the selector text to be used for filtering
-    var filterSelector = _this.getFilterSelector();
+    var filterArray = _this.getFilterArray();
 
-    // Filter using the selector on Isotope
-    _this.$grid.isotope({
-      filter: filterSelector,
-    });
-
+    _this.$grid.shuffle.filter(filterArray);
   },
 
-  // Return a string selector based on the filter values
-  // Eg. '[data-filters*=age-20]'
-  //     '[data-filters*=age-20][data-filters*=subject-subject-1]'
-  getFilterSelector: function() {
+  // Return an array of filters
+  // Eg. ["subject-ants"]
+  //     ["subject-ants", "location-pants"]
+  getFilterArray: function() {
     var _this = this;
 
-    var selector = '';
+    var filterArray = [];
 
     // Iterate thru the filters to get it's values
     _this.$filters.each( function(index) {
       if(this.value) {
 
         // Build up selector string
-        selector += '[data-filters*=' + this.dataset.filter + '-' + this.value + ']';
+        filterArray.push(this.dataset.filter + '-' + this.value);
       }
     });
 
-    return selector;
+    return filterArray;
   },
 
 };
@@ -662,7 +656,7 @@ Site.Map = {
     var list = [];
 
     // Filter selector string
-    var filter = '[data-filters*=location-' + location + ']';
+    var filter = '[data-groups*="location-' + location + '"]';
 
     // Filter portraits
     var $filteredPortraits = _this.$portraits.filter(filter);
