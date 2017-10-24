@@ -491,6 +491,8 @@ Site.Map = {
   options: {
     mapTypeControl: false,
     fullscreenControl: false,
+    streetViewControl: false,
+    zoomControl: false,
     // TODO: Set coordinates
     center: {
       lat: -34.397,
@@ -639,12 +641,45 @@ Site.Map = {
 
     _this.bind();
 
+    //_this.limitBounds();
+  },
+
+  limitBounds: function() {
+    var _this = this;
+
+    var strictBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-75, -145),
+      new google.maps.LatLng(75, 145)
+    );
+
+    // Listen for the dragend event
+    google.maps.event.addListener(_this.map, 'dragend', function () {
+      if (strictBounds.contains(_this.map.getCenter())) return;
+
+      // We're out of bounds - Move the map back within the bounds
+
+      var c = _this.map.getCenter(),
+        x = c.lng(),
+        y = c.lat(),
+        maxX = strictBounds.getNorthEast().lng(),
+        maxY = strictBounds.getNorthEast().lat(),
+        minX = strictBounds.getSouthWest().lng(),
+        minY = strictBounds.getSouthWest().lat();
+
+      if (x < minX) x = minX;
+      if (x > maxX) x = maxX;
+      if (y < minY) y = minY;
+      if (y > maxY) y = maxY;
+
+      _this.map.setCenter(new google.maps.LatLng(y, x));
+
+    });
   },
 
   bind: function() {
     var _this = this;
 
-    $('.js-toggle-map').on('click', function(event) {
+    $('.toggle-map').on('click', function(event) {
       event.preventDefault();
       _this.$wrapper.toggleClass('show-map');
     });
