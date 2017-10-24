@@ -46,25 +46,27 @@ if ( $portraits->have_posts() ) {
           <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
 
   <?php
+    $item_classes = 'grid-item';
+
     if (!empty($ages)) {
-      render_filter_select($ages, 'age', 'grid-item item-m-2');
+      render_filter_select($ages, 'age', $item_classes);
     }
 
     if (!empty($subjects)) {
-      render_filter_select($subjects, 'subject', 'grid-item item-m-2');
+      render_filter_select($subjects, 'subject', $item_classes);
     }
 
     if (!empty($locations)) {
-      render_filter_select($locations, 'location', 'grid-item item-m-2');
+      render_filter_select($locations, 'location', $item_classes);
     }
 
     if (!empty($genders)) {
-      render_filter_select($genders, 'gender', 'grid-item item-m-2');
+      render_filter_select($genders, 'gender', $item_classes);
     }
 
   ?>
         </form>
-          <a href="#" class="js-toggle-map grid-item font-bold">Map ></a>
+          <a href="#" class="toggle-map grid-item font-bold">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
         </div>
 
         <div id="portraits-grid">
@@ -95,7 +97,7 @@ if ( $portraits->have_posts() ) {
         <div class="container">
           <div class="grid-row padding-bottom-small padding-top-small">
             <div class="grid-item item-s-3">
-              <a href="#" class="js-toggle-map font-bold">< Grid</a>
+              <a href="#" class="toggle-map font-bold"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> Grid</a>
             </div>
           </div>
           <div id="map-container"></div>
