@@ -47,6 +47,7 @@ $transition-speed = 300ms
 
 // PORTRAITS
 #portraits
+  overflow-x: hidden
   opacity: 1
   transition: opacity $transition-speed
 
@@ -66,28 +67,6 @@ $transition-speed = 300ms
       width: 100%
     #player-container
       width: 100%
-
-/*
-#portraits
-  // This class toggles to open/close the video
-  &.video
-    #player-wrapper
-      height: unquote('calc((100vw / 16) * 9)')
-      #player-container
-        width: 100%
-
-$header-height = 89px
-$filters-height = 29px
-
-@media (orientation: landscape)
-  #portraits
-    // This class toggles to open/close the video
-    &.video
-      #player-wrapper
-        height: calc('100vh - ' + ($header-height + $filters-height))
-        #player-container
-          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
-*/
 
 #player-wrapper
   display: block
@@ -141,7 +120,7 @@ $filters-height = 29px
 
 @media screen and (orientation: landscape)
   #portrait-sizer, .portrait
-    width: unquote('calc(100% / 3)') 
+    width: unquote('calc(100% / 3)')
 
 // ******************************************************
 
@@ -153,12 +132,18 @@ $filters-height = 29px
   left: 100%
   width: 100vw
 
+#portraits-filters-container
+  position: sticky
+  top: 0
+  z-index: 1000
+  background: white
+  transform:translate(0,0)
+
 #map-container
   position: relative
   height: 80vh
 
 #map-portraits-wrapper
-  overflow: hidden
 
   &.show-map #map-portraits-container
     transform: translateX(-100%)
