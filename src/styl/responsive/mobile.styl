@@ -1,3 +1,5 @@
+$header-height = 60px
+$filter-height = 41px
 $transition-speed = 300ms
 
 #main-container
@@ -49,6 +51,8 @@ $transition-speed = 300ms
 #portraits
   opacity: 1
   transition: opacity $transition-speed
+  min-height: calc('100vh - ' + $header-height)
+  overflow: hidden
 
   // This class toggles to show/hide the video (eg, when buffering)
   &.show
@@ -66,28 +70,6 @@ $transition-speed = 300ms
       width: 100%
     #player-container
       width: 100%
-
-/*
-#portraits
-  // This class toggles to open/close the video
-  &.video
-    #player-wrapper
-      height: unquote('calc((100vw / 16) * 9)')
-      #player-container
-        width: 100%
-
-$header-height = 89px
-$filters-height = 29px
-
-@media (orientation: landscape)
-  #portraits
-    // This class toggles to open/close the video
-    &.video
-      #player-wrapper
-        height: calc('100vh - ' + ($header-height + $filters-height))
-        #player-container
-          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
-*/
 
 #player-wrapper
   display: block
@@ -135,13 +117,32 @@ $filters-height = 29px
     position: relative
     font-size: 0
 
+select.filter-select
+  padding-bottom: 0
+  border: none
+  text-transform: capitalize
+  display: inline-block
+  width: auto
+  cursor: pointer
+  padding-left: 10px
+
+.icon-select
+  position: absolute
+  top: 6px
+  width: 8px
+  pointer-events: none
+
+.toggle-map
+  .icon-arrow
+    height: 11px
+
 @media screen and (orientation: portrait)
   #portrait-sizer, .portrait
     width: 50%
 
 @media screen and (orientation: landscape)
   #portrait-sizer, .portrait
-    width: unquote('calc(100% / 3)') 
+    width: unquote('calc(100% / 3)')
 
 // ******************************************************
 
@@ -152,13 +153,14 @@ $filters-height = 29px
   top: 0
   left: 100%
   width: 100vw
+  .container
+    height: 100%
 
 #map-container
   position: relative
-  height: 80vh
+  min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
 
 #map-portraits-wrapper
-  overflow: hidden
 
   &.show-map #map-portraits-container
     transform: translateX(-100%)
@@ -197,7 +199,7 @@ input, select
   border: 0
   background: transparent
   appearance: none
-  border-bottom: 3px solid $color-black
+  border-bottom: 2px solid $color-black
   padding-bottom: 3px
   border-radius: 0
   margin-bottom: -4px

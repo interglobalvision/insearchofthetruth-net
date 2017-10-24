@@ -1,12 +1,39 @@
+$header-height = 124px
+$filter-height = 93px
+
 #header
   .truth-logo
     height: 86px
 
 .icon-arrow
-  height: 28px
+  height: 23px
 
 #portrait-sizer, .portrait
   padding: 0 $margin-tiny
+
+// ******************************************************
+
+// PORTRAITS
+
+#portraits
+  min-height: calc('100vh - ' + $header-height)
+
+#portrait-sizer, .portrait
+  padding: 0 $margin-tiny
+
+#map-container
+  min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+
+select.filter-select
+  padding-left: 24px
+
+.icon-select
+  top: 11px
+  width: 14px
+
+.toggle-map
+  .icon-arrow
+    height: 16px
 
 // ******************************************************
 
