@@ -489,6 +489,8 @@ Site.Portraits = {
 
 Site.Map = {
   options: {
+    mapTypeControl: false,
+    fullscreenControl: false,
     // TODO: Set coordinates
     center: {
       lat: -34.397,
