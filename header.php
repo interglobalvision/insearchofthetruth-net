@@ -31,14 +31,14 @@
 
 <section id="main-container">
 
-  <header id="header" class="padding-top-small">
+  <header id="header" class="padding-top-tiny">
     <div class="container">
       <div class="grid-row align-items-center justify-between">
         <div id="logo-holder" class="grid-item">
           <h1 class="u-visuallyhidden">In Search of the Truth</h1>
           <a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/truth-logo.svg'); ?></a>
         </div>
-        <div id="nav-toggle-holder" class="grid-item">
+        <div id="nav-toggle-holder" class="grid-item align-self-start padding-top-tiny">
           <div><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-open.svg'); ?></div>
         </div>
         <nav id="main-nav" class="grid-item flex-grow no-gutter">
@@ -53,9 +53,9 @@
     </div>
 
     <div id="mobile-menu">
-      <div class="container margin-top-basic padding-bottom-basic">
+      <div class="container margin-top-tiny padding-bottom-tiny">
         <div class="grid-row justify-between">
-          <div class="grid-item item-s-12 text-align-right">
+          <div class="grid-item item-s-12 text-align-right padding-top-tiny">
             <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/menu-close.svg'); ?>
           </div>
           <nav id="mobile-nav" class="grid-item flex-grow">

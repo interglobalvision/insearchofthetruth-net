@@ -1,4 +1,4 @@
-$header-height = 60px
+$header-height = 54px
 $filter-height = 41px
 $transition-speed = 300ms
 
@@ -30,7 +30,9 @@ $transition-speed = 300ms
   &.open
     transform: translateX(0%)
   .grid-column
-    min-height: calc('100vh - ' + ($margin-basic * 4))
+    min-height: calc('100vh - ' + ($margin-small * 4))
+    .grid-item
+      margin-bottom: $margin-small
 
 .menu-icon
   height: 16px
@@ -159,6 +161,7 @@ select.filter-select
 #map-container
   position: relative
   min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+  max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
 
 #map-portraits-wrapper
 
