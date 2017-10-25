@@ -604,6 +604,18 @@ Site.Map = {
           }
         });
 
+        if(WP.wp_debug == true && WP.isAdmin == true) {
+          // Add marker
+          _this.markers[index] = new google.maps.Marker({
+            map: _this.map,
+            title: item.name,
+            position: {
+              lat: parseInt(item.lat),
+              lng: parseInt(item.lng),
+            }
+          });
+        }
+
         // Add slug to the marker
         _this.markers[index].slug = item.slug;
 
@@ -681,7 +693,11 @@ Site.Map = {
 
     $('.toggle-map').on('click', function(event) {
       event.preventDefault();
+      // Toggle map class
       _this.$wrapper.toggleClass('show-map');
+
+      // Scroll to where portraits or map is
+      $('body').scrollTo(_this.$wrapper, Site.scrollToSpeed);
     });
   },
 
