@@ -499,6 +499,7 @@ Site.Map = {
       lng: 150.644
     },
     minZoom: 2,
+    maxZoom: 15,
     icon: {
       // requires Maps API and set on init()
     },
@@ -521,7 +522,7 @@ Site.Map = {
             "color": "#000000"
           },
           {
-            "visibility": "off"
+            "visibility": "on"
           },
           {
             "weight": 0.5
@@ -654,6 +655,8 @@ Site.Map = {
     _this.bind();
 
     _this.limitBounds();
+
+    _this.zoomButtons();
   },
 
   // prevent map dragging into North/South grey areas
@@ -724,6 +727,33 @@ Site.Map = {
     // Scroll to top
     $('body').scrollTo(0, Site.scrollToSpeed);
 
+  },
+
+  zoomButtons: function() {
+    var _this = this;
+
+    $('.map-zoom-button').on('click', function() {
+      var zoomChange = parseInt($(this).attr('data-zoom'));
+      var currentZoom = _this.map.getZoom();
+
+      _this.map.setZoom(currentZoom + zoomChange);
+    });
+
+    google.maps.event.addListener(_this.map, 'zoom_changed', function(){
+      var zoomLevel = _this.map.getZoom();
+
+      if (zoomLevel <= _this.options.minZoom) {
+        $('.map-zoom-button[data-zoom="-1"]').addClass('disabled');
+      } else {
+        $('.map-zoom-button[data-zoom="-1"]').removeClass('disabled');
+      }
+
+      if (zoomLevel >= _this.options.maxZoom) {
+        $('.map-zoom-button[data-zoom="1"]').addClass('disabled');
+      } else {
+        $('.map-zoom-button[data-zoom="1"]').removeClass('disabled');
+      }
+    });
   },
 };
 
