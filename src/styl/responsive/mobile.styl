@@ -119,7 +119,7 @@ $transition-speed = 300ms
 
 select.filter-select
   padding-bottom: 0
-  border: none
+  border: 0
   text-transform: capitalize
   display: inline-block
   width: auto
@@ -178,19 +178,19 @@ select.filter-select
 #support-form
   flex-wrap: nowrap
 
-::-webkit-input-placeholder // Chrome/Opera/Safari
+::-webkit-input-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-::-moz-placeholder // Firefox 19+
+::-moz-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-:-ms-input-placeholder // IE 10+
+:-ms-input-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-:-moz-placeholder // Firefox 18-
+:-moz-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
