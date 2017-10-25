@@ -656,6 +656,7 @@ Site.Map = {
     _this.limitBounds();
   },
 
+  // prevent map dragging into North/South grey areas
   limitBounds: function() {
     var _this = this;
 
