@@ -36,11 +36,11 @@ if ( $portraits->have_posts() ) {
 <section id="portraits">
   <div id="player-wrapper" class="container">
     <div id="player-container" class="">
-      <div id="player-iframe" class="js-fit-height"></div>
+      <div id="player-iframe"></div>
     </div>
   </div>
   <div id="map-portraits-wrapper">
-    <div id="map-portraits-container" class="js-fit-height">
+    <div id="map-portraits-container">
       <div class="container">
         <div id="portraits-filters-container" class="padding-top-small padding-bottom-small grid-row">
           <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
