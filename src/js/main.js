@@ -653,39 +653,37 @@ Site.Map = {
 
     _this.bind();
 
-    //_this.limitBounds();
+    _this.limitBounds();
   },
 
   limitBounds: function() {
     var _this = this;
 
-    var strictBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-75, -145),
-      new google.maps.LatLng(75, 145)
-    );
+    function centerMapWithinBounds() {
+      var sLat = _this.map.getBounds().getSouthWest().lat();
+      var nLat = _this.map.getBounds().getNorthEast().lat();
 
-    // Listen for the dragend event
-    google.maps.event.addListener(_this.map, 'dragend', function () {
-      if (strictBounds.contains(_this.map.getCenter())) return;
+      if (sLat < -85 || nLat > 85) {
+        // map out of bounds
+        // relcenter map within bounds
+        _this.map.setOptions({
+          center: new google.maps.LatLng(
+            _this.mapCenter.lat(), // set Latitude for center of map here
+            _this.mapCenter.lng() // set Langitude for center of map here
+          )
+        });
+      } else {
+        // map within bounds
+        // save map center
+        _this.mapCenter = _this.map.getCenter();
+      }
+    };
 
-      // We're out of bounds - Move the map back within the bounds
-
-      var c = _this.map.getCenter(),
-        x = c.lng(),
-        y = c.lat(),
-        maxX = strictBounds.getNorthEast().lng(),
-        maxY = strictBounds.getNorthEast().lat(),
-        minX = strictBounds.getSouthWest().lng(),
-        minY = strictBounds.getSouthWest().lat();
-
-      if (x < minX) x = minX;
-      if (x > maxX) x = maxX;
-      if (y < minY) y = minY;
-      if (y > maxY) y = maxY;
-
-      _this.map.setCenter(new google.maps.LatLng(y, x));
-
+    google.maps.event.addListener(_this.map, 'drag', function(){
+      // call on drag
+      centerMapWithinBounds();
     });
+
   },
 
   bind: function() {
