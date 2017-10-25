@@ -172,7 +172,14 @@ select.filter-select
   position: relative
   transition: transform $transition-speed
 
+.map-zoom-button
+  transition: opacity $transition-speed
+  &.disabled
+    opacity: .2
+    pointer-events: none
 
+.icon-zoom
+  width: 12px
 
 // ******************************************************
 
