@@ -95,9 +95,17 @@ if ( $portraits->have_posts() ) {
 
       <div id="portraits-map">
         <div class="container">
-          <div class="grid-row padding-bottom-small padding-top-small">
-            <div class="grid-item item-s-3">
+          <div class="grid-row padding-bottom-small padding-top-small justify-between">
+            <div class="grid-item">
               <a href="#" class="toggle-map font-bold"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> Grid</a>
+            </div>
+            <div class="grid-item grid-row nowrap justify-end no-gutter">
+              <div class="grid-item u-inline-block map-zoom-button grid-row align-items-center u-pointer" data-zoom="1">
+                <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/zoom-in.svg'); ?>
+              </div>
+              <div class="grid-item u-inline-block map-zoom-button grid-row align-items-center u-pointer" data-zoom="-1">
+                <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/zoom-out.svg'); ?>
+              </div>
             </div>
           </div>
           <div id="map-container"></div>
