@@ -33,9 +33,10 @@ function render_filter_select($options, $name, $classes = '') {
    return;
   }
     ?>
-      <div class="<?php echo $classes; ?>">
-      <select id="filter-<?php echo $name; ?>" name="filter-<?php echo $name; ?>" class="filter-select" data-filter="<?php echo $name; ?>">
-  <option value=""><?php echo $name; ?></option>
+<div class="<?php echo $classes; ?>">
+  <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-select.svg'); ?>
+  <select id="filter-<?php echo $name; ?>" name="filter-<?php echo $name; ?>" class="filter-select font-bold" data-filter="<?php echo $name; ?>">
+    <option value=""><?php echo $name; ?></option>
 <?php
   foreach($options as $option) {
 ?>

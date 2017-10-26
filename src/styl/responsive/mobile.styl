@@ -1,3 +1,5 @@
+$header-height = 54px
+$filter-height = 41px
 $transition-speed = 300ms
 
 #main-container
@@ -28,7 +30,9 @@ $transition-speed = 300ms
   &.open
     transform: translateX(0%)
   .grid-column
-    min-height: calc('100vh - ' + ($margin-basic * 4))
+    min-height: calc('100vh - ' + ($margin-small * 4))
+    .grid-item
+      margin-bottom: $margin-small
 
 .menu-icon
   height: 16px
@@ -49,6 +53,8 @@ $transition-speed = 300ms
 #portraits
   opacity: 1
   transition: opacity $transition-speed
+  min-height: calc('100vh - ' + $header-height)
+  overflow: hidden
 
   // This class toggles to show/hide the video (eg, when buffering)
   &.show
@@ -66,28 +72,6 @@ $transition-speed = 300ms
       width: 100%
     #player-container
       width: 100%
-
-/*
-#portraits
-  // This class toggles to open/close the video
-  &.video
-    #player-wrapper
-      height: unquote('calc((100vw / 16) * 9)')
-      #player-container
-        width: 100%
-
-$header-height = 89px
-$filters-height = 29px
-
-@media (orientation: landscape)
-  #portraits
-    // This class toggles to open/close the video
-    &.video
-      #player-wrapper
-        height: calc('100vh - ' + ($header-height + $filters-height))
-        #player-container
-          width: calc('((100vh - ' + ($header-height + $filters-height) + ') / 9) * 16')
-*/
 
 #player-wrapper
   display: block
@@ -135,13 +119,32 @@ $filters-height = 29px
     position: relative
     font-size: 0
 
+select.filter-select
+  padding-bottom: 0
+  border: 0
+  text-transform: capitalize
+  display: inline-block
+  width: auto
+  cursor: pointer
+  padding-left: 10px
+
+.icon-select
+  position: absolute
+  top: 6px
+  width: 8px
+  pointer-events: none
+
+.toggle-map
+  .icon-arrow
+    height: 11px
+
 @media screen and (orientation: portrait)
   #portrait-sizer, .portrait
     width: 50%
 
 @media screen and (orientation: landscape)
   #portrait-sizer, .portrait
-    width: unquote('calc(100% / 3)') 
+    width: unquote('calc(100% / 3)')
 
 // ******************************************************
 
@@ -152,13 +155,15 @@ $filters-height = 29px
   top: 0
   left: 100%
   width: 100vw
+  .container
+    height: 100%
 
 #map-container
   position: relative
-  height: 80vh
+  min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+  max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
 
 #map-portraits-wrapper
-  overflow: hidden
 
   &.show-map #map-portraits-container
     transform: translateX(-100%)
@@ -167,7 +172,14 @@ $filters-height = 29px
   position: relative
   transition: transform $transition-speed
 
+.map-zoom-button
+  transition: opacity $transition-speed
+  &.disabled
+    opacity: .2
+    pointer-events: none
 
+.icon-zoom
+  width: 12px
 
 // ******************************************************
 
@@ -176,19 +188,19 @@ $filters-height = 29px
 #support-form
   flex-wrap: nowrap
 
-::-webkit-input-placeholder // Chrome/Opera/Safari
+::-webkit-input-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-::-moz-placeholder // Firefox 19+
+::-moz-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-:-ms-input-placeholder // IE 10+
+:-ms-input-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
-:-moz-placeholder // Firefox 18-
+:-moz-placeholder // @stylint ignore
   transition: opacity 100ms linear
   color: $color-black
 
@@ -197,7 +209,7 @@ input, select
   border: 0
   background: transparent
   appearance: none
-  border-bottom: 3px solid $color-black
+  border-bottom: 2px solid $color-black
   padding-bottom: 3px
   border-radius: 0
   margin-bottom: -4px

@@ -36,35 +36,37 @@ if ( $portraits->have_posts() ) {
 <section id="portraits">
   <div id="player-wrapper" class="container">
     <div id="player-container" class="">
-      <div id="player-iframe" class="js-fit-height"></div>
+      <div id="player-iframe"></div>
     </div>
   </div>
   <div id="map-portraits-wrapper">
-    <div id="map-portraits-container" class="js-fit-height">
+    <div id="map-portraits-container">
       <div class="container">
-        <div id="portraits-filters-container" class="padding-bottom-small grid-row">
+        <div id="portraits-filters-container" class="padding-top-small padding-bottom-small grid-row">
           <form id="portraits-filters" class="flex-grow grid-row grid-item no-gutter">
 
   <?php
+    $item_classes = 'grid-item';
+
     if (!empty($ages)) {
-      render_filter_select($ages, 'age', 'grid-item item-m-2');
+      render_filter_select($ages, 'age', $item_classes);
     }
 
     if (!empty($subjects)) {
-      render_filter_select($subjects, 'subject', 'grid-item item-m-2');
+      render_filter_select($subjects, 'subject', $item_classes);
     }
 
     if (!empty($locations)) {
-      render_filter_select($locations, 'location', 'grid-item item-m-2');
+      render_filter_select($locations, 'location', $item_classes);
     }
 
     if (!empty($genders)) {
-      render_filter_select($genders, 'gender', 'grid-item item-m-2');
+      render_filter_select($genders, 'gender', $item_classes);
     }
 
   ?>
         </form>
-          <a href="#" class="js-toggle-map grid-item font-bold">Map ></a>
+          <a href="#" class="toggle-map grid-item font-bold">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
         </div>
 
         <div id="portraits-grid">
@@ -93,9 +95,17 @@ if ( $portraits->have_posts() ) {
 
       <div id="portraits-map">
         <div class="container">
-          <div class="grid-row padding-bottom-small">
-            <div class="grid-item item-s-3">
-              <a href="#" class="js-toggle-map font-bold">< Grid</a>
+          <div class="grid-row padding-bottom-small padding-top-small justify-between">
+            <div class="grid-item">
+              <a href="#" class="toggle-map font-bold"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> Grid</a>
+            </div>
+            <div class="grid-item grid-row nowrap justify-end no-gutter">
+              <div class="grid-item u-inline-block map-zoom-button grid-row align-items-center u-pointer" data-zoom="1">
+                <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/zoom-in.svg'); ?>
+              </div>
+              <div class="grid-item u-inline-block map-zoom-button grid-row align-items-center u-pointer" data-zoom="-1">
+                <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/zoom-out.svg'); ?>
+              </div>
             </div>
           </div>
           <div id="map-container"></div>

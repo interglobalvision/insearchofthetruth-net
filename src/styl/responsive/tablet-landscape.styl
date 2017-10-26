@@ -1,9 +1,12 @@
+$header-height = 88px
+$filter-height = 80px
+
 #header
   .truth-logo
     height: 68px
 
 .icon-arrow
-  height: 20px
+  height: 21px
 
 .form-element
   border-bottom: 5px solid $color-black
@@ -14,11 +17,33 @@
   svg
     height: 40px
 
+input, select
+  border-bottom-width: 3px
+
 // ******************************************************
+
+// PORTRAITS
+
+#portraits
+  min-height: calc('100vh - ' + $header-height)
 
 #portrait-sizer, .portrait
   width: 20%
   padding: 0 $margin-tiny
+
+#map-container
+  min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+  max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+
+select.filter-select
+  padding-left: 20px
+
+.icon-select
+  top: 8px
+  width: 12px
+
+.icon-zoom
+  width: 17px
 
 // ******************************************************
 

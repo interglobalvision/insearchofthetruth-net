@@ -52,6 +52,7 @@ Site = {
       $(this).html(string);
     });
   },
+
 };
 
 Site.Gallery = {
@@ -489,12 +490,17 @@ Site.Portraits = {
 
 Site.Map = {
   options: {
+    mapTypeControl: false,
+    fullscreenControl: false,
+    streetViewControl: false,
+    zoomControl: false,
     // TODO: Set coordinates
     center: {
       lat: -34.397,
       lng: 150.644
     },
     minZoom: 2,
+    maxZoom: 15,
     icon: {
       // requires Maps API and set on init()
     },
@@ -517,7 +523,7 @@ Site.Map = {
             "color": "#000000"
           },
           {
-            "visibility": "off"
+            "visibility": "on"
           },
           {
             "weight": 0.5
@@ -647,14 +653,43 @@ Site.Map = {
 
     }
 
-    _this.bind();
+    _this.bindToggleMap();
+
+    _this.limitBounds();
+
+    _this.zoomButtons();
+  },
+
+  // prevent map dragging into North/South grey areas
+  limitBounds: function() {
+    var _this = this;
+
+    google.maps.event.addListener(_this.map, 'drag', function() {
+      var sLat = _this.map.getBounds().getSouthWest().lat();
+      var nLat = _this.map.getBounds().getNorthEast().lat();
+
+      if (sLat < -85 || nLat > 85) {
+        // map out of bounds
+        // relcenter map within bounds
+        _this.map.setOptions({
+          center: new google.maps.LatLng(
+            _this.mapCenter.lat(), // set Latitude for center of map here
+            _this.mapCenter.lng() // set Langitude for center of map here
+          )
+        });
+      } else {
+        // map within bounds
+        // save map center
+        _this.mapCenter = _this.map.getCenter();
+      }
+    });
 
   },
 
-  bind: function() {
+  bindToggleMap: function() {
     var _this = this;
 
-    $('.js-toggle-map').on('click', function(event) {
+    $('.toggle-map').on('click', function(event) {
       event.preventDefault();
       // Toggle map class
       _this.$wrapper.toggleClass('show-map');
@@ -688,6 +723,33 @@ Site.Map = {
     // Scroll to top
     $('body').scrollTo(0, Site.scrollToSpeed);
 
+  },
+
+  zoomButtons: function() {
+    var _this = this;
+
+    $('.map-zoom-button').on('click', function() {
+      var zoomChange = parseInt($(this).attr('data-zoom'));
+      var currentZoom = _this.map.getZoom();
+
+      _this.map.setZoom(currentZoom + zoomChange);
+    });
+
+    google.maps.event.addListener(_this.map, 'zoom_changed', function(){
+      var zoomLevel = _this.map.getZoom();
+
+      if (zoomLevel <= _this.options.minZoom) {
+        $('.map-zoom-button[data-zoom="-1"]').addClass('disabled');
+      } else {
+        $('.map-zoom-button[data-zoom="-1"]').removeClass('disabled');
+      }
+
+      if (zoomLevel >= _this.options.maxZoom) {
+        $('.map-zoom-button[data-zoom="1"]').addClass('disabled');
+      } else {
+        $('.map-zoom-button[data-zoom="1"]').removeClass('disabled');
+      }
+    });
   },
 };
 

@@ -1,3 +1,6 @@
+$header-height = 75.5px
+$filter-height = 63px
+
 // HEADER
 
 #logo-holder
@@ -22,9 +25,32 @@
 
 // ******************************************************
 
+// PORTRAITS
+
+#portraits
+  min-height: calc('100vh - ' + $header-height)
+
 #portrait-sizer, .portrait
   width: 25%
   padding: 0 $margin-tiny
+
+#map-container
+  min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+  max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+
+select.filter-select
+  padding-left: 14px
+
+.icon-select
+  top: 8px
+  width: 10px
+
+.toggle-map
+  .icon-arrow
+    height: 12px
+
+.icon-zoom
+  width: 15px
 
 // ******************************************************
 
