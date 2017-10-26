@@ -670,7 +670,7 @@ Site.Map = {
 
     }
 
-    _this.bind();
+    _this.bindToggleMap();
 
     _this.limitBounds();
 
@@ -701,7 +701,7 @@ Site.Map = {
 
   },
 
-  bind: function() {
+  bindToggleMap: function() {
     var _this = this;
 
     $('.toggle-map').on('click', function(event) {
