@@ -52,6 +52,24 @@ Site = {
       $(this).html(string);
     });
   },
+
+  // classic debounce https://davidwalsh.name/javascript-debounce-function
+  debounce: function(func, wait, immediate) {
+    var timeout;
+
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
 };
 
 Site.Gallery = {
@@ -667,26 +685,19 @@ Site.Map = {
       var sLat = _this.map.getBounds().getSouthWest().lat();
       var nLat = _this.map.getBounds().getNorthEast().lat();
 
-      if (sLat < -85 || nLat > 85) {
+      if (sLat < -89 || nLat > 89) {
         // map out of bounds
-        // relcenter map within bounds
-        _this.map.setOptions({
-          center: new google.maps.LatLng(
-            _this.mapCenter.lat(), // set Latitude for center of map here
-            _this.mapCenter.lng() // set Langitude for center of map here
-          )
-        });
-      } else {
-        // map within bounds
-        // save map center
-        _this.mapCenter = _this.map.getCenter();
+        // zoom out and pan to center of map
+        _this.map.setZoom(_this.options.minZoom);
+        _this.map.panTo({lat: 0, lng: 0});
       }
     };
 
-    google.maps.event.addListener(_this.map, 'drag', function(){
-      // call on drag
+    var debouncedCenter = Site.debounce(function() {
       centerMapWithinBounds();
-    });
+    }, 25);
+
+    google.maps.event.addListener(_this.map, 'drag', debouncedCenter);
 
   },
 
