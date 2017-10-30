@@ -74,6 +74,7 @@ $transition-speed = 300ms
       width: 100%
 
 #player-wrapper
+  position: relative
   display: block
   overflow: hidden
   height: 0
@@ -137,6 +138,30 @@ select.filter-select
 .toggle-map
   .icon-arrow
     height: 11px
+
+#player-loader-wrapper
+  position:absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  z-index: -1
+
+#player-loader
+  width: $margin-basic
+  height: $margin-basic
+  border: $margin-micro solid $color-black
+  border-radius: $margin-basic
+  border-top-color: $color-white
+  animation: loader-rotate 1s linear infinite
+
+@keyframes loader-rotate
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(180deg)
+  100%
+    transform: rotate(360deg)
 
 @media screen and (orientation: portrait)
   #portrait-sizer, .portrait
