@@ -16,9 +16,9 @@
   ],
   "dependencies": {
     "lazysizes": "^2.0.4",
-    "swiper": "^3.4.2",
     "jquery.scrollTo": "^2.1.2",
-    "shufflejs": "^5.0.2"
+    "shufflejs": "^5.0.2",
+    "slick-carousel": "1.7.1"
   },
   "overrides": {
     "lazysizes": {

@@ -26,9 +26,17 @@ Site = {
         Site.Paypal.init();
       }
 
-      if ($('.swiper-container').length) {
-        // Init any galleries
-        Site.Gallery.init();
+      if ($('.slick-slide').length > 1) {
+        $('.slick-container').slick({
+          infinite: true,
+          speed: 300,
+          slidesToShow: 1,
+          centerMode: true,
+          variableWidth: true,
+          dots: true,
+          arrows: false,
+          focusOnSelect: true
+        });
       }
 
       $('.js-menu-toggle').on('click', function() {
@@ -55,6 +63,7 @@ Site = {
 
 };
 
+/*
 Site.Gallery = {
   instances: [],
   options: {
@@ -81,6 +90,7 @@ Site.Gallery = {
 
   },
 };
+*/
 
 Site.Paypal = {
   init: function() {
