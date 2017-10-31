@@ -11,5 +11,5 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'full-width', 1800, 1013, false ); // 16:9
   add_image_size( 'product-thumb', 450, 450, false );
   add_image_size( 'item-l-4', 600, 800, false );
-  add_image_size( 'gallery', 1200, 9999, false );
+  add_image_size( 'gallery', 9999, 600, false );
 }

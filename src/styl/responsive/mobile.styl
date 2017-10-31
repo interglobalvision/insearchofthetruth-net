@@ -286,3 +286,46 @@ input[type='submit']
 
 .icon-arrow
   height: 14px
+
+// ******************************************************
+
+// SLIDER
+
+.slick-container,
+.slick-list
+  overflow: visible
+
+.slick-slide
+  margin: 0 $margin-small
+  max-width: 95vw
+  max-height: 600px
+  height: 50vw
+  width: auto
+  cursor: pointer
+  &:focus
+    outline: 0
+
+.slick-dots
+  width: 100%
+  display: flex
+  justify-content: center
+  margin-top: $margin-small
+  li
+    button
+      font-size: 0
+      appearance: none
+      background: $color-white
+      height: $margin-basic
+      width: $margin-basic
+      border: $margin-micro solid $color-black
+      border-radius: $margin-basic
+      margin: 0 $margin-tiny
+      cursor: pointer
+      &:focus
+        outline: 0
+      &:hover
+        background: $color-black
+    &.slick-active
+      button
+        border: $margin-micro solid $color-white
+        background: $color-black
