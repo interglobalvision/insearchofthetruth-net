@@ -35,6 +35,9 @@ if ( $portraits->have_posts() ) {
 ?>
 <section id="portraits">
   <div id="player-wrapper" class="container">
+    <div id="player-loader-wrapper" class="grid-row justify-center align-items-center">
+      <div id="player-loader"></div>
+    </div>
     <div id="player-container" class="">
       <div id="player-iframe"></div>
     </div>
