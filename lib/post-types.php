@@ -118,10 +118,9 @@ add_action( 'init', 'create_portrait_taxonomies' );
 function create_portrait_taxonomies() {
 
   $taxonomies = array(
-    'Age' => 'age',
+    'Region' => 'region',
     'Subject' => 'subject',
     'Location' => 'location',
-    'Gender' => 'gender',
   );
 
   foreach($taxonomies as $taxonomy_name => $taxonomy_slug) {
