@@ -323,7 +323,7 @@ Site.Player = {
       var nextVideo = _this.list[currentVideo + 1];
 
       // Play next video
-      _this.playVideo(nextVideo);
+      location.hash = '#!/portrait/' + nextVideo;
     } else {
       _this.closeVideo();
     }
