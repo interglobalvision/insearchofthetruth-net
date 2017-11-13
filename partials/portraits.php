@@ -11,24 +11,19 @@ $portraits = new WP_Query( array(
  * FILTERS
  */
 
-// Age
-$ages = get_terms( array(
-  'taxonomy' => 'age',
-) );
+ // Region
+ $regions = get_terms( array(
+   'taxonomy' => 'region',
+ ) );
 
-// Subject
-$subjects = get_terms( array(
-  'taxonomy' => 'subject',
-) );
+ // Subject
+ $subjects = get_terms( array(
+   'taxonomy' => 'subject',
+ ) );
 
 // Location
 $locations = get_terms( array(
   'taxonomy' => 'location',
-) );
-
-// Gender
-$genders = get_terms( array(
-  'taxonomy' => 'gender',
 ) );
 
 if ( $portraits->have_posts() ) {
@@ -51,23 +46,15 @@ if ( $portraits->have_posts() ) {
   <?php
     $item_classes = 'grid-item';
 
-    if (!empty($ages)) {
-      render_filter_select($ages, 'age', $item_classes);
+    if (!empty($regions)) {
+      render_filter_select($regions, 'region', $item_classes);
     }
 
     if (!empty($subjects)) {
       render_filter_select($subjects, 'subject', $item_classes);
     }
-
-    if (!empty($locations)) {
-      render_filter_select($locations, 'location', $item_classes);
-    }
-
-    if (!empty($genders)) {
-      render_filter_select($genders, 'gender', $item_classes);
-    }
-
   ?>
+  
         </form>
           <a href="#" class="toggle-map grid-item font-bold">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
         </div>

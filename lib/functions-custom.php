@@ -60,13 +60,12 @@ function get_taxonomy_values($post,$taxonomy) {
 }
 
 // Return an array constructed from the filters values
-// eg. ["age-20", "gender-male"]
+// eg. ["region-asia", "subject-death"]
 function get_post_filters_data($post) {
   $filters = array(
-    'age' => get_taxonomy_values($post,'age'),
+    'region' => get_taxonomy_values($post,'region'),
     'subject' => get_taxonomy_values($post,'subject'),
     'location' => get_taxonomy_values($post,'location'),
-    'gender' => get_taxonomy_values($post,'gender'),
   );
 
   $filters_data = array();
