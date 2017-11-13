@@ -162,6 +162,10 @@ Site.Player = {
   init: function() {
     var _this = this;
 
+    // Init youtube whuen youtube api is ready
+    // TODO: subscribe to this event with jQuery
+    window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
+
     // If WP_DEBUG turn on controls cuz happy Dev :)
     if(WP.wp_debug == true && WP.isAdmin == true) {
       _this.playerOptions.controls = 1;
@@ -196,10 +200,6 @@ Site.Player = {
 
   bind: function() {
     var _this = this;
-
-    // Init youtube whuen youtube api is ready
-    // TODO: subscribe to this event with jQuery
-    window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
 
     // Listen for updatedyoutubelist
     $(window).on('updatedyoutubelist', function(event, data) {
