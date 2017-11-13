@@ -61,6 +61,25 @@ Site = {
     });
   },
 
+  getHashVideoId: function() {
+    var _this = this;
+
+    // Get hash
+    var hash = location.hash.split('/');
+
+    // Check that its a portrait
+    if(hash[1] === 'portrait') {
+
+      // Get youtube ID
+      var videoId = hash[hash.length - 1];
+
+      return videoId;
+
+    }
+
+    return false;
+  },
+
 };
 
 /*
@@ -260,6 +279,10 @@ Site.Player = {
     var _this = this;
 
     _this.$container.removeClass('video');
+    _this.closeIframe();
+    _this.player.stopVideo()
+
+    location.hash = '';
 
   },
 
@@ -290,8 +313,8 @@ Site.Player = {
     var _this = this;
 
     // Get current video ID
-    var currentVideo =  _this.player.getVideoData();
-    currentVideo = _this.list.indexOf(currentVideo.video_id);
+    var currentVideo = Site.getHashVideoId();
+    currentVideo = _this.list.indexOf(currentVideo);
 
     // Check if theres more videos to play
     if (_this.list.length > currentVideo + 1) {
@@ -304,6 +327,14 @@ Site.Player = {
     } else {
       _this.closeVideo();
     }
+  },
+
+  closeIframe: function() {
+    var _this = this;
+
+    $('#player-wrapper').css({
+      'height': 0
+    });
   },
 
   sizeIframe: function() {
@@ -416,15 +447,9 @@ Site.Portraits = {
   checkHash: function() {
     var _this = this;
 
-    // Get hash
-    var hash = location.hash.split('/');
+    var videoId = Site.getHashVideoId();
 
-    // Check that its a portrait
-    if(hash[1] === 'portrait') {
-
-      // Get youtube ID
-      var videoId = hash[hash.length - 1];
-
+    if(videoId) {
       var list = _this.getFilteredYoutubeIds();
 
       Site.Player.playVideo(videoId, list);
