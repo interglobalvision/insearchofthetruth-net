@@ -190,8 +190,11 @@ select.filter-select
 
 #map-portraits-wrapper
 
-  &.show-map #map-portraits-container
-    transform: translateX(-100%)
+  &.show-map
+    min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
+
+    #map-portraits-container
+     transform: translateX(-100%)
 
 #map-portraits-container
   position: relative
