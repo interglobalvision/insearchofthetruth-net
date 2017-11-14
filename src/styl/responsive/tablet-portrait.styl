@@ -38,6 +38,11 @@ $filter-height = 63px
   min-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
   max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
 
+#map-portraits-wrapper
+
+  &.show-map
+    min-height: calc('100vh - ' + $header-height)
+
 select.filter-select
   padding-left: 14px
 
