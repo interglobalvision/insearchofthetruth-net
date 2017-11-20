@@ -27,7 +27,7 @@ if( have_posts() ) {
     if (!empty($headline)) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
+          <section class="grid-row margin-bottom-large">
             <div class="grid-item item-s-12 item-m-8 item-l-6 font-size-large font-medium">
               <?php echo apply_filters('the_content', $headline); ?>
             </div>
@@ -39,7 +39,7 @@ if( have_posts() ) {
     if (has_post_thumbnail()) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
+          <section class="grid-row margin-bottom-large">
             <div class="item-s-12 item-m-8 offset-m-4">
               <?php the_post_thumbnail('full-width'); ?>
             </div>
@@ -49,7 +49,7 @@ if( have_posts() ) {
     }
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
+          <section class="grid-row margin-bottom-mid">
             <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-large font-medium">
               <?php the_content(); ?>
             </div>
@@ -63,7 +63,7 @@ if( have_posts() ) {
     if (!empty($longtext)) {
 ?>
 
-          <section class="grid-row margin-top-mid margin-bottom-mid">
+          <section class="grid-row margin-bottom-mid">
             <div class="grid-item item-s-12 item-m-10 offset-m-1 item-l-8 offset-l-2 font-size-mid">
               <?php echo apply_filters('the_content', $longtext); ?>
             </div>
@@ -75,7 +75,7 @@ if( have_posts() ) {
     if (!empty($press)) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large justify-center">
+          <section class="grid-row margin-bottom-large justify-center">
 
 <?php
       $i = 0;
@@ -86,7 +86,7 @@ if( have_posts() ) {
             $quote['author'] = '<a class="link-underline" href="' . esc_url($quote['link']) . '">' . $quote['author'] . '</a>';
           }
 ?>
-            <div class="grid-item item-s-12 item-m-4 font-size-large font-medium margin-bottom-mid">
+            <div class="grid-item item-s-12 item-m-4 font-size-mid font-medium margin-bottom-mid">
               <div class="margin-bottom-small"><?php echo $quote['quote']; ?></div>
               <span>&mdash;&nbsp;<?php echo $quote['author']; ?></span>
             </div>
@@ -112,7 +112,7 @@ if( have_posts() ) {
     if (!empty($bios)) {
 ?>
 
-          <section class="margin-top-large margin-bottom-large">
+          <section class="margin-bottom-large">
             <div class="grid-row margin-bottom-small">
               <div class="grid-item item-s-12 item-m-3 offset-m-1">
                 <h2 class="font-size-mid font-medium">Meet the artists:</h2>
@@ -126,7 +126,7 @@ if( have_posts() ) {
 ?>
             <div class="grid-row margin-bottom-small">
               <div class="grid-item item-s-12 item-m-6 offset-m-4">
-                <h3 class="font-size-large font-medium"><?php echo $bio['name']; ?></h3>
+                <h3 class="font-size-mid font-medium"><?php echo $bio['name']; ?></h3>
               </div>
             </div>
 
