@@ -53,7 +53,7 @@ if( have_posts() ) {
 ?>
 
           <section class="grid-row margin-bottom-large">
-            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-large font-medium">
+            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-mid font-medium">
               <?php the_content(); ?>
             </div>
           </section>
