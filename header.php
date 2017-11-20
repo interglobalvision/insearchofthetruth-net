@@ -31,7 +31,7 @@
 
 <section id="main-container">
 
-  <header id="header" class="padding-top-tiny">
+  <header id="header" class="padding-top-tiny<?php echo !is_front_page() ? ' margin-bottom-mid' : ''; ?>">
     <div class="container">
       <div class="grid-row align-items-center justify-between">
         <div id="logo-holder" class="grid-item">
