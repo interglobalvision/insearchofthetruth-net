@@ -5,7 +5,7 @@
 function render_gallery_slider($images) {
 ?>
 
-<section class="grid-row justify-center">
+<section class="grid-row justify-center margin-bottom-large">
   <div class="slick-container item-s-10">
   <?php
     foreach($images as $image_id => $image) {
