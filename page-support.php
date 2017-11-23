@@ -30,7 +30,7 @@ if( have_posts() ) {
     if (!empty($headline)) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
+          <section class="grid-row margin-bottom-large">
             <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3 text-align-center font-size-large font-medium">
               <?php echo apply_filters('the_content', $headline); ?>
             </div>
@@ -42,7 +42,7 @@ if( have_posts() ) {
     if (has_post_thumbnail()) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
+          <section class="grid-row margin-bottom-large">
             <div class="item-s-12">
               <?php the_post_thumbnail('full-width'); ?>
             </div>
@@ -52,8 +52,8 @@ if( have_posts() ) {
     }
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large">
-            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-large font-medium">
+          <section class="grid-row margin-bottom-large">
+            <div class="grid-item item-s-12 item-m-10 offset-m-1 font-size-mid font-medium">
               <?php the_content(); ?>
             </div>
           </section>
@@ -61,7 +61,7 @@ if( have_posts() ) {
 <?php
     if (!empty($form_options)) {
 ?>
-          <section class="margin-top-large margin-bottom-large font-size-large font-medium">
+          <section class="margin-bottom-large font-size-large font-medium">
             <div class="grid-row">
               <div class="grid-item item-s-11 offset-s-1">
                 How can you support the truth booth?
@@ -93,7 +93,7 @@ if( have_posts() ) {
     if (!empty($products)) {
 ?>
 
-          <section class="grid-row margin-top-large margin-bottom-large justify-center align-items-end">
+          <section class="grid-row margin-bottom-large justify-center align-items-end">
             <h2 class="grid-item item-s-12 text-align-center margin-bottom-basic font-size-large font-medium">Get Truth gear!</h2>
 <?php
       foreach ($products as $product) {
@@ -128,7 +128,7 @@ if( have_posts() ) {
 
 ?>
 
-        <section class="margin-top-large margin-bottom-large">
+        <section class="margin-bottom-large">
           <div class="grid-row margin-bottom-basic font-medium font-size-large">
             <div class="grid-item item-s-12 item-m-6 offset-m-1 item-l-5 item-xl-4">
               In Search of the Truth has been graciously sponsored by these organizations:
