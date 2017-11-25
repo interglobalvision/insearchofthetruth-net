@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Build the email content.
   $email_content .= 'Email: $email\n\n';
-  $email_content .= 'Message:\n$message\n';
+  $email_content .= 'I want to $message';
 
   // Build the email headers.
   $email_headers = 'From: <$email>';
