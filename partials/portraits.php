@@ -5,6 +5,7 @@ $portraits = new WP_Query( array(
   'post_type' => array( 'portrait' ),
   'nopaging' => true,
   'post_status' => array( 'publish' ),
+  'orderby' => 'rand',
 ));
 
 /*
@@ -54,7 +55,7 @@ if ( $portraits->have_posts() ) {
       render_filter_select($subjects, 'subject', $item_classes);
     }
   ?>
-  
+
         </form>
           <a href="#" class="toggle-map grid-item font-bold">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
         </div>
