@@ -827,7 +827,7 @@ Site.SupportForm = {
 
         // Clear the form.
         $('#support-form-email').val('');
-        $('#support-form-select').val('');
+
       }).fail(function(data) {
         // Mmessages elem has'error' class.
         _this.$messages.removeClass('success');
