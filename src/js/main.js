@@ -26,6 +26,10 @@ Site = {
         Site.Paypal.init();
       }
 
+      if ($('#support-form').length) {
+        Site.SupportForm.init();
+      }
+
       if ($('.slick-slide').length > 1) {
         $('.slick-container').slick({
           infinite: true,
@@ -784,6 +788,58 @@ Site.Map = {
       } else {
         $('.map-zoom-button[data-zoom="1"]').removeClass('disabled');
       }
+    });
+  },
+};
+
+Site.SupportForm = {
+  init: function() {
+    var _this = this;
+
+    _this.$form = $('#support-form');
+    _this.$messages = $('#support-messages');
+
+    _this.bindSubmit();
+  },
+
+  bindSubmit: function() {
+    var _this = this;
+
+    _this.$form.submit(function(event) {
+      // Stop the browser from submitting the form.
+      event.preventDefault();
+
+      // Serialize the form data.
+      var formData = _this.$form.serialize();
+
+      // Submit the form using AJAX.
+      $.ajax({
+        type: 'POST',
+        url: _this.$form.attr('action'),
+        data: formData
+      }).done(function(response) {
+        // Messages elem has 'success' class.
+        _this.$messages.removeClass('error');
+        _this.$messages.addClass('success');
+
+        // Set the message text.
+        _this.$messages.text(response);
+
+        // Clear the form.
+        $('#support-form-email').val('');
+        $('#support-form-select').val('');
+      }).fail(function(data) {
+        // Mmessages elem has'error' class.
+        _this.$messages.removeClass('success');
+        _this.$messages.addClass('error');
+
+        // Set the message text.
+        if (data.responseText !== '') {
+          _this.$messages.text(data.responseText);
+        } else {
+          _this.$messages.text('Oops! An error occured and your message could not be sent.');
+        }
+      });
     });
   },
 };
