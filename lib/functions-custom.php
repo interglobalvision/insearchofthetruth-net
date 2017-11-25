@@ -147,6 +147,7 @@ function render_support_form($form_options, $form_recipient) {
   </div>
   <div class="grid-item">
     <input type="hidden" value="<?php echo $form_recipient; ?>" name="recipient"/>
+    <input type="hidden" value="<?php echo $form_success; ?>" name="success"/>
     <button id="support-submit" class="form-arrow u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
   </div>
 </form>
