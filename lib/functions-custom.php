@@ -126,3 +126,34 @@ function render_front_splash($front_id) {
 <?php
   }
 }
+
+// Render Support page form
+function render_support_form($form_options, $form_recipient) {
+?>
+<form id="support-form" class="grid-row align-items-end" method="post" action="<?php echo get_stylesheet_directory_uri() . '/lib/form-mailer.php'; ?>">
+  <div id="i-want-to" class="grid-item">
+    I want to
+  </div>
+  <div class="grid-item grid-column flex-grow">
+    <input id="support-form-email" class="form-element margin-top-basic" type="email" placeholder="my email" name="email"/>
+
+    <select id="support-form-select" class="form-element margin-top-basic u-pointer" name="message">
+      <?php
+        foreach ($form_options as $option) {
+          echo '<option>' . $option . '</option>';
+        }
+      ?>
+    </select>
+  </div>
+  <div class="grid-item">
+    <input type="hidden" value="<?php echo $form_recipient; ?>" name="recipient"/>
+    <button id="support-submit" class="form-arrow u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
+  </div>
+</form>
+<div class="grid-row font-size-basic margin-top-basic">
+  <div class="grid-item item-s-12 text-align-center" id="support-messages">
+    &nbsp;
+  </div>
+</div>
+<?php
+}
