@@ -12,5 +12,5 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'product-thumb', 450, 450, false );
   add_image_size( 'item-l-4', 600, 800, false );
   add_image_size( 'gallery', 9999, 600, false );
-  add_image_size( 'portrait-16-9', 337, 190, true );
+  add_image_size( 'portrait-16-9', 190, 106, true );
 }
