@@ -73,7 +73,7 @@ if ( $portraits->have_posts() ) {
         $filters_data = get_post_filters_data($post);
   ?>
           <article <?php post_class('portrait margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-groups='<?php echo json_encode($filters_data); ?>' data-youtube-id="<?php echo $youtube_id; ?>">
-          <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('item-l-4'); ?></a>
+          <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('portrait-16-9'); ?></a>
           </article>
   <?php
       }
