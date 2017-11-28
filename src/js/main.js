@@ -442,6 +442,9 @@ Site.Portraits = {
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
+
+    // Bind scroll to top on portrait click
+    $('.portrait a').on('click', Site.Player.scrollIn());
   },
 
   checkHash: function() {
@@ -453,8 +456,6 @@ Site.Portraits = {
       var list = _this.getFilteredYoutubeIds();
 
       Site.Player.playVideo(videoId, list);
-
-      Site.Player.scrollIn();
     }
   },
 
@@ -626,6 +627,10 @@ Site.Map = {
     // Init a bounds object
     var bounds = new google.maps.LatLngBounds();
 
+    // Get values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+
     // Add a marker for each location
     if (WP.locations.length) {
       $(WP.locations).each(function(index, item) {
@@ -730,7 +735,7 @@ Site.Map = {
       _this.$wrapper.toggleClass('show-map');
 
       // Scroll to where portraits or map is
-      $('body').scrollTo(_this.$wrapper, Site.scrollToSpeed);
+      $('body').scrollTo(_this.wrapperOffsetTop - _this.headerHeight, Site.scrollToSpeed);
     });
   },
 
@@ -786,6 +791,14 @@ Site.Map = {
       }
     });
   },
+
+  onResize: function() {
+    var _this = this;
+
+    // Refresh values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+  }
 };
 
 Site.init();
