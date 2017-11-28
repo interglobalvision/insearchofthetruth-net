@@ -631,6 +631,8 @@ Site.Map = {
     _this.wrapperOffsetTop = _this.$wrapper.offset().top;
     _this.headerHeight = $('#header').outerHeight(true);
 
+    $(window).resize(_this.onResize.bind(_this));
+
     // Add a marker for each location
     if (WP.locations.length) {
       $(WP.locations).each(function(index, item) {
