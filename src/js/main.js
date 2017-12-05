@@ -46,6 +46,7 @@ Site = {
 
   },
 
+  // Remove laoding class fro body after a certain time
   removeLoading: function() {
     var _this = this;
 
