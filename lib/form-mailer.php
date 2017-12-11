@@ -1,10 +1,13 @@
 <?php
 // Only process POST reqeusts.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $support_page = get_page_by_path('support');
+  $support_page_id = $support_page->ID;
+
   // Get the form fields and remove whitespace.
   $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
   $message = trim($_POST['message']);
-  $recipient = filter_var(trim($_POST['recipient']), FILTER_SANITIZE_EMAIL);
+  $recipient = get_post_meta($support_page_id, '_igv_support_form_recipient', true);
   $message = trim($_POST['message']);
 
   // Check that data was sent to the mailer.
@@ -14,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo 'Oops! There was a problem with your submission. Please complete the form and try again.';
     exit;
   }
+
+  // Get custom success response message
+  $success = get_post_meta($support_page_id, '_igv_support_form_success', true);
 
   if (empty($success)) {
     $success = 'Thank You! Your message has been sent.';

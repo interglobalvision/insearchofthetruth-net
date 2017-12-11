@@ -12,15 +12,17 @@ if( have_posts() ) {
     the_post();
 
     $headline = get_post_meta($post->ID, '_igv_support_headline', true);
+
     $form_options = get_post_meta($post->ID, '_igv_support_form_options', true);
     $form_recipient = get_post_meta($post->ID, '_igv_support_form_recipient', true);
-    $form_success = get_post_meta($post->ID, '_igv_support_form_success', true);
+
     $products = get_posts(array(
       'posts_per_page'   => -1,
       'post_type'        => 'product',
       'post_status'      => 'publish',
       'orderby'          => 'menu_order',
     ));
+    
     $sponsors = get_post_meta($post->ID, '_igv_sponsor_logos', true);
 ?>
 
@@ -69,7 +71,7 @@ if( have_posts() ) {
                 How can you support the truth booth?
               </div>
             </div>
-            <?php render_support_form($form_options, $form_recipient, $form_success); ?>
+            <?php render_support_form($form_options); ?>
           </section>
 <?php
     }
