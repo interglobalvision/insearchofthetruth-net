@@ -444,7 +444,7 @@ Site.Portraits = {
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
 
     // Bind scroll to top on portrait click
-    $('.portrait a').on('click', Site.Player.scrollIn());
+    $('.portrait a').on('click', Site.Player.scrollIn);
   },
 
   checkHash: function() {
