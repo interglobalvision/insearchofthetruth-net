@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, YT, Swiper, WP, google */
+/* global $, document, Site, YT, WP, google */
 
 Site = {
   mobileThreshold: 601,
@@ -62,8 +62,6 @@ Site = {
   },
 
   getHashVideoId: function() {
-    var _this = this;
-
     // Get hash
     var hash = location.hash.split('/');
 
@@ -82,35 +80,6 @@ Site = {
 
 };
 
-/*
-Site.Gallery = {
-  instances: [],
-  options: {
-    pagination: '.swiper-pagination',
-    loop: true,
-    slidesPerView: 'auto',
-    loopedSlides: 5,
-    spaceBetween: 0,
-    paginationClickable: true,
-    centeredSlides: true,
-    onTap: function(swiper) {
-      swiper.slideNext();
-    },
-  },
-
-  init: function() {
-    var _this = this;
-
-    // Find and loop all swiper containers
-    $('.swiper-container').each(function(index, element) {
-      // Create and save instance on instances array
-      _this.instances[index] = new Swiper(element, _this.options);
-    });
-
-  },
-};
-*/
-
 Site.Paypal = {
   init: function() {
     var _this = this;
@@ -122,10 +91,6 @@ Site.Paypal = {
     });
 
     $('.paypal-form-holder').removeClass('u-hidden');
-
-  },
-
-  styleBuy: function($buy) {
 
   },
 
@@ -167,7 +132,7 @@ Site.Player = {
     window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
 
     // If WP_DEBUG turn on controls cuz happy Dev :)
-    if(WP.wp_debug == true && WP.isAdmin == true) {
+    if(WP.wp_debug === true && WP.isAdmin === true) {
       _this.playerOptions.controls = 1;
     }
 
@@ -280,7 +245,7 @@ Site.Player = {
 
     _this.$container.removeClass('video');
     _this.closeIframe();
-    _this.player.stopVideo()
+    _this.player.stopVideo();
 
     location.hash = '';
 
@@ -511,7 +476,7 @@ Site.Portraits = {
     var filterArray = [];
 
     // Iterate thru the filters to get it's values
-    _this.$filters.each( function(index) {
+    _this.$filters.each( function() {
       if(this.value) {
 
         // Build up selector string
@@ -648,7 +613,7 @@ Site.Map = {
           }
         });
 
-        if(WP.wp_debug == true && WP.isAdmin == true) {
+        if(WP.wp_debug === true && WP.isAdmin === true) {
           // Add marker
           _this.markers[index] = new google.maps.Marker({
             map: _this.map,
