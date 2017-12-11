@@ -25,6 +25,18 @@ function scripts_and_styles_method() {
   wp_enqueue_script('javascript-library', $javascriptLibrary, '', '', true);
 
   if (is_front_page()) {
+    // Get Locations taxonomy
+    $locations = array_merge(array(), get_locations_data());
+
+    // To be used in `WP`
+    $javascriptVars['locations'] = $locations;
+  }
+
+  wp_register_script('javascript-main', $javascriptMain);
+  wp_localize_script('javascript-main', 'WP', $javascriptVars);
+  wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);
+
+  if (is_front_page()) {
     // Enqueue youtube api
     wp_enqueue_script('yt-player-api', 'http://www.youtube.com/player_api', array(), false, true);
 
@@ -33,18 +45,10 @@ function scripts_and_styles_method() {
 
     if (!empty($google_api_key)) {
       // Enqueue google maps api
-      wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&async', array(), false, true);
+      wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&async&callback=Site.Map.init', array(), false, true);
 
-      // Get Locations taxonomy
-      $locations = array_merge(array(), get_locations_data());
-
-      $javascriptVars['locations'] = $locations;
     }
   }
-
-  wp_register_script('javascript-main', $javascriptMain);
-  wp_localize_script('javascript-main', 'WP', $javascriptVars);
-  wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);
 
   wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.min.css' );
 
