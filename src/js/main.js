@@ -4,6 +4,7 @@
 Site = {
   mobileThreshold: 601,
   scrollToSpeed: 300,
+  loadingDelay: 1500, // milliseconds
   init: function() {
     var _this = this;
 
@@ -18,8 +19,6 @@ Site = {
         Site.Portraits.init();
         // Init player
         Site.Player.init();
-        // Init Map
-        Site.Map.init();
       }
 
       if ($('.paypal-form-holder').length) {
@@ -45,6 +44,16 @@ Site = {
 
     });
 
+  },
+
+  // Remove laoding class fro body after a certain time
+  removeLoading: function() {
+    var _this = this;
+
+    setTimeout( function() {
+      // Remove loading
+      $('body').removeClass('loading');
+    }, _this.loadingDelay);
   },
 
   onResize: function() {
@@ -129,7 +138,6 @@ Site.Player = {
 
     // Init youtube whuen youtube api is ready
     // TODO: subscribe to this event with jQuery
-    window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
 
     // If WP_DEBUG turn on controls cuz happy Dev :)
     if(WP.wp_debug === true && WP.isAdmin === true) {
@@ -144,13 +152,6 @@ Site.Player = {
 
     // Bind stuff
     _this.bind();
-
-    // Remove loading
-    // TODO: This shouldn't go here, we must dev a feat to check Google Maps and
-    // Yotube loading, and then remove this class
-    $( window ).on( "load", function() {
-      $('body').removeClass('loading');
-    });
 
   },
 
@@ -176,6 +177,9 @@ Site.Player = {
 
   initYoutube: function() {
     var _this = this;
+
+    // Remove Loading
+    Site.removeLoading();
 
     // Init youtube player inside #player-container
     _this.player = new YT.Player('player-iframe', {
@@ -489,6 +493,9 @@ Site.Portraits = {
 
 };
 
+// Declared ASAP
+window.onYouTubePlayerAPIReady = Site.Player.initYoutube.bind(Site.Player);
+
 Site.Map = {
   options: {
     mapTypeControl: false,
@@ -767,5 +774,6 @@ Site.Map = {
     _this.headerHeight = $('#header').outerHeight(true);
   }
 };
+
 
 Site.init();
