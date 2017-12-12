@@ -797,50 +797,90 @@ Site.SupportForm = {
     var _this = this;
 
     _this.$form = $('#support-form');
-    _this.$messages = $('#support-messages');
 
-    _this.bindSubmit();
+    if (_this.$form.length) {
+      _this.bind();
+    }
+
   },
 
-  bindSubmit: function() {
+  bind: function() {
     var _this = this;
 
-    _this.$form.submit(function(event) {
-      // Stop the browser from submitting the form.
-      event.preventDefault();
+    _this.$form.on({
+      'submit': function(e) {
+        e.preventDefault();
 
-      // Serialize the form data.
-      var formData = _this.$form.serialize();
+        var data = $(this).serializeArray().reduce(function(obj, item) {
+          obj[item.name] = item.value;
+          return obj;
+        }, {});
 
-      // Submit the form using AJAX.
-      $.ajax({
-        type: 'POST',
-        url: _this.$form.attr('action'),
-        data: formData
-      }).done(function(response) {
-        // Messages elem has 'success' class.
-        _this.$messages.removeClass('error');
-        _this.$messages.addClass('success');
+        _this.submitForm(this, data);
 
-        // Set the message text.
-        _this.$messages.text(response);
+      }
+    })
+  },
 
-        // Clear the form.
-        $('#support-form-email').val('');
+  submitForm: function(form, data) {
+    var _this = this;
 
-      }).fail(function(data) {
-        // Mmessages elem has'error' class.
-        _this.$messages.removeClass('success');
-        _this.$messages.addClass('error');
+    // validate and notify
+    if (data.email === '' || data.message === '') {
+      _this.warnInvalid(form);
+    } else {
+      _this.unwarnInvalid(form);
+      _this.makeRequest(data, form);
+      $('#support-submit').attr('disabled', 'disabled');
+    }
+  },
 
-        // Set the message text.
-        if (data.responseText !== '') {
-          _this.$messages.text(data.responseText);
-        } else {
-          _this.$messages.text('Oops! An error occured and your message could not be sent.');
-        }
-      });
+  warnInvalid: function(form) {
+    $(form).addClass('invalid');
+  },
+
+  unwarnInvalid: function(form) {
+    $(form).removeClass('invalid');
+  },
+
+  makeRequest: function(data, form) {
+    var _this = this;
+    var requestData = {
+      'action': 'send_enquiry',
+      'nonce': data.nonce,
+      'data': data
+    };
+
+    $.ajax({
+      url: WP.ajaxUrl,
+      type: 'post',
+      data: requestData,
+      success: function(response, status) {
+        _this.handleResponse(response, status, form);
+      }
     });
+  },
+
+  handleResponse: function(response, status, form) {
+    var _this = this;
+
+    if (response.type === 'error') {
+      _this.handleError(response.error, form);
+    } else if (response.type === 'success') {
+      $(form).addClass('thanks');
+    }
+
+    $('#support-submit').attr('disabled', 'false');
+
+  },
+
+  handleError: function(error, form) {
+    var _this = this;
+
+    console.log('Error!', error);
+
+    $(form).addClass('error');
+    $('#support-messages .message-error').text(error.message);
   },
 };
 

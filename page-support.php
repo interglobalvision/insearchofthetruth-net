@@ -22,7 +22,7 @@ if( have_posts() ) {
       'post_status'      => 'publish',
       'orderby'          => 'menu_order',
     ));
-    
+
     $sponsors = get_post_meta($post->ID, '_igv_sponsor_logos', true);
 ?>
 
@@ -64,6 +64,7 @@ if( have_posts() ) {
 
 <?php
     if (!empty($form_options) && !empty($form_recipient)) {
+      $thanks = get_post_meta($post->ID, 'support_form_success', true);
 ?>
           <section class="margin-bottom-large font-size-large font-medium">
             <div class="grid-row">
@@ -71,7 +72,7 @@ if( have_posts() ) {
                 How can you support the truth booth?
               </div>
             </div>
-            <?php render_support_form($form_options); ?>
+            <?php render_support_form($form_options, $thanks); ?>
           </section>
 <?php
     }

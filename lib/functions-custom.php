@@ -128,31 +128,76 @@ function render_front_splash($front_id) {
 }
 
 // Render Support page form
-function render_support_form($form_options) {
+function render_support_form($form_options, $thanks) {
 ?>
-<form id="support-form" class="grid-row align-items-end" method="post" action="<?php echo get_stylesheet_directory_uri() . '/lib/form-mailer.php'; ?>">
-  <div id="i-want-to" class="grid-item">
-    I want to
-  </div>
-  <div class="grid-item grid-column flex-grow">
-    <input id="support-form-email" class="form-element margin-top-basic" type="email" placeholder="my email" name="email" required/>
+<form id="support-form" class="grid-row" method="post">
+  <div id="support-form-row" class="grid-item item-s-12 no-gutter grid-row align-items-end">
+    <input type="hidden" name="nonce" id="nonce" value="<?php echo wp_create_nonce('enquiry'); ?>">
+    <div id="i-want-to" class="grid-item">
+      I want to
+    </div>
+    <div class="grid-item grid-column flex-grow">
+      <input id="support-form-email" class="form-element margin-top-basic" type="email" placeholder="my email" name="email" required/>
 
-    <select id="support-form-select" class="form-element margin-top-basic u-pointer" name="message" required>
-      <?php
-        foreach ($form_options as $option) {
-          echo '<option>' . $option . '</option>';
-        }
-      ?>
-    </select>
+      <select id="support-form-select" class="form-element margin-top-basic u-pointer" name="message" required>
+        <?php
+          foreach ($form_options as $option) {
+            echo '<option>' . $option . '</option>';
+          }
+        ?>
+      </select>
+    </div>
+    <div class="grid-item">
+      <button id="support-submit" class="form-arrow u-pointer" type="submit"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
+    </div>
   </div>
-  <div class="grid-item">
-    <button id="support-submit" class="form-arrow u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
+
+  <div class="grid-item item-s-12 text-align-center font-size-basic margin-top-basic" id="support-messages">
+    <div class="message-thanks">
+      <?php echo !empty($thanks) ? $thanks : 'Thank You! Your message has been sent.'; ?>
+    </div>
+    <div class="message-error">
+    </div>
   </div>
 </form>
-<div class="grid-row font-size-basic margin-top-basic">
-  <div class="grid-item item-s-12 text-align-center" id="support-messages">
-    &nbsp;
-  </div>
-</div>
 <?php
+}
+
+add_action( 'wp_ajax_send_enquiry', 'send_enquiry' );
+add_action( 'wp_ajax_nopriv_send_enquiry', 'send_enquiry' );
+
+function send_enquiry() {
+  check_ajax_referer('enquiry', 'nonce');
+
+  $support_page = get_page_by_path('support');
+  $support_page_id = $support_page->ID;
+
+  $to = get_post_meta($support_page_id, '_igv_support_form_recipient', true);
+
+  header('Content-Type: application/json');
+
+  if (!empty($to)) {
+    $from = sanitize_email($_POST['data']['email']);
+    $message = sanitize_text_field($_POST['data']['message']);
+
+    $title   = 'Support Form Inquiry';
+    $headers = array('From: ' . $from . ' <' . $from . '>');
+    $content = 'I want to ' . $message;
+
+    //Send the email
+    add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
+    $email = wp_mail($to, $title, $message, $headers);
+    remove_filter('wp_mail_content_type', 'set_html_content_type');
+
+    if ($email) {
+      echo json_encode(array('type' => 'success'));
+    } else {
+      echo json_encode(array('type' => 'error', 'error' => array('type' => 2, 'message' => 'Message not sent. Email sending failed.')));
+    }
+
+  } else {
+    echo json_encode(array('type' => 'error', 'error' => array('type' => 1, 'message' => 'Contact form not configured. Message not sent.')));
+  }
+
+  wp_die();
 }

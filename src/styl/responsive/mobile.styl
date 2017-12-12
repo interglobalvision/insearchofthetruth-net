@@ -217,6 +217,20 @@ select.filter-select
 // FORM
 
 #support-form
+  &.error
+    .message-error
+      display: block
+  &.thanks
+    .message-thanks
+      display: block
+    .message-error
+      display: none
+  .message-thanks
+    display: none
+  .message-error
+    display: none
+
+#support-form-row
   flex-wrap: nowrap
 
 ::-webkit-input-placeholder // @stylint ignore
