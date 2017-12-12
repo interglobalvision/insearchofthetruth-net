@@ -25,6 +25,10 @@ Site = {
         Site.Paypal.init();
       }
 
+      if ($('#support-form').length) {
+        Site.SupportForm.init();
+      }
+
       if ($('.slick-slide').length > 1) {
         $('.slick-container').slick({
           infinite: true,
@@ -775,5 +779,97 @@ Site.Map = {
   }
 };
 
+Site.SupportForm = {
+  init: function() {
+    var _this = this;
+
+    _this.$form = $('#support-form');
+
+    if (_this.$form.length) {
+      _this.bind();
+    }
+
+  },
+
+  bind: function() {
+    var _this = this;
+
+    _this.$form.on({
+      'submit': function(e) {
+        e.preventDefault();
+
+        var data = $(this).serializeArray().reduce(function(obj, item) {
+          obj[item.name] = item.value;
+          return obj;
+        }, {});
+
+        _this.submitForm(this, data);
+
+      }
+    })
+  },
+
+  submitForm: function(form, data) {
+    var _this = this;
+
+    // validate and notify
+    if (data.email === '' || data.message === '') {
+      _this.warnInvalid(form);
+    } else {
+      _this.unwarnInvalid(form);
+      _this.makeRequest(data, form);
+      $('#support-submit').attr('disabled', 'disabled');
+    }
+  },
+
+  warnInvalid: function(form) {
+    $(form).addClass('invalid');
+  },
+
+  unwarnInvalid: function(form) {
+    $(form).removeClass('invalid');
+  },
+
+  makeRequest: function(data, form) {
+    var _this = this;
+    var requestData = {
+      'action': 'send_enquiry',
+      'nonce': data.nonce,
+      'data': data
+    };
+
+    $.ajax({
+      url: WP.ajaxUrl,
+      type: 'post',
+      data: requestData,
+      success: function(response, status) {
+        _this.handleResponse(response, status, form);
+      }
+    });
+  },
+
+  handleResponse: function(response, status, form) {
+    var _this = this;
+
+    if (response.type === 'error') {
+      _this.handleError(response.error, form);
+    } else if (response.type === 'success') {
+      $(form).addClass('thanks');
+      $('#support-form-email').val('');
+    }
+
+    $('#support-submit').attr('disabled', false);
+
+  },
+
+  handleError: function(error, form) {
+    var _this = this;
+
+    console.log('Error!', error);
+
+    $(form).addClass('error');
+    $('#support-messages .message-error').text(error.message);
+  },
+};
 
 Site.init();

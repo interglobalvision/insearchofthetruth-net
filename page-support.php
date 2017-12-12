@@ -12,13 +12,17 @@ if( have_posts() ) {
     the_post();
 
     $headline = get_post_meta($post->ID, '_igv_support_headline', true);
+
     $form_options = get_post_meta($post->ID, '_igv_support_form_options', true);
+    $form_recipient = get_post_meta($post->ID, '_igv_support_form_recipient', true);
+
     $products = get_posts(array(
       'posts_per_page'   => -1,
       'post_type'        => 'product',
       'post_status'      => 'publish',
       'orderby'          => 'menu_order',
     ));
+
     $sponsors = get_post_meta($post->ID, '_igv_sponsor_logos', true);
 ?>
 
@@ -59,7 +63,8 @@ if( have_posts() ) {
           </section>
 
 <?php
-    if (!empty($form_options)) {
+    if (!empty($form_options) && !empty($form_recipient)) {
+      $thanks = get_post_meta($post->ID, 'support_form_success', true);
 ?>
           <section class="margin-bottom-large font-size-large font-medium">
             <div class="grid-row">
@@ -67,25 +72,7 @@ if( have_posts() ) {
                 How can you support the truth booth?
               </div>
             </div>
-            <form id="support-form" class="grid-row align-items-end">
-              <div id="i-want-to" class="grid-item">
-                I want to
-              </div>
-              <div class="grid-item grid-column flex-grow">
-                <input id="support-form-email" class="form-element margin-top-basic" type="email" placeholder="my email" />
-
-                <select id="support-form-select" class="form-element margin-top-basic u-pointer">
-                  <?php
-                    foreach ($form_options as $option) {
-                      echo '<option>' . $option . '</option>';
-                    }
-                  ?>
-                </select>
-              </div>
-              <div class="grid-item">
-                <button id="submit" class="form-arrow u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></button>
-              </div>
-            </form>
+            <?php render_support_form($form_options, $thanks); ?>
           </section>
 <?php
     }
