@@ -855,9 +855,10 @@ Site.SupportForm = {
       _this.handleError(response.error, form);
     } else if (response.type === 'success') {
       $(form).addClass('thanks');
+      $('#support-form-email').val('');
     }
 
-    $('#support-submit').attr('disabled', 'false'); 
+    $('#support-submit').attr('disabled', false);
 
   },
 
