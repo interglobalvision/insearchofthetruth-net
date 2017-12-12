@@ -5,6 +5,7 @@ $portraits = new WP_Query( array(
   'post_type' => array( 'portrait' ),
   'nopaging' => true,
   'post_status' => array( 'publish' ),
+  'orderby' => 'rand',
 ));
 
 /*
@@ -54,9 +55,9 @@ if ( $portraits->have_posts() ) {
       render_filter_select($subjects, 'subject', $item_classes);
     }
   ?>
-  
+
         </form>
-          <a href="#" class="toggle-map grid-item font-bold">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
+          <a href="#" class="toggle-map grid-item font-bold u-pointer">Map <?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-right.svg'); ?></a>
         </div>
 
         <div id="portraits-grid">
@@ -71,8 +72,8 @@ if ( $portraits->have_posts() ) {
 
         $filters_data = get_post_filters_data($post);
   ?>
-          <article <?php post_class('portrait margin-bottom-small u-pointer'); ?> id="post-<?php the_ID(); ?>" data-groups='<?php echo json_encode($filters_data); ?>' data-youtube-id="<?php echo $youtube_id; ?>">
-          <a href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('item-l-4'); ?></a>
+          <article <?php post_class('portrait margin-bottom-small u-pointer text-align-center'); ?> id="post-<?php the_ID(); ?>" data-groups='<?php echo json_encode($filters_data); ?>' data-youtube-id="<?php echo $youtube_id; ?>">
+          <a class="u-pointer" href="#!/portrait/<?php echo $youtube_id; ?>"><?php the_post_thumbnail('portrait-16-9'); ?></a>
           </article>
   <?php
       }
@@ -87,7 +88,7 @@ if ( $portraits->have_posts() ) {
         <div class="container">
           <div class="grid-row padding-bottom-small padding-top-small justify-between">
             <div class="grid-item">
-              <a href="#" class="toggle-map font-bold"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> Grid</a>
+              <a href="#" class="toggle-map font-bold u-pointer"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/arrow-left.svg'); ?> Grid</a>
             </div>
             <div class="grid-item grid-row nowrap justify-end no-gutter">
               <div class="grid-item u-inline-block map-zoom-button grid-row align-items-center u-pointer" data-zoom="1">

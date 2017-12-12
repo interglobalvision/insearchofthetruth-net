@@ -21,7 +21,7 @@ if ($query->have_posts() && !is_front_page()) {
 ?>
       <div class="item-s-3 item-m-2">
         <a href="<?php echo home_url(); ?>/#!/portrait/<?php echo $youtube_id; ?>">
-          <?php the_post_thumbnail('item-l-3', 'class=u-block'); ?>
+          <?php the_post_thumbnail('portrait-16-9', 'class=u-block'); ?>
         </a>
       </div>
 <?php

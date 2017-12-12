@@ -1,9 +1,10 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, YT, Swiper, WP, google */
+/* global $, document, Site, YT, WP, google */
 
 Site = {
   mobileThreshold: 601,
   scrollToSpeed: 300,
+  loadingDelay: 1500, // milliseconds
   init: function() {
     var _this = this;
 
@@ -18,8 +19,6 @@ Site = {
         Site.Portraits.init();
         // Init player
         Site.Player.init();
-        // Init Map
-        Site.Map.init();
       }
 
       if ($('.paypal-form-holder').length) {
@@ -51,6 +50,16 @@ Site = {
 
   },
 
+  // Remove laoding class fro body after a certain time
+  removeLoading: function() {
+    var _this = this;
+
+    setTimeout( function() {
+      // Remove loading
+      $('body').removeClass('loading');
+    }, _this.loadingDelay);
+  },
+
   onResize: function() {
     var _this = this;
 
@@ -66,8 +75,6 @@ Site = {
   },
 
   getHashVideoId: function() {
-    var _this = this;
-
     // Get hash
     var hash = location.hash.split('/');
 
@@ -86,35 +93,6 @@ Site = {
 
 };
 
-/*
-Site.Gallery = {
-  instances: [],
-  options: {
-    pagination: '.swiper-pagination',
-    loop: true,
-    slidesPerView: 'auto',
-    loopedSlides: 5,
-    spaceBetween: 0,
-    paginationClickable: true,
-    centeredSlides: true,
-    onTap: function(swiper) {
-      swiper.slideNext();
-    },
-  },
-
-  init: function() {
-    var _this = this;
-
-    // Find and loop all swiper containers
-    $('.swiper-container').each(function(index, element) {
-      // Create and save instance on instances array
-      _this.instances[index] = new Swiper(element, _this.options);
-    });
-
-  },
-};
-*/
-
 Site.Paypal = {
   init: function() {
     var _this = this;
@@ -126,10 +104,6 @@ Site.Paypal = {
     });
 
     $('.paypal-form-holder').removeClass('u-hidden');
-
-  },
-
-  styleBuy: function($buy) {
 
   },
 
@@ -168,10 +142,9 @@ Site.Player = {
 
     // Init youtube whuen youtube api is ready
     // TODO: subscribe to this event with jQuery
-    window.onYouTubePlayerAPIReady = _this.initYoutube.bind(_this);
 
     // If WP_DEBUG turn on controls cuz happy Dev :)
-    if(WP.wp_debug == true && WP.isAdmin == true) {
+    if(WP.wp_debug === true && WP.isAdmin === true) {
       _this.playerOptions.controls = 1;
     }
 
@@ -183,13 +156,6 @@ Site.Player = {
 
     // Bind stuff
     _this.bind();
-
-    // Remove loading
-    // TODO: This shouldn't go here, we must dev a feat to check Google Maps and
-    // Yotube loading, and then remove this class
-    $( window ).on( "load", function() {
-      $('body').removeClass('loading');
-    });
 
   },
 
@@ -215,6 +181,9 @@ Site.Player = {
 
   initYoutube: function() {
     var _this = this;
+
+    // Remove Loading
+    Site.removeLoading();
 
     // Init youtube player inside #player-container
     _this.player = new YT.Player('player-iframe', {
@@ -284,7 +253,7 @@ Site.Player = {
 
     _this.$container.removeClass('video');
     _this.closeIframe();
-    _this.player.stopVideo()
+    _this.player.stopVideo();
 
     location.hash = '';
 
@@ -446,6 +415,9 @@ Site.Portraits = {
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
+
+    // Bind scroll to top on portrait click
+    $('.portrait a').on('click', Site.Player.scrollIn);
   },
 
   checkHash: function() {
@@ -457,8 +429,6 @@ Site.Portraits = {
       var list = _this.getFilteredYoutubeIds();
 
       Site.Player.playVideo(videoId, list);
-
-      Site.Player.scrollIn();
     }
   },
 
@@ -514,7 +484,7 @@ Site.Portraits = {
     var filterArray = [];
 
     // Iterate thru the filters to get it's values
-    _this.$filters.each( function(index) {
+    _this.$filters.each( function() {
       if(this.value) {
 
         // Build up selector string
@@ -526,6 +496,9 @@ Site.Portraits = {
   },
 
 };
+
+// Declared ASAP
+window.onYouTubePlayerAPIReady = Site.Player.initYoutube.bind(Site.Player);
 
 Site.Map = {
   options: {
@@ -630,6 +603,12 @@ Site.Map = {
     // Init a bounds object
     var bounds = new google.maps.LatLngBounds();
 
+    // Get values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+
+    $(window).resize(_this.onResize.bind(_this));
+
     // Add a marker for each location
     if (WP.locations.length) {
       $(WP.locations).each(function(index, item) {
@@ -645,7 +624,7 @@ Site.Map = {
           }
         });
 
-        if(WP.wp_debug == true && WP.isAdmin == true) {
+        if(WP.wp_debug === true && WP.isAdmin === true) {
           // Add marker
           _this.markers[index] = new google.maps.Marker({
             map: _this.map,
@@ -734,7 +713,7 @@ Site.Map = {
       _this.$wrapper.toggleClass('show-map');
 
       // Scroll to where portraits or map is
-      $('body').scrollTo(_this.$wrapper, Site.scrollToSpeed);
+      $('body').scrollTo(_this.wrapperOffsetTop - _this.headerHeight, Site.scrollToSpeed);
     });
   },
 
@@ -790,6 +769,14 @@ Site.Map = {
       }
     });
   },
+
+  onResize: function() {
+    var _this = this;
+
+    // Refresh values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+  }
 };
 
 Site.SupportForm = {
@@ -870,7 +857,7 @@ Site.SupportForm = {
       $(form).addClass('thanks');
     }
 
-    $('#support-submit').attr('disabled', 'false');
+    $('#support-submit').attr('disabled', 'false'); 
 
   },
 
