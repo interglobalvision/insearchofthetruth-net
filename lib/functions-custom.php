@@ -186,7 +186,7 @@ function send_enquiry() {
 
     //Send the email
     add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
-    $email = wp_mail($to, $title, $message, $headers);
+    $email = wp_mail($to, $title, $content, $headers);
     remove_filter('wp_mail_content_type', 'set_html_content_type');
 
     if ($email) {
