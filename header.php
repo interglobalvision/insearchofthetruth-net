@@ -39,6 +39,12 @@
 
 <section id="main-container">
 
+  <?php
+    $facebook = IGV_get_option('_igv_site_options', '_igv_socialmedia_facebook_url');
+    $twitter = IGV_get_option('_igv_site_options', '_igv_socialmedia_twitter');
+    $instagram = IGV_get_option('_igv_site_options', '_igv_socialmedia_instagram');
+  ?>
+
   <header id="header" class="padding-top-tiny<?php echo !is_front_page() ? ' margin-bottom-mid' : ''; ?>">
     <div class="container">
       <div class="grid-row align-items-center justify-between">
@@ -55,6 +61,33 @@
             <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
             <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
             <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
+            <li class="grid-item">
+              <ul class="grid-row">
+              <?php
+                if (!empty($twitter)) {
+              ?>
+                <li class="grid-item no-gutter">
+                  <a href="<?php echo 'https://twitter.com/' . $twitter; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-twitter.svg'); ?></a>
+                </li>
+              <?php
+                }
+                if (!empty($facebook)) {
+              ?>
+                <li class="grid-item no-gutter">
+                  <a href="<?php echo $facebook; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-facebook.svg'); ?></a>
+                </li>
+              <?php
+                }
+                if (!empty($instagram)) {
+              ?>
+                <li class="grid-item no-gutter">
+                  <a href="<?php echo 'https://instagram.com/' . $instagram; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-instagram.svg'); ?></a>
+                </li>
+              <?php
+                }
+              ?>
+              </ul>
+            </li>
           </ul>
         </nav>
       </div>
@@ -72,6 +105,33 @@
               <li class="grid-item"><a href="<?php echo home_url('support'); ?>">Support</a></li>
               <li class="grid-item"><a href="<?php echo home_url('about'); ?>">About</a></li>
               <li class="grid-item"><a href="<?php echo home_url('blog'); ?>">Blog</a></li>
+              <li class="grid-item">
+                <ul class="grid-row">
+                <?php
+                  if (!empty($twitter)) {
+                ?>
+                  <li class="grid-item no-gutter">
+                    <a href="<?php echo 'https://twitter.com/' . $twitter; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-twitter.svg'); ?></a>
+                  </li>
+                <?php
+                  }
+                  if (!empty($facebook)) {
+                ?>
+                  <li class="grid-item no-gutter">
+                    <a href="<?php echo $facebook; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-facebook.svg'); ?></a>
+                  </li>
+                <?php
+                  }
+                  if (!empty($instagram)) {
+                ?>
+                  <li class="grid-item no-gutter">
+                    <a href="<?php echo 'https://instagram.com/' . $instagram; ?>"><?php echo url_get_contents(get_template_directory_uri() . '/dist/img/icon-instagram.svg'); ?></a>
+                  </li>
+                <?php
+                  }
+                ?>
+                </ul>
+              </li>
             </ul>
           </nav>
         </div>
