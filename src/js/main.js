@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, YT, Swiper, WP, google */
+/* global $, document, Site, YT, WP, google */
 
 Site = {
   mobileThreshold: 601,
@@ -23,6 +23,10 @@ Site = {
 
       if ($('.paypal-form-holder').length) {
         Site.Paypal.init();
+      }
+
+      if ($('#support-form').length) {
+        Site.SupportForm.init();
       }
 
       if ($('.slick-slide').length > 1) {
@@ -71,8 +75,6 @@ Site = {
   },
 
   getHashVideoId: function() {
-    var _this = this;
-
     // Get hash
     var hash = location.hash.split('/');
 
@@ -91,35 +93,6 @@ Site = {
 
 };
 
-/*
-Site.Gallery = {
-  instances: [],
-  options: {
-    pagination: '.swiper-pagination',
-    loop: true,
-    slidesPerView: 'auto',
-    loopedSlides: 5,
-    spaceBetween: 0,
-    paginationClickable: true,
-    centeredSlides: true,
-    onTap: function(swiper) {
-      swiper.slideNext();
-    },
-  },
-
-  init: function() {
-    var _this = this;
-
-    // Find and loop all swiper containers
-    $('.swiper-container').each(function(index, element) {
-      // Create and save instance on instances array
-      _this.instances[index] = new Swiper(element, _this.options);
-    });
-
-  },
-};
-*/
-
 Site.Paypal = {
   init: function() {
     var _this = this;
@@ -131,10 +104,6 @@ Site.Paypal = {
     });
 
     $('.paypal-form-holder').removeClass('u-hidden');
-
-  },
-
-  styleBuy: function($buy) {
 
   },
 
@@ -175,7 +144,7 @@ Site.Player = {
     // TODO: subscribe to this event with jQuery
 
     // If WP_DEBUG turn on controls cuz happy Dev :)
-    if(WP.wp_debug == true && WP.isAdmin == true) {
+    if(WP.wp_debug === true && WP.isAdmin === true) {
       _this.playerOptions.controls = 1;
     }
 
@@ -284,7 +253,7 @@ Site.Player = {
 
     _this.$container.removeClass('video');
     _this.closeIframe();
-    _this.player.stopVideo()
+    _this.player.stopVideo();
 
     location.hash = '';
 
@@ -446,6 +415,9 @@ Site.Portraits = {
 
     // Bind arrange complete grid event
     _this.$grid.on('arrangeComplete',_this.handleArrangeComplete.bind(_this));
+
+    // Bind scroll to top on portrait click
+    $('.portrait a').on('click', Site.Player.scrollIn);
   },
 
   checkHash: function() {
@@ -457,8 +429,6 @@ Site.Portraits = {
       var list = _this.getFilteredYoutubeIds();
 
       Site.Player.playVideo(videoId, list);
-
-      Site.Player.scrollIn();
     }
   },
 
@@ -514,7 +484,7 @@ Site.Portraits = {
     var filterArray = [];
 
     // Iterate thru the filters to get it's values
-    _this.$filters.each( function(index) {
+    _this.$filters.each( function() {
       if(this.value) {
 
         // Build up selector string
@@ -633,6 +603,12 @@ Site.Map = {
     // Init a bounds object
     var bounds = new google.maps.LatLngBounds();
 
+    // Get values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+
+    $(window).resize(_this.onResize.bind(_this));
+
     // Add a marker for each location
     if (WP.locations.length) {
       $(WP.locations).each(function(index, item) {
@@ -648,7 +624,7 @@ Site.Map = {
           }
         });
 
-        if(WP.wp_debug == true && WP.isAdmin == true) {
+        if(WP.wp_debug === true && WP.isAdmin === true) {
           // Add marker
           _this.markers[index] = new google.maps.Marker({
             map: _this.map,
@@ -737,7 +713,7 @@ Site.Map = {
       _this.$wrapper.toggleClass('show-map');
 
       // Scroll to where portraits or map is
-      $('body').scrollTo(_this.$wrapper, Site.scrollToSpeed);
+      $('body').scrollTo(_this.wrapperOffsetTop - _this.headerHeight, Site.scrollToSpeed);
     });
   },
 
@@ -793,7 +769,107 @@ Site.Map = {
       }
     });
   },
+
+  onResize: function() {
+    var _this = this;
+
+    // Refresh values for view toggle scrollTo
+    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
+    _this.headerHeight = $('#header').outerHeight(true);
+  }
 };
 
+Site.SupportForm = {
+  init: function() {
+    var _this = this;
+
+    _this.$form = $('#support-form');
+
+    if (_this.$form.length) {
+      _this.bind();
+    }
+
+  },
+
+  bind: function() {
+    var _this = this;
+
+    _this.$form.on({
+      'submit': function(e) {
+        e.preventDefault();
+
+        var data = $(this).serializeArray().reduce(function(obj, item) {
+          obj[item.name] = item.value;
+          return obj;
+        }, {});
+
+        _this.submitForm(this, data);
+
+      }
+    })
+  },
+
+  submitForm: function(form, data) {
+    var _this = this;
+
+    // validate and notify
+    if (data.email === '' || data.message === '') {
+      _this.warnInvalid(form);
+    } else {
+      _this.unwarnInvalid(form);
+      _this.makeRequest(data, form);
+      $('#support-submit').attr('disabled', 'disabled');
+    }
+  },
+
+  warnInvalid: function(form) {
+    $(form).addClass('invalid');
+  },
+
+  unwarnInvalid: function(form) {
+    $(form).removeClass('invalid');
+  },
+
+  makeRequest: function(data, form) {
+    var _this = this;
+    var requestData = {
+      'action': 'send_enquiry',
+      'nonce': data.nonce,
+      'data': data
+    };
+
+    $.ajax({
+      url: WP.ajaxUrl,
+      type: 'post',
+      data: requestData,
+      success: function(response, status) {
+        _this.handleResponse(response, status, form);
+      }
+    });
+  },
+
+  handleResponse: function(response, status, form) {
+    var _this = this;
+
+    if (response.type === 'error') {
+      _this.handleError(response.error, form);
+    } else if (response.type === 'success') {
+      $(form).addClass('thanks');
+      $('#support-form-email').val('');
+    }
+
+    $('#support-submit').attr('disabled', false);
+
+  },
+
+  handleError: function(error, form) {
+    var _this = this;
+
+    console.log('Error!', error);
+
+    $(form).addClass('error');
+    $('#support-messages .message-error').text(error.message);
+  },
+};
 
 Site.init();

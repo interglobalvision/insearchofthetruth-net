@@ -195,10 +195,10 @@ select.filter-select
   max-height: calc('100vh - ' + ($header-height + $filter-height + $margin-small))
 
 #map-portraits-wrapper
-  transition: min-height $transition-speed
+  transition: height $transition-speed
 
   &.show-map
-    min-height: calc('100vh - ' + $header-height)
+    height: calc('100vh - ' + $header-height)
 
     #map-portraits-container
       transform: translateX(-100%)
@@ -221,7 +221,25 @@ select.filter-select
 // FORM
 
 #support-form
+  &.error
+    .message-error
+      display: block
+  &.thanks
+    .message-thanks
+      display: block
+    .message-error
+      display: none
+  .message-thanks
+    display: none
+  .message-error
+    display: none
+
+#support-form-row
   flex-wrap: nowrap
+
+#support-submit
+  &[disabled="disabled"]
+    opacity: .5
 
 ::-webkit-input-placeholder // @stylint ignore
   transition: opacity 100ms linear

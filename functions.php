@@ -20,6 +20,7 @@ function scripts_and_styles_method() {
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
     'wp_debug' => WP_DEBUG,
+    'ajaxUrl' => admin_url('admin-ajax.php'),
   );
 
   wp_enqueue_script('javascript-library', $javascriptLibrary, '', '', true);

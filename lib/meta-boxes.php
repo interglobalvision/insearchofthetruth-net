@@ -116,6 +116,21 @@ function igv_cmb_metaboxes() {
     ) );
 
     $cmb_support->add_field( array(
+    	'name'       => esc_html__( 'Email form recipient email', 'cmb2' ),
+      'desc'       => esc_html__( '', 'cmb2' ),
+    	'id'         => $prefix . 'support_form_recipient',
+    	'type'       => 'text_email',
+    ) );
+
+    $cmb_support->add_field( array(
+    	'name'       => esc_html__( 'Email form success message', 'cmb2' ),
+      'desc'       => esc_html__( '', 'cmb2' ),
+    	'id'         => $prefix . 'support_form_success',
+    	'type'       => 'textarea_small',
+      'default'    => 'Thank You! Your message has been sent.',
+    ) );
+
+    $cmb_support->add_field( array(
     	'name'       => esc_html__( 'Sponsor logos', 'cmb2' ),
     	'id'         => $prefix . 'sponsor_logos',
     	'type'       => 'file_list',
