@@ -604,7 +604,6 @@ Site.Map = {
     var bounds = new google.maps.LatLngBounds();
 
     // Get values for view toggle scrollTo
-    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
     _this.headerHeight = $('#header').outerHeight(true);
 
     $(window).resize(_this.onResize.bind(_this));
@@ -712,8 +711,10 @@ Site.Map = {
       // Toggle map class
       _this.$wrapper.toggleClass('show-map');
 
+      var wrapperOffsetTop = _this.$wrapper.offset().top;
+
       // Scroll to where portraits or map is
-      $('body').scrollTo(_this.wrapperOffsetTop - _this.headerHeight, Site.scrollToSpeed);
+      $('body').scrollTo(wrapperOffsetTop - _this.headerHeight, Site.scrollToSpeed);
     });
   },
 
@@ -774,7 +775,6 @@ Site.Map = {
     var _this = this;
 
     // Refresh values for view toggle scrollTo
-    _this.wrapperOffsetTop = _this.$wrapper.offset().top;
     _this.headerHeight = $('#header').outerHeight(true);
   }
 };
