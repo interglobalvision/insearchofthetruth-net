@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section id="404">
+  <section id="404" class="margin-bottom-large">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12">
