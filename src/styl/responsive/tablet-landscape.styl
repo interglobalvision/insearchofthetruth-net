@@ -1,5 +1,9 @@
 $header-height = 88px
+$footer-height = 89px
 $filter-height = 80px
+
+#main-content
+  min-height: calc('100vh - ' + ($header-height + $footer-height + $margin-large + $margin-mid))
 
 #header
   .truth-logo
