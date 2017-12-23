@@ -19,7 +19,7 @@ if ($query->have_posts() && !is_front_page()) {
 
     if (has_post_thumbnail() && !empty($youtube_id)) {
 ?>
-      <div class="item-s-3 item-m-2">
+      <div class="item-s-2">
         <a href="<?php echo home_url(); ?>/#!/portrait/<?php echo $youtube_id; ?>">
           <?php the_post_thumbnail('portrait-16-9', 'class=u-block'); ?>
         </a>
