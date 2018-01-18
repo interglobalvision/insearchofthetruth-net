@@ -129,7 +129,7 @@ Site.Paypal = {
 Site.Player = {
   playerOptions: {
     // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
-    controls: 1,
+    controls: 0,
     modestbranding: 1,
     rel: 0,
     title: 0,
