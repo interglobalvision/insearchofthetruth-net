@@ -28,7 +28,7 @@ if( have_posts() ) {
 ?>
 
           <section class="grid-row margin-bottom-large">
-            <div class="grid-item item-s-12 item-m-8 item-l-6 font-size-large font-medium">
+            <div class="grid-item item-s-12 item-m-8 offset-m-2 item-l-6 offset-l-3 text-align-center font-size-large font-medium">
               <?php echo apply_filters('the_content', $headline); ?>
             </div>
           </section>
@@ -40,7 +40,7 @@ if( have_posts() ) {
 ?>
 
           <section class="grid-row margin-bottom-large">
-            <div class="item-s-12 item-m-8 offset-m-4">
+            <div class="item-s-12 item-m-8 offset-m-2">
               <?php the_post_thumbnail('full-width'); ?>
             </div>
           </section>
