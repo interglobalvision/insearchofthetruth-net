@@ -129,7 +129,7 @@ Site.Paypal = {
 Site.Player = {
   playerOptions: {
     // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
-    controls: 0,
+    controls: 1,
     modestbranding: 1,
     rel: 0,
     title: 0,
@@ -207,22 +207,28 @@ Site.Player = {
   handleVideoStateChange: function(event) {
     var _this = this;
 
+    console.log('state change');
+
     switch(event.data) {
       case -1: // Unstarted
         _this.fadeOut();
+        console.log('Unstarted');
         break;
       case 0: // Ended
         _this.fadeOut();
-
+        console.log('Ended 0');
         if(_this.list) {
+          console.log('Next');
           _this.nextVideo();
         }
         break;
       case 1: // Playing
+        console.log('Playing');
         _this.fadeIn();
         break;
       case 3: // Video ended
         _this.fadeOut();
+        console.log('Video ended 3');
         break;
       // Check if there's list
     }
@@ -426,9 +432,13 @@ Site.Portraits = {
     var videoId = Site.getHashVideoId();
 
     if(videoId) {
-      var list = _this.getFilteredYoutubeIds();
+      if (Site.Map.$wrapper.hasClass('show-map')) {
+        Site.Player.playVideo(videoId);
+      } else {
+        var list = _this.getFilteredYoutubeIds();
 
-      Site.Player.playVideo(videoId, list);
+        Site.Player.playVideo(videoId, list);
+      }
     }
   },
 
@@ -719,14 +729,14 @@ Site.Map = {
   },
 
   // Play portraits by location
-  playPortraitsByLocation: function(location) {
+  playPortraitsByLocation: function(mapLocation) {
     var _this = this;
 
     // Empty list for youtube IDs
     var list = [];
 
     // Filter selector string
-    var filter = '[data-groups*="location-' + location + '"]';
+    var filter = '[data-groups*="location-' + mapLocation + '"]';
 
     // Filter portraits
     var $filteredPortraits = _this.$portraits.filter(filter);
@@ -737,7 +747,19 @@ Site.Map = {
     });
 
     // Play first video, update the list
-    Site.Player.playVideo(list[0], list);
+    // Site.Player.playVideo(list[0], list);
+
+    var firstVideoId = list[0];
+
+    debugger;
+
+    // Play next video
+    location.hash = '#!/portrait/' + firstVideoId;
+
+    // If passed, update list
+    if(typeof list !== 'undefined') {
+      Site.Player.setVideosList(list);
+    }
 
     // Scroll to top
     $('body').scrollTo(0, Site.scrollToSpeed);
